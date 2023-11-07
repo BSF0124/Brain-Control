@@ -14,11 +14,11 @@ public class MainCharacter : MonoBehaviour
     private float min_Y;
     private float max_Y;
 
-    public Board b;
+    GameObject Board;
 
     void Start()
     {
-        targetPosition = transform.position;
+        targetPosition = transform.localPosition;
     }
 
     void Update()
@@ -27,8 +27,10 @@ public class MainCharacter : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                Debug.Log(targetPosition);
                 temp = targetPosition;
                 targetPosition += Vector3.left;
+                Debug.Log(targetPosition);
                 MoveCheck();
             }
 
@@ -36,6 +38,7 @@ public class MainCharacter : MonoBehaviour
             {
                 temp = targetPosition;
                 targetPosition += Vector3.right;
+                Debug.Log(targetPosition);
                 MoveCheck();
             }
 
@@ -94,10 +97,11 @@ public class MainCharacter : MonoBehaviour
     }
 
     // 현재 캐릭터의 위치가 최소, 최대 좌표에 있는지 확인
-    bool CheckCoordinates(Vector3 Position)
+    public bool CheckCoordinates(Vector3 Position)
     {
-        // Board board = FindObjectOfType<Board>();
-        // board.SetCoordinates(min_X, max_X, min_Y, max_Y);
+        // 최소, 최대 좌표 설정
+        Board = GameObject.Find("MainBoard");
+        Board.GetComponent<Board>().SetCoordinates(ref min_X, ref max_X, ref min_Y, ref max_Y);
 
         if(Position.x < min_X || Position.x > max_X || Position.y < min_Y || Position.y > max_Y)
             return true;
@@ -105,4 +109,6 @@ public class MainCharacter : MonoBehaviour
         else
             return false;
     }
+
+    
 }

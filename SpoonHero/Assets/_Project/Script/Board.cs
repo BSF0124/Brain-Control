@@ -7,8 +7,10 @@ public class Board : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] board;
+
     [SerializeField]
     private int column = 5; // 열
+
     [SerializeField]
     private int row = 5; // 행
 
@@ -91,14 +93,11 @@ public class Board : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "MainCharacter")
-        {
 
-        }
     }
 
     // 최소, 최대 좌표 설정
-    public void SetCoordinates(float min_X, float max_X, float min_Y, float max_Y) {
+    public void SetCoordinates(ref float min_X, ref float max_X, ref float min_Y, ref float max_Y) {
         min_X = initial_X;
         max_X = initial_X * (-1);
         min_Y = initial_Y * (-1);
