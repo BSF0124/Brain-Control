@@ -116,11 +116,5 @@ public class MainCharacter : MonoBehaviour
 
         max_Y = transform.position.y;
         min_Y = max_Y - Board.row + 0.5f;
-
-        Debug.Log(min_X);
-        Debug.Log(max_X);
-
-        Debug.Log(min_Y);
-        Debug.Log(max_Y);
     }
 }
