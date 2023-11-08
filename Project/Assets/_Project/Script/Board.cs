@@ -19,10 +19,10 @@ public class Board : MonoBehaviour
 
     private float initial_X; // 초기 x좌표 (음수)
     private float initial_Y; // 초기 y좌표 (양수)
-    private float current_x; // 현재 배치할 x좌표 (음수->양수)
-    private float current_y; // 현재 배치할 y좌표 (양수->음수)
-    private float sum_x; // 발판 사이의 x값
-    private float sum_y; // 발판 사이의 y값
+    private float current_X; // 현재 배치할 x좌표 (음수->양수)
+    private float current_Y; // 현재 배치할 y좌표 (양수->음수)
+    private float sum_X; // 발판 사이의 x값
+    private float sum_Y; // 발판 사이의 y값
 
 
     //메인 캐릭터와 충돌 감지 -> 충돌하면 오브젝트 변경
@@ -45,32 +45,32 @@ public class Board : MonoBehaviour
             {1,2,1,4,5}
         };
 
-        sum_x = (float)(Math.Truncate(1000 / (double)column)/1000);
-        sum_y = (float)(Math.Truncate(1000 / (double)row)/1000);
+        sum_X = (float)(Math.Truncate(1000 / (double)column)/1000);
+        sum_Y = (float)(Math.Truncate(1000 / (double)row)/1000);
 
         if(column % 2 == 0)
-        { initial_X = (sum_x / 2) + ((column / 2 - 1) * sum_x); 
+        { initial_X = (sum_X / 2) + ((column / 2 - 1) * sum_X); 
         initial_X*=-1; }
         else
-        { initial_X = column / 2 * sum_x; 
+        { initial_X = column / 2 * sum_X; 
         initial_X*=-1; }
 
         if(row % 2 == 0)
-        { initial_Y = (sum_y / 2) + ((row/ 2 - 1) * sum_y); }
+        { initial_Y = (sum_Y / 2) + ((row/ 2 - 1) * sum_Y); }
         else
-        { initial_Y = row / 2 * sum_y; }
+        { initial_Y = row / 2 * sum_Y; }
 
-        current_x = initial_X;
-        current_y = initial_Y;
+        current_X = initial_X;
+        current_Y = initial_Y;
 
         // 보드 배치
         for(int i=0; i<row; i++)
         {
-            current_x = initial_X;
+            current_X = initial_X;
 
             for(int j=0; j<column; j++)
             {
-                Vector3 boardPos = new Vector3(current_x, current_y, 0);
+                Vector3 boardPos = new Vector3(current_X, current_Y, 0);
                 // GameObject myBoard = Instantiate(board[type[i,j]]) as GameObject;
                 // myBoard.transform.SetParent(this.transform, false);
                 
@@ -79,9 +79,9 @@ public class Board : MonoBehaviour
 
                 myBoard.transform.localPosition = boardPos;
 
-                current_x += sum_x;
+                current_X += sum_X;
             }
-            current_y -= sum_y;
+            current_Y -= sum_Y;
         }
     }
 
@@ -97,10 +97,12 @@ public class Board : MonoBehaviour
     }
 
     // 최소, 최대 좌표 설정
-    public void SetCoordinates(ref float min_X, ref float max_X, ref float min_Y, ref float max_Y) {
+    public void SetCoordinates(ref float min_X, ref float max_X, ref float min_Y, ref float max_Y, ref float sum_X, ref float sum_Y) {
         min_X = initial_X;
         max_X = initial_X * (-1);
         min_Y = initial_Y * (-1);
         max_Y = initial_Y;
+        sum_X = this.sum_X;
+        sum_Y = this.sum_Y;
     }
 }

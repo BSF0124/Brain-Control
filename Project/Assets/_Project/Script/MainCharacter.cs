@@ -13,12 +13,16 @@ public class MainCharacter : MonoBehaviour
     private float max_X;
     private float min_Y;
     private float max_Y;
+    private float sum_X;
+    private float sum_Y;
 
     GameObject Board;
 
     void Start()
     {
         targetPosition = transform.localPosition;
+        Board = GameObject.Find("MainBoard");
+        Board.GetComponent<Board>().SetCoordinates(ref min_X, ref max_X, ref min_Y, ref max_Y, ref sum_X, ref sum_Y);
     }
 
     void Update()
@@ -27,9 +31,10 @@ public class MainCharacter : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                Debug.Log(sum_X);
                 Debug.Log(targetPosition);
                 temp = targetPosition;
-                targetPosition += Vector3.left;
+                targetPosition += new Vector3(sum_X, 0, 0);
                 Debug.Log(targetPosition);
                 MoveCheck();
             }
@@ -37,7 +42,7 @@ public class MainCharacter : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.RightArrow))
             {
                 temp = targetPosition;
-                targetPosition += Vector3.right;
+                targetPosition += new Vector3((-1*sum_X), 0, 0);
                 Debug.Log(targetPosition);
                 MoveCheck();
             }
@@ -100,9 +105,6 @@ public class MainCharacter : MonoBehaviour
     public bool CheckCoordinates(Vector3 Position)
     {
         // 최소, 최대 좌표 설정
-        Board = GameObject.Find("MainBoard");
-        Board.GetComponent<Board>().SetCoordinates(ref min_X, ref max_X, ref min_Y, ref max_Y);
-
         if(Position.x < min_X || Position.x > max_X || Position.y < min_Y || Position.y > max_Y)
             return true;
         
