@@ -13,16 +13,14 @@ public class MainCharacter : MonoBehaviour
     private float max_X;
     private float min_Y;
     private float max_Y;
-    private float sum_X;
-    private float sum_Y;
 
-    GameObject Board;
+    Board Board;
 
     void Start()
     {
-        targetPosition = transform.localPosition;
-        Board = GameObject.Find("MainBoard");
-        Board.GetComponent<Board>().SetCoordinates(ref min_X, ref max_X, ref min_Y, ref max_Y, ref sum_X, ref sum_Y);
+        targetPosition = transform.position;
+        Board = GameObject.Find("MainBoard").GetComponent<Board>();
+        SetCoordinates();
     }
 
     void Update()
@@ -31,32 +29,31 @@ public class MainCharacter : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                Debug.Log(sum_X);
-                Debug.Log(targetPosition);
+
                 temp = targetPosition;
-                targetPosition += new Vector3(sum_X, 0, 0);
-                Debug.Log(targetPosition);
+                targetPosition += Vector3.left;
                 MoveCheck();
             }
 
             if(Input.GetKeyDown(KeyCode.RightArrow))
             {
                 temp = targetPosition;
-                targetPosition += new Vector3((-1*sum_X), 0, 0);
-                Debug.Log(targetPosition);
+                targetPosition += Vector3.right;
                 MoveCheck();
             }
 
             if(Input.GetKeyDown(KeyCode.UpArrow))
             {
+                temp = targetPosition;
                 targetPosition += Vector3.up;
-                StartCoroutine(MoveToTarget());
+                MoveCheck();
             }
 
             if(Input.GetKeyDown(KeyCode.DownArrow))
             {
+                temp = targetPosition;
                 targetPosition += Vector3.down;
-                StartCoroutine(MoveToTarget());
+                MoveCheck();
             }
         }
     }
@@ -106,11 +103,24 @@ public class MainCharacter : MonoBehaviour
     {
         // 최소, 최대 좌표 설정
         if(Position.x < min_X || Position.x > max_X || Position.y < min_Y || Position.y > max_Y)
-            return true;
+            return true; // 움직임X
         
         else
-            return false;
+            return false; // 움직임O
     }
 
-    
+    public void SetCoordinates()
+    {
+        min_X = transform.position.x;
+        max_X = min_X + Board.column - 1;
+
+        max_Y = transform.position.y;
+        min_Y = max_Y - Board.row + 0.5f;
+
+        Debug.Log(min_X);
+        Debug.Log(max_X);
+
+        Debug.Log(min_Y);
+        Debug.Log(max_Y);
+    }
 }

@@ -8,11 +8,9 @@ public class Board : MonoBehaviour
     [SerializeField]
     private GameObject[] board;
 
-    [SerializeField]
-    private int column = 5; // 열
+    public int column; // 열
 
-    [SerializeField]
-    private int row = 5; // 행
+    public int row; // 행
 
     private int[,] type; //발판 종류
     // 0 : 시작 / 1 : 왼쪽 / 2 : 오른쪽 /3 : 위쪽 / 4 : 아래쪽 / 5 : 도착
@@ -37,12 +35,12 @@ public class Board : MonoBehaviour
         transform.parent = parent;
 
         // 보드 종류 설정
-        type = new int[5,5] {
-            {0,1,2,1,3},
-            {4,4,2,3,1},
-            {2,4,3,2,1},
-            {2,3,3,4,2},
-            {1,2,1,4,5}
+        type = new int[,] {
+            {0,1,2,1,3,2},
+            {4,4,2,3,1,3},
+            {2,4,3,2,1,1},
+            {2,3,3,4,2,0},
+            {1,2,1,4,5,4}
         };
 
         sum_X = (float)(Math.Truncate(1000 / (double)column)/1000);
@@ -97,12 +95,10 @@ public class Board : MonoBehaviour
     }
 
     // 최소, 최대 좌표 설정
-    public void SetCoordinates(ref float min_X, ref float max_X, ref float min_Y, ref float max_Y, ref float sum_X, ref float sum_Y) {
+    public void SetCoordinates(ref float min_X, ref float max_X, ref float min_Y, ref float max_Y) {
         min_X = initial_X;
         max_X = initial_X * (-1);
         min_Y = initial_Y * (-1);
         max_Y = initial_Y;
-        sum_X = this.sum_X;
-        sum_Y = this.sum_Y;
     }
 }
