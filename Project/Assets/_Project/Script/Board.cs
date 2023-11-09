@@ -19,14 +19,13 @@ public class Board : MonoBehaviour
     private float initial_Y; // 초기 y좌표 (양수)
     private float current_X; // 현재 배치할 x좌표 (음수->양수)
     private float current_Y; // 현재 배치할 y좌표 (양수->음수)
-    private float sum_X; // 발판 사이의 x값
-    private float sum_Y; // 발판 사이의 y값
+    public float sum_X; // 발판 사이의 x값
+    public float sum_Y; // 발판 사이의 y값
 
 
     //메인 캐릭터와 충돌 감지 -> 충돌하면 오브젝트 변경
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // 보드 크기 설정
         Transform parent = transform.parent;
@@ -36,11 +35,11 @@ public class Board : MonoBehaviour
 
         // 보드 종류 설정
         type = new int[,] {
-            {0,1,2,1,3,2},
-            {4,4,2,3,1,3},
-            {2,4,3,2,1,1},
-            {2,3,3,4,2,0},
-            {1,2,1,4,5,4}
+            {0,1,2,1,3},
+            {4,4,2,3,1},
+            {2,4,3,2,1},
+            {2,3,3,4,2},
+            {1,2,1,4,5}
         };
 
         sum_X = (float)(Math.Truncate(1000 / (double)column)/1000);
@@ -83,7 +82,6 @@ public class Board : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -92,13 +90,5 @@ public class Board : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-    }
-
-    // 최소, 최대 좌표 설정
-    public void SetCoordinates(ref float min_X, ref float max_X, ref float min_Y, ref float max_Y) {
-        min_X = initial_X;
-        max_X = initial_X * (-1);
-        min_Y = initial_Y * (-1);
-        max_Y = initial_Y;
     }
 }

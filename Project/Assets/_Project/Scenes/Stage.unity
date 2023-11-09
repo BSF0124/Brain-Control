@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6077162243168049055, guid: 64399e9204e9aae45a5587fcd50985a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39999992
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6077162243168049055, guid: 64399e9204e9aae45a5587fcd50985a0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -379,6 +379,8 @@ MonoBehaviour:
   - {fileID: 3584142995453954386, guid: 2438d3670bde22a45bcfb970caf88fed, type: 3}
   column: 5
   row: 5
+  sum_X: 0
+  sum_Y: 0
 --- !u!1 &956574481
 GameObject:
   m_ObjectHideFlags: 0
