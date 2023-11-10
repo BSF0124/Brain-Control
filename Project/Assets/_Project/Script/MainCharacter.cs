@@ -28,40 +28,27 @@ public class MainCharacter : MonoBehaviour
             {
                 temp = targetPosition;
                 targetPosition -= new Vector3(sum_X, 0, 0);
-                
-                Debug.Log(temp);
-                Debug.Log(targetPosition);
-
                 MoveCheck();
             }
 
             if(Input.GetKeyDown(KeyCode.RightArrow))
             {
+                temp = targetPosition;
                 targetPosition += new Vector3(sum_X, 0, 0);
-                
-                Debug.Log(temp);
-                Debug.Log(targetPosition);
-
                 MoveCheck();
             }
 
             if(Input.GetKeyDown(KeyCode.UpArrow))
             {
+                temp = targetPosition;
                 targetPosition += new Vector3(0, sum_Y, 0);
-                
-                Debug.Log(temp);
-                Debug.Log(targetPosition);
-
                 MoveCheck();
             }
 
             if(Input.GetKeyDown(KeyCode.DownArrow))
             {
+                temp = targetPosition;
                 targetPosition -= new Vector3(0, sum_Y, 0);
-                
-                Debug.Log(temp);
-                Debug.Log(targetPosition);
-
                 MoveCheck();
             }
         }
@@ -83,10 +70,10 @@ public class MainCharacter : MonoBehaviour
     // 최소, 최대 좌표, sum 설정
     public void SetCoordinates()
     {
-        min_X = transform.localPosition.x;
+        min_X = Board.initial_X;
         max_X = transform.localPosition.x * -1;
 
-        max_Y = transform.localPosition.y;
+        max_Y = Board.initial_Y;
         min_Y = transform.localPosition.y * -1;
 
         sum_X = Board.sum_X;

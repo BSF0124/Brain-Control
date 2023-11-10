@@ -15,8 +15,8 @@ public class Board : MonoBehaviour
     private int[,] type; //발판 종류
     // 0 : 시작 / 1 : 왼쪽 / 2 : 오른쪽 /3 : 위쪽 / 4 : 아래쪽 / 5 : 도착
 
-    private float initial_X; // 초기 x좌표 (음수)
-    private float initial_Y; // 초기 y좌표 (양수)
+    public float initial_X; // 초기 x좌표 (음수)
+    public float initial_Y; // 초기 y좌표 (양수)
     private float current_X; // 현재 배치할 x좌표 (음수->양수)
     private float current_Y; // 현재 배치할 y좌표 (양수->음수)
     public float sum_X; // 발판 사이의 x값
