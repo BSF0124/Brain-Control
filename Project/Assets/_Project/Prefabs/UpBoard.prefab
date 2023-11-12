@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3096585534542601138}
   - component: {fileID: 8726134591474976005}
   - component: {fileID: 2358007111657149947}
+  - component: {fileID: -2180630549814499679}
   m_Layer: 0
   m_Name: UpBoard
-  m_TagString: Board
+  m_TagString: UpBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,3 +131,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &-2180630549814499679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584142995453954386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11998e3d902eb1045ae0ef0941da45e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActivatedImage: {fileID: 21300000, guid: c861774bfb86c754b836803492be8648, type: 3}

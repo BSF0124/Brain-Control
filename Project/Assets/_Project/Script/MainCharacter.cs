@@ -10,14 +10,14 @@ public class MainCharacter : MonoBehaviour
     private float min_X, max_X, min_Y, max_Y; // 최소, 최대 좌표
     private float sum_X, sum_Y;
 
-    Board Board;
+    MainBoard MainBoard;
 
     void Start()
     {
-        targetPosition = transform.localPosition;
-        Board = GameObject.Find("MainBoard").GetComponent<Board>();
+        MainBoard = GameObject.Find("MainBoard").GetComponent<MainBoard>();
         SetCoordinates();
         CreateCharacter();
+        targetPosition = transform.localPosition;
     }
 
     void Update()
@@ -64,20 +64,20 @@ public class MainCharacter : MonoBehaviour
         transform.parent = parent;
         
         // 좌표 설정
-        transform.localPosition = new Vector3(min_X, max_Y, transform.localPosition.z);
+        transform.localPosition = new Vector3(min_X, max_Y, 1);
     }
 
     // 최소, 최대 좌표, sum 설정
     public void SetCoordinates()
     {
-        min_X = Board.initial_X;
-        max_X = transform.localPosition.x * -1;
+        min_X = MainBoard.initial_X;
+        max_X = min_X * -1;
 
-        max_Y = Board.initial_Y;
-        min_Y = transform.localPosition.y * -1;
+        max_Y = MainBoard.initial_Y;
+        min_Y = max_Y * -1;
 
-        sum_X = Board.sum_X;
-        sum_Y = Board.sum_Y;
+        sum_X = MainBoard.sum_X;
+        sum_Y = MainBoard.sum_Y;
     }
 
     // 캐릭터 이동
@@ -121,8 +121,8 @@ public class MainCharacter : MonoBehaviour
     // 현재 캐릭터의 위치가 최소, 최대 좌표에 있는지 확인
     public bool CheckCoordinates()
     {
-        if(targetPosition.x < min_X || targetPosition.x > max_X || 
-        targetPosition.y < min_Y || targetPosition.y > max_Y)
+        if(targetPosition.x < (min_X-0.005) || targetPosition.x > max_X || 
+        targetPosition.y < min_Y || targetPosition.y > (max_Y+0.005))
             return true; // 움직임X
         
         else

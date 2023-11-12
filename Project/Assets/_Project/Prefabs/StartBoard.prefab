@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3601769900341235639}
   m_Layer: 0
   m_Name: StartBoard
-  m_TagString: Board
+  m_TagString: StartBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
