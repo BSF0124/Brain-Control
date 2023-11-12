@@ -25,18 +25,21 @@ public class SubBoard : MonoBehaviour
     {
         if(other.gameObject.tag == "MainCharacter")
             Activated();
-        Debug.Log("dd");
+
+        
     }
 
     // 발판 활성화
     public void Activated() 
     {
-        // 이미지 변경
+        Debug.Log(this.gameObject.tag);
         
+        // 이미지 변경
         defaultImage.sprite = ActivatedImage;
 
         // 태그 변경
         gameObject.tag = "ActivatedBoard";
+
     }
 
 }

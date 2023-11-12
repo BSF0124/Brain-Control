@@ -15,4 +15,24 @@ public class SubCharacter : MonoBehaviour
     {
         
     }
+
+    public void Move_Left()
+    {
+
+    }
+
+    public void Move_Right()
+    {
+        
+    }
+
+    public void Move_Up()
+    {
+        
+    }
+
+    public void Move_Down()
+    {
+        
+    }
 }
