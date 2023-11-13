@@ -382,8 +382,8 @@ MonoBehaviour:
   - {fileID: 3584142995453954386, guid: 7c18a62d823c0384d87259b3dfde6932, type: 3}
   - {fileID: 3584142995453954386, guid: 592fdb12fbafa6346b119135715802be, type: 3}
   - {fileID: 3584142995453954386, guid: 2438d3670bde22a45bcfb970caf88fed, type: 3}
-  column: 6
-  row: 6
+  column: 4
+  row: 3
   initial_X: 0
   initial_Y: 0
   sum_X: 0

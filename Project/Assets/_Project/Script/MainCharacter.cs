@@ -9,6 +9,7 @@ public class MainCharacter : MonoBehaviour
     private Vector3 targetPosition, temp;
     private float min_X, max_X, min_Y, max_Y; // 최소, 최대 좌표
     private float sum_X, sum_Y;
+    private float column, row;
 
     MainBoard MainBoard;
 
@@ -119,7 +120,7 @@ public class MainCharacter : MonoBehaviour
     }
 
     // 현재 캐릭터의 위치가 최소, 최대 좌표에 있는지 확인
-    public bool CheckCoordinates()
+    bool CheckCoordinates()
     {
         if(targetPosition.x < (min_X-0.005) || targetPosition.x > max_X || 
         targetPosition.y < min_Y || targetPosition.y > (max_Y+0.005))
@@ -127,6 +128,11 @@ public class MainCharacter : MonoBehaviour
         
         else
             return false; // 움직임O
+    }
+
+    bool ActivatedCheck()
+    {
+        return true;
     }
 
 }
