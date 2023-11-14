@@ -16,6 +16,8 @@ TagManager:
   - RightBoard
   - ActivatedBoard
   - Goal
+  - ladder_Up
+  - ladder_Down
   layers:
   - Default
   - TransparentFX
