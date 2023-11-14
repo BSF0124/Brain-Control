@@ -15,6 +15,7 @@ TagManager:
   - LeftBoard
   - RightBoard
   - ActivatedBoard
+  - Goal
   layers:
   - Default
   - TransparentFX
