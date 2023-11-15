@@ -35,16 +35,28 @@ public class MainBoard : MonoBehaviour
 
         // 보드 종류 설정
 
-        type = new int[column, row];
+        type = new int[row, column];
         System.Random random = new System.Random();
-        for (int i=0; i<column; i++)
+        for (int i=0; i<row; i++)
         {
-            for (int j=0; j<row; j++)
+            for (int j=0; j<column; j++)
             {
                 int r = random.Next(6);
                 type[i, j] = r;
             }
         }
+        // type = new int[,] {
+        //     {0,2,2,1,2,2,1,2,1,2},
+        //     {2,2,2,2,1,1,2,1,2,1},
+        //     {1,2,2,2,1,2,3,3,4,2},
+        //     {2,1,2,2,2,2,4,1,3,2},
+        //     {2,2,1,1,5,3,2,2,4,1},
+        //     {3,2,1,4,2,5,2,1,4,3},
+        //     {3,2,2,1,3,4,2,4,1,1},
+        //     {3,1,2,4,3,1,3,2,4,2},
+        //     {1,4,3,2,4,2,1,2,3,1},
+        //     {4,3,2,1,3,3,4,2,2,1}
+        // };
 
         sum_X = (float)(Math.Truncate(1000 / (double)column) / 1000);
         sum_Y = (float)(Math.Truncate(1000 / (double)row) / 1000);
