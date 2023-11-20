@@ -18,13 +18,13 @@ public class Board : MonoBehaviour
     // 충돌 감지
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(this.gameObject.tag == "LeftBoard")
+        if(gameObject.tag == "LeftBoard")
             SubCharacter.Move_Left();
-        else if(this.gameObject.tag == "RightBoard")
+        else if(gameObject.tag == "RightBoard")
             SubCharacter.Move_Right();
-        else if(this.gameObject.tag == "UpBoard")
+        else if(gameObject.tag == "UpBoard")
             SubCharacter.Move_Up();
-        else if(this.gameObject.tag == "DownBoard")
+        else if(gameObject.tag == "DownBoard")
             SubCharacter.Move_Down();
 
         if(other.gameObject.tag == "MainCharacter")
@@ -38,6 +38,7 @@ public class Board : MonoBehaviour
         defaultImage.sprite = ActivatedImage;
 
         // 태그 변경
-        gameObject.tag = "ActivatedBoard";
+        if(gameObject.tag != "EndBoard")
+            gameObject.tag = "ActivatedBoard";
     }
 }

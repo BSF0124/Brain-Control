@@ -85,7 +85,7 @@ public class MainCharacter : MonoBehaviour
 
         transform.DOMove(targetPosition, 0.25f);
         yield return new WaitForSeconds(0.23f);
-
+        print(gameManager.main_Clear + " " + gameManager.sub_Clear);
         isMoving = false;
     }
 
@@ -136,12 +136,13 @@ public class MainCharacter : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "GoalBoard")
+        if(other.gameObject.tag == "EndBoard"){
             gameManager.main_Clear = true;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag == "GoalBoard")
+        if(other.gameObject.tag == "EndBoard")
             isMoving = true;
     }
 }

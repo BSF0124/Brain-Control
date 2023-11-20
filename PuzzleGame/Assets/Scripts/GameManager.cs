@@ -9,20 +9,20 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        print(main_Clear + " " + sub_Clear);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void Success()
-    {
         if(main_Clear && sub_Clear)
         {
-            Debug.Log("Clear!");
+            GameClear();
         }
+    }
+
+    public void GameClear()
+    {
+
     }
 }

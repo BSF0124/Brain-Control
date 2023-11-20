@@ -61,9 +61,6 @@ public class SubCharacter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Goal")
-            Debug.Log("Success");
-        
         if(other.gameObject.tag == "ladder_Up")
             ladder_up = true;
 
