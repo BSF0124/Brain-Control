@@ -6,10 +6,9 @@ using DG.Tweening;
 
 public class MainCharacter : MonoBehaviour
 {
-    private bool isMoving = false;
-    private bool isShaking = false;
     private Vector3 targetPosition, temp;
     private float min_X, max_X, min_Y, max_Y; // 최소, 최대 좌표
+    private bool isMoving = false, isShaking = false;
 
     MainBoard mainBoard;
     GameManager gameManager;
@@ -25,7 +24,14 @@ public class MainCharacter : MonoBehaviour
 
     void Update()
     {
-        if (!isMoving && !isShaking)
+        if(gameManager.isGameClear)
+        {
+            // 엔터키 입력시 씬 이동
+            if(Input.GetKeyDown(KeyCode.Return))
+                gameManager.MoveScene();
+        }
+
+        else if (!isMoving && !isShaking)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -85,7 +91,6 @@ public class MainCharacter : MonoBehaviour
 
         transform.DOMove(targetPosition, 0.25f);
         yield return new WaitForSeconds(0.23f);
-        print(gameManager.main_Clear + " " + gameManager.sub_Clear);
         isMoving = false;
     }
 
