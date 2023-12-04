@@ -9,13 +9,13 @@ public class GameManager : MonoBehaviour
     
     [HideInInspector]
     public bool main_Clear=false, sub_Clear=false, isGameClear=false, isSceneMove=false;
-
     public string sceneName;
 
     void Start()
     {
         fadeEffect = GameObject.Find("FadeImage").GetComponent<FadeEffect>();
         fadeEffect.FadeOut();
+
     }
 
     void Update()

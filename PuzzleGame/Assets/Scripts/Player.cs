@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         stageName = "Stage " + currentStage;
-        transform.position = GameObject.Find(stageName).transform.position;
+        Vector3 startPosition = GameObject.Find(stageName).transform.position;
+        startPosition.y += 0.17f;
+        transform.position = startPosition;
     }
 
     void Update()
@@ -30,6 +32,8 @@ public class Player : MonoBehaviour
                 MoveToNextStage();
         }
     }
+
+    // 이전 스테이지로 이동
     void MoveToPreviousStage()
     {
         currentStage--;
@@ -38,6 +42,7 @@ public class Player : MonoBehaviour
         stage.GetComponent<Stage>().MoveLeft(transform);
     }
 
+    // 다음 스테이지로 이동
     void MoveToNextStage()
     {
         stage = GameObject.Find(stageName);
