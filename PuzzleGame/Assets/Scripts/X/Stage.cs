@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System.Numerics;
 
 public class Stage : MonoBehaviour
 {
@@ -15,8 +14,7 @@ public class Stage : MonoBehaviour
     {
         if(!isMoving)
         {
-        StartCoroutine(DoMove(cur_transform, true));
-
+            StartCoroutine(DoMove(cur_transform, true));
         }
 
     }
@@ -25,7 +23,7 @@ public class Stage : MonoBehaviour
     {
         if(!isMoving)
         {
-        StartCoroutine(DoMove(cur_transform, false));
+            StartCoroutine(DoMove(cur_transform, false));
         }
 
     }
@@ -38,7 +36,7 @@ public class Stage : MonoBehaviour
 
         if(moveLeft)
         {
-            for(int i=pathPoints.Length-2; i>=0; i++)
+            for(int i=pathPoints.Length-2; i>=0; i--)
             {
                 UnityEngine.Vector3 target = pathPoints[i];
                 yield return StartCoroutine(Move(cur_transform, target));
@@ -61,34 +59,4 @@ public class Stage : MonoBehaviour
         start.DOMove(end, moveTime).SetEase(Ease.InOutSine);
         yield return new WaitForSeconds(moveTime);
     }
-
-
-    /*
-    private IEnumerator MoveAlongPath(Transform player, bool moveLeft)
-    {
-        if(moveLeft)
-        {
-            for(int i=road.Length-2; i>=0; i--)
-            {
-                Vector3 target = road[i].transform.position;
-                yield return StartCoroutine(Move(player, target));
-            }
-        }
-
-        else
-        {
-            for(int i=1; i<road.Length; i++)
-            {
-                Vector3 target = road[i].transform.position;
-                yield return StartCoroutine(Move(player, target));
-            }
-        }
-    }
-
-    private IEnumerator Move(Transform start, Vector3 end)
-    {
-        start.DOMove(end, moveTime).SetEase(Ease.InOutSine);
-        yield return new WaitForSeconds(waitTime);
-    }
-    */
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
@@ -40,6 +39,7 @@ public class Player : MonoBehaviour
         stageName = "Stage " + currentStage;
         stage = GameObject.Find(stageName);
         stage.GetComponent<Stage>().MoveLeft(transform);
+        print(stageName);
     }
 
     // 다음 스테이지로 이동
@@ -49,5 +49,6 @@ public class Player : MonoBehaviour
         stage.GetComponent<Stage>().MoveRight(transform);
         currentStage++;
         stageName = "Stage " + currentStage;
+        print(stageName);
     }
 }
