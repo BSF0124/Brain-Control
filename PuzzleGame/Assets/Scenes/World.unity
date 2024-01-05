@@ -967,7 +967,7 @@ GameObject:
   - component: {fileID: 779900622}
   - component: {fileID: 779900621}
   - component: {fileID: 779900620}
-  - component: {fileID: 779900619}
+  - component: {fileID: 779900623}
   m_Layer: 5
   m_Name: SlideImage
   m_TagString: Untagged
@@ -994,19 +994,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1920, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &779900619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779900617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e1632f497f2d745b56ac17f7d39ff5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 779900620}
 --- !u!95 &779900620
 Animator:
   serializedVersion: 5
@@ -1066,6 +1053,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 779900617}
   m_CullTransparentMesh: 1
+--- !u!114 &779900623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779900617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c409026053e660f4c90c0051439b4b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 779900620}
 --- !u!1 &1028287177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df900ae47389ad74aa68d5760a9eeb94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenTransition: {fileID: 0}
+  slideInOut: {fileID: 779900623}
   mainCamera: {fileID: 519420031}
   moveSpeed: 0.5
   maxWorldIndex: 3

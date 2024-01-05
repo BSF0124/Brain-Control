@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
-    public ScreenTransition screenTransition;
+    public SlideInOut slideInOut;
     public Camera mainCamera; // 메인 카메라
     public float moveSpeed; // 플레이어 이동 속도
     public int maxWorldIndex; // 최대 월드 수
@@ -71,21 +71,7 @@ public class PlayerMove : MonoBehaviour
     public void MoveWorld()
     {
         StartMoving();
-        SetWorld();
-
-        screenTransition.WipeIn();
-
-        Vector3 worldPosition = new Vector3((worldIndex - 1) * 20, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        mainCamera.transform.DOMove(worldPosition, moveSpeed);
-
-        if(stageIndex == 0)
-            stageIndex = maxStageIndex - 1;
-        else
-            stageIndex = 0;
-
-        screenTransition.WipeOut();
-
-        MoveStage();
+        StartCoroutine(MoveWorldRoutine());
     }
     private void StartMoving()
     {
@@ -102,5 +88,26 @@ public class PlayerMove : MonoBehaviour
         var world = GameObject.Find("World " + worldIndex);
         stageManager = world.GetComponent<StageManager>();
         maxStageIndex = stageManager.stage.Length;
+    }
+
+    private IEnumerator MoveWorldRoutine()
+    {
+        yield return slideInOut.SlideIn(); // SlideIn 애니메이션 실행
+
+        SetWorld();
+
+        Vector3 worldPosition = new Vector3((worldIndex - 1) * 20, mainCamera.transform.position.y, mainCamera.transform.position.z);
+        mainCamera.transform.DOMove(worldPosition, moveSpeed); // 카메라 이동
+
+        if(stageIndex == 0)
+            stageIndex = maxStageIndex - 1;
+        else
+            stageIndex = 0;
+
+        MoveStage(); // 플레이어 이동
+
+        yield return slideInOut.SlideOut(); // SlideOut 애니메이션 실행
+
+        StopMoving();
     }
 }
