@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
             if(stageIndex > 0)
             {
                 stageIndex--;
-                MoveStage();
+                StartCoroutine(MoveStage());
             }
             else if(worldIndex > 1)
             {
@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
             if(stageIndex < maxStageIndex - 1)
             {
                 stageIndex++;
-                MoveStage();
+                StartCoroutine(MoveStage());
             }
             else if(worldIndex < maxWorldIndex)
             {
@@ -60,12 +60,13 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void MoveStage()
+    public IEnumerator MoveStage()
     {
         StartMoving();
 
         Vector3 stagePosition = stageManager.stage[stageIndex].transform.position;
-        transform.DOMove(stagePosition, moveSpeed).OnComplete(StopMoving);
+        Tweener tweener = transform.DOMove(stagePosition, moveSpeed).OnComplete(StopMoving);
+        yield return tweener.WaitForCompletion();
     }
 
     public void MoveWorld()
@@ -73,14 +74,26 @@ public class PlayerMove : MonoBehaviour
         StartMoving();
         StartCoroutine(MoveWorldRoutine());
     }
-    private void StartMoving()
-    {
-        isMoving = true;
-    }
 
-    private void StopMoving()
+    private IEnumerator MoveWorldRoutine()
     {
-        isMoving = false;
+        SetWorld();
+
+        if(stageIndex == 0)
+            stageIndex = maxStageIndex - 1;
+        else
+            stageIndex = 0;
+
+        yield return slideInOut.SlideIn();
+
+        Vector3 worldPosition = new Vector3((worldIndex - 1) * 20, mainCamera.transform.position.y, mainCamera.transform.position.z);
+        mainCamera.transform.position = worldPosition;
+
+        yield return slideInOut.SlideOut();
+
+        yield return MoveStage(); // 플레이어 이동
+        
+        StopMoving();
     }
 
     private void SetWorld()
@@ -90,24 +103,13 @@ public class PlayerMove : MonoBehaviour
         maxStageIndex = stageManager.stage.Length;
     }
 
-    private IEnumerator MoveWorldRoutine()
+    private void StartMoving()
     {
-        yield return slideInOut.SlideIn(); // SlideIn 애니메이션 실행
+        isMoving = true;
+    }
 
-        SetWorld();
-
-        Vector3 worldPosition = new Vector3((worldIndex - 1) * 20, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        mainCamera.transform.DOMove(worldPosition, moveSpeed); // 카메라 이동
-
-        if(stageIndex == 0)
-            stageIndex = maxStageIndex - 1;
-        else
-            stageIndex = 0;
-
-        MoveStage(); // 플레이어 이동
-
-        yield return slideInOut.SlideOut(); // SlideOut 애니메이션 실행
-
-        StopMoving();
+    private void StopMoving()
+    {
+        isMoving = false;
     }
 }

@@ -6,8 +6,13 @@ public class SlideInOut : MonoBehaviour
 {
     public Animator animator;
 
+    void Start()
+    {
+        gameObject.SetActive(false);
+    }
     public IEnumerator SlideIn()
     {
+        gameObject.SetActive(true);
         animator.Play("SlideIn");
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("SlideIn") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
     }
@@ -16,5 +21,6 @@ public class SlideInOut : MonoBehaviour
     {
         animator.Play("SlideOut");
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("SlideOut") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+        gameObject.SetActive(false);
     }
 }
