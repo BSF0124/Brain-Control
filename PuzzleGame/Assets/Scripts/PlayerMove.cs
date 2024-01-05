@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class PlayerMove : MonoBehaviour
 {
+    public ScreenTransition screenTransition;
     public Camera mainCamera; // 메인 카메라
     public float moveSpeed; // 플레이어 이동 속도
     public int maxWorldIndex; // 최대 월드 수
@@ -12,65 +13,68 @@ public class PlayerMove : MonoBehaviour
     private int worldIndex = 1; // 현재 월드 인덱스
     private int stageIndex = 0; // 현재 스테이지 인덱스
     private bool isMoving = false; // 플레이어가 이동 중인지 확인
+    private StageManager stageManager;
 
-    GameObject world;
 
     void Start()
     {
-        world = GameObject.Find("World " + worldIndex);
-        maxStageIndex = world.GetComponent<StageManager>().stage.Length;
+        SetWorld();
     }
 
     void Update()
     {
-        if(!isMoving)
-        {
-            if(Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                if(stageIndex > 0)
-                {
-                    stageIndex--;
-                    MoveStage();
-                }
-                else if(worldIndex > 1)
-                {
-                    worldIndex--;
-                    MoveWorld();
-                }
-            }
+        if(isMoving)
+            return;
 
-            if(Input.GetKeyDown(KeyCode.RightArrow))
+        HandleInput();
+    }
+
+    private void HandleInput()
+    {
+        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if(stageIndex > 0)
             {
-                if(stageIndex < maxStageIndex - 1)
-                {
-                    stageIndex++;
-                    MoveStage();
-                }
-                else if(worldIndex < maxWorldIndex)
-                {
-                    worldIndex++;
-                    MoveWorld();
-                }
+                stageIndex--;
+                MoveStage();
+            }
+            else if(worldIndex > 1)
+            {
+                worldIndex--;
+                MoveWorld();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if(stageIndex < maxStageIndex - 1)
+            {
+                stageIndex++;
+                MoveStage();
+            }
+            else if(worldIndex < maxWorldIndex)
+            {
+                worldIndex++;
+                MoveWorld();
             }
         }
     }
 
     public void MoveStage()
     {
-        isMoving = true;
+        StartMoving();
 
-        Vector3 stagePosition = world.GetComponent<StageManager>().stage[stageIndex].transform.position;
-        transform.DOMove(stagePosition, moveSpeed).OnComplete(() => isMoving = false);
+        Vector3 stagePosition = stageManager.stage[stageIndex].transform.position;
+        transform.DOMove(stagePosition, moveSpeed).OnComplete(StopMoving);
     }
 
     public void MoveWorld()
     {
-        isMoving = true;
+        StartMoving();
+        SetWorld();
 
-        world = GameObject.Find("World " + worldIndex);
-        maxStageIndex = world.GetComponent<StageManager>().stage.Length;
+        screenTransition.WipeIn();
 
-        // 메인 카메라 이동 구현
         Vector3 worldPosition = new Vector3((worldIndex - 1) * 20, mainCamera.transform.position.y, mainCamera.transform.position.z);
         mainCamera.transform.DOMove(worldPosition, moveSpeed);
 
@@ -78,9 +82,25 @@ public class PlayerMove : MonoBehaviour
             stageIndex = maxStageIndex - 1;
         else
             stageIndex = 0;
-        
-        MoveStage();
 
+        screenTransition.WipeOut();
+
+        MoveStage();
+    }
+    private void StartMoving()
+    {
+        isMoving = true;
+    }
+
+    private void StopMoving()
+    {
         isMoving = false;
+    }
+
+    private void SetWorld()
+    {
+        var world = GameObject.Find("World " + worldIndex);
+        stageManager = world.GetComponent<StageManager>();
+        maxStageIndex = stageManager.stage.Length;
     }
 }

@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     {
         fadeEffect = GameObject.Find("FadeImage").GetComponent<FadeEffect>();
         fadeEffect.FadeOut();
-
     }
 
     void Update()
