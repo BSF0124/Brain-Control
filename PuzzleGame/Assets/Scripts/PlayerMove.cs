@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     private int worldIndex = 1; // 현재 월드 인덱스
     private int stageIndex = 0; // 현재 스테이지 인덱스
     private bool isMoving = false; // 플레이어가 이동 중인지 확인
-    private StageManager stageManager;
+    private WorldManager worldManager;
 
 
     void Start()
@@ -64,7 +64,7 @@ public class PlayerMove : MonoBehaviour
     {
         StartMoving();
 
-        Vector3 stagePosition = stageManager.stage[stageIndex].transform.position;
+        Vector3 stagePosition = worldManager.stage[stageIndex].transform.position;
         Tweener tweener = transform.DOMove(stagePosition, moveSpeed).OnComplete(StopMoving);
         yield return tweener.WaitForCompletion();
     }
@@ -99,8 +99,8 @@ public class PlayerMove : MonoBehaviour
     private void SetWorld()
     {
         var world = GameObject.Find("World " + worldIndex);
-        stageManager = world.GetComponent<StageManager>();
-        maxStageIndex = stageManager.stage.Length;
+        worldManager = world.GetComponent<WorldManager>();
+        maxStageIndex = worldManager.stage.Length;
     }
 
     private void StartMoving()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8435686864533775116}
   - component: {fileID: 4789008842919405581}
   - component: {fileID: 2676917765174668205}
+  - component: {fileID: 1298461628525967128}
   m_Layer: 0
   m_Name: StartBoard
   m_TagString: StartBoard
@@ -144,3 +145,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivatedImage: {fileID: 21300000, guid: 35a921e6d5833e94f8d57e348dbced75, type: 3}
+--- !u!114 &1298461628525967128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180363858590181267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afa7df61774bd854aad0192816ea0a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

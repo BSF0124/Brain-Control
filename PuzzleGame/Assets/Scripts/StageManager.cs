@@ -4,5 +4,17 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    public Transform[] stage;
+    public bool isActive = false;
+
+    void Awake()
+    {
+        if(isActive)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
