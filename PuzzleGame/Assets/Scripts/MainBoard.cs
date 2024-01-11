@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class MainBoard : MonoBehaviour
 {
@@ -17,26 +16,28 @@ public class MainBoard : MonoBehaviour
         transform.parent = parent;
 
         // 보드 상태 배열 초기화
-        boardVisited = new bool[row, column];
-        for (int i=0; i<row; i++)
+        boardVisited = new bool[column, row];
+        for (int i=0; i<column; i++)
         {
-            for (int j=0; j<column; j++)
+            for (int j=0; j<row; j++)
             {
                 boardVisited[i, j] = false;
             }
         }
-        boardVisited[row-1, 0] = true;
+        
+        // 캐릭터 시작 좌표 true 설정
+        boardVisited[0, 0] = true;
     }
 
-    // 해당 좌표의 보드를 밟았음을 표시
-    public void MarkBoardVisited(Vector2Int boardCoordinates)
+    // 해당 인덱스의 보드를 밟았음을 표시
+    public void MarkBoardVisited(int column, int row)
     {
-        boardVisited[boardCoordinates.y, boardCoordinates.x] = true;
+        boardVisited[column, row] = true;
     }
 
-    // 해당 좌표의 보드를 밟았는지 여부를 반환
-    public bool IsBoardVisited(Vector2Int boardCoordinates)
+    // 해당 인덱스의 보드를 밟았는지 여부를 반환
+    public bool IsBoardVisited(int column, int row)
     {
-        return boardVisited[boardCoordinates.y, boardCoordinates.x];
+        return boardVisited[column, row];
     }
 }

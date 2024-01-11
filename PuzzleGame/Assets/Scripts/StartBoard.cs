@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class StartBoard : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // 생성할 메인 캐릭터
+    public GameObject character;
     void Start()
     {
-        
-    }
+        // 메인 캐릭터 생성
+        GameObject mainCharacter = Instantiate(character);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // 메인 캐릭터의 부모 설정
+        mainCharacter.transform.parent = transform.parent.parent;
+
+        // 메인 캐릭터의 좌표 설정
+        mainCharacter.transform.localPosition = transform.localPosition;
     }
 }

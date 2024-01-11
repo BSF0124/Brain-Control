@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,19 +5,16 @@ using DG.Tweening;
 
 public class MainCharacter : MonoBehaviour
 {
-    private Vector3 targetPosition, temp;
-    private float min_X, max_X, min_Y, max_Y; // 최소, 최대 좌표
-    private bool isMoving = false, isShaking = false;
-
-    MainBoard mainBoard;
-    GameManager gameManager;
+    private Vector3 targetPosition; // 캐릭터가 이동할 좌표
+    private int column = 0, row = 0; // 캐릭터 현재 위치
+    private bool isMoving = false, isShaking = false; // 캐릭터 이동 제어
+    private MainBoard mainBoard;
+    private GameManager gameManager;
 
     void Start()
     {
         mainBoard = GameObject.Find("MainBoard").GetComponent<MainBoard>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-        SetCoordinates();
         targetPosition = transform.position;
     }
 
@@ -28,59 +24,84 @@ public class MainCharacter : MonoBehaviour
         {
             // 엔터키 입력시 씬 이동
             if(Input.GetKeyDown(KeyCode.Return))
-                gameManager.MoveScene();
+            {gameManager.MoveScene();}
         }
 
-        else if (!isMoving && !isShaking)
+        if (isMoving || isShaking)
+        {return;} 
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) // 위쪽 방향키 입력
+        {Move_Up();}
+        if (Input.GetKeyDown(KeyCode.DownArrow)) // 아래쪽 방향키 입력
+        {Move_Down();}
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) // 왼쪽 방향키 입력
+        {Move_Left();}
+        if (Input.GetKeyDown(KeyCode.RightArrow)) // 오른쪽 방향키 입력
+        {Move_Right();}
+    }
+
+    // 위쪽 이동
+    void Move_Up() {
+        if(row == 0)
+        {Shake();}
+
+        else if(mainBoard.IsBoardVisited(column, row-1))
+        {Shake();}
+
+        else
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                temp = targetPosition;
-                targetPosition += Vector3.left;
-                MoveCheck();
-            }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                temp = targetPosition;
-                targetPosition += Vector3.right;
-                MoveCheck();
-            }
-
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                temp = targetPosition;
-                targetPosition += Vector3.up;
-                MoveCheck();
-            }
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                temp = targetPosition;
-                targetPosition += Vector3.down;
-                MoveCheck();
-            }
+            targetPosition += Vector3.up;
+            StartCoroutine(MoveToTarget());
+            mainBoard.MarkBoardVisited(column, --row);
         }
     }
 
-    // 최소, 최대 좌표 설정
-    void SetCoordinates()
-    {
-        if(mainBoard.column % 2 == 0)
-            max_X = mainBoard.column / 2 - 0.5f;
+    // 아래쪽 이동
+    void Move_Down() {
+        if(row == mainBoard.row-1)
+        {Shake();}
+
+        else if(mainBoard.IsBoardVisited(column, row+1))
+        {Shake();}
+
         else
-            max_X = mainBoard.column / 2;
+        {
+            targetPosition += Vector3.down;
+            StartCoroutine(MoveToTarget());
+            mainBoard.MarkBoardVisited(column, ++row);
+        }
+    }
 
-        if(mainBoard.row % 2 == 0)
-            max_Y = mainBoard.row / 2 - 0.5f;
+    // 왼쪽 이동
+    void Move_Left() {
+        if(column == 0)
+        {Shake();}
+
+        else if(mainBoard.IsBoardVisited(column-1, row))
+        {Shake();}
+
         else
-            max_Y = mainBoard.row / 2;
+        {
+            targetPosition += Vector3.left;
+            StartCoroutine(MoveToTarget());
+            mainBoard.MarkBoardVisited(--column, row);
+        }
+    }
 
-        min_X = max_X * -1;
-        min_Y = max_Y * -1;
+    // 오른쪽 이동
+    void Move_Right() {
+        if(column == mainBoard.column-1)
+        {Shake();}
 
-        min_Y -= 2.5f;
-        max_Y -= 2.5f;
+        else if(mainBoard.IsBoardVisited(column+1, row))
+        {Shake();}
+
+        else
+        {
+            targetPosition += Vector3.right;
+            StartCoroutine(MoveToTarget());
+            mainBoard.MarkBoardVisited(++column, row);
+        }
     }
     
 
@@ -91,6 +112,7 @@ public class MainCharacter : MonoBehaviour
 
         transform.DOMove(targetPosition, 0.25f);
         yield return new WaitForSeconds(0.23f);
+
         isMoving = false;
     }
 
@@ -102,42 +124,6 @@ public class MainCharacter : MonoBehaviour
         {
             isShaking = false;
         });
-    }
-
-    // 캐릭터 이동 가능 확인(최대 최소 좌표에 있는지, 이미 밟은 발판을 밟는지)
-    void MoveCheck()
-    {
-        Vector2Int boardCoordinates = GetBoardCoordinates(targetPosition);
-
-        if (CheckCoordinates() || mainBoard.IsBoardVisited(boardCoordinates))
-        {
-            Shake();
-            targetPosition = temp;
-        }
-        else
-        {
-            StartCoroutine(MoveToTarget());
-            mainBoard.MarkBoardVisited(boardCoordinates);
-        }
-    }
-
-    // 현재 캐릭터의 위치가 최소, 최대 좌표에 있는지 확인
-    bool CheckCoordinates()
-    {
-        if (targetPosition.x < min_X || targetPosition.x > max_X ||
-            targetPosition.y < min_Y || targetPosition.y > max_Y)
-            return true; // 움직임X
-
-        else
-            return false; // 움직임O
-    }
-
-    // 현재 캐릭터의 위치에 해당하는 보드의 좌표 반환
-    Vector2Int GetBoardCoordinates(Vector3 position)
-    {
-        int x = Mathf.FloorToInt(position.x + max_X);
-        int y = Mathf.FloorToInt(position.y + max_Y + 5);
-        return new Vector2Int(x, y);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
