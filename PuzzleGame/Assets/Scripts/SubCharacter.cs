@@ -7,9 +7,7 @@ public class SubCharacter : MonoBehaviour
 {
     private Vector3 targetPosition;
 
-    public float char_X, char_Y; // 캐릭터 초기 좌표
     public float sum_X, sum_Y; // 캐릭터 상하좌우 이동 거리
-    public float min_X, max_X; // 최소, 최대 좌표
     private bool ladder_up = false; // 올라갈 수 있는지 확인
     private bool ladder_down = false; // 내려갈 수 있는지 확인
 
@@ -18,13 +16,7 @@ public class SubCharacter : MonoBehaviour
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        SetCharacter();
         targetPosition = transform.localPosition;
-    }
-
-    void SetCharacter()
-    {
-        transform.localPosition = new Vector3(char_X, char_Y, 0);
     }
 
     public void Move_Left()

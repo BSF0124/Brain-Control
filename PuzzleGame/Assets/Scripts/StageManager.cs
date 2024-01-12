@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    public bool isActive = false;
-
+    private string currentStage;
     void Awake()
     {
-        if(isActive)
-        {
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        StageActive sa = GameObject.Find(currentStage).GetComponent<StageActive>();
+        sa.Active();
     }
 }
