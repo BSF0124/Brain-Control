@@ -8,7 +8,6 @@ public class PlayerMove : MonoBehaviour
 {
     public SlideInOut slideInOut;
     public Camera mainCamera; // 메인 카메라
-    public PlayerData playerData;
     private WorldManager worldManager;
 
     public float moveSpeed; // 플레이어 이동 속도
@@ -114,11 +113,5 @@ public class PlayerMove : MonoBehaviour
     {
         isMoving = false;
     }
-}
 
-[System.Serializable]
-public class PlayerData
-{
-    public string difficulty;
-    public string currentStage;
 }
