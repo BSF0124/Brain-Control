@@ -8,9 +8,7 @@ using System.IO;
 public class SelectData : MonoBehaviour
 {
     public GameObject startPanel;
-    public GameObject createPanel;
-    public TextMeshProUGUI[] slotText; // 플레이어 이름
-    public TextMeshProUGUI newPlayerName; // 새로운 플레이어 이름
+    public TextMeshProUGUI[] slotText;
 
     bool[] saveFile = new bool[3]; // true : 데이터 존재, false - 데이터 없음
 
@@ -24,7 +22,7 @@ public class SelectData : MonoBehaviour
                 DataManager.instance.currentSlot = i;
                 DataManager.instance.LoadData();
 
-                slotText[i].text = DataManager.instance.currentPlayer.name;
+                slotText[i].text = "Slot " + i.ToString();
             }
 
             else
@@ -48,18 +46,8 @@ public class SelectData : MonoBehaviour
 
         else
         {
-            Creat();
+            GoGame();
         }
-    }
-
-    public void Creat()
-    {
-        createPanel.gameObject.SetActive(true);
-    }
-
-    public void HideCreate()
-    {
-        createPanel.gameObject.SetActive(false);
     }
 
     public void GameStart()
@@ -83,7 +71,6 @@ public class SelectData : MonoBehaviour
     {
         if(!saveFile[DataManager.instance.currentSlot])
         {
-            DataManager.instance.currentPlayer.name = newPlayerName.text;
             DataManager.instance.SaveData();
         }
 
