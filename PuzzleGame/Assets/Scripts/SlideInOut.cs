@@ -6,10 +6,6 @@ public class SlideInOut : MonoBehaviour
 {
     public Animator animator;
 
-    void Start()
-    {
-        gameObject.SetActive(false);
-    }
     public IEnumerator SlideIn()
     {
         gameObject.SetActive(true);

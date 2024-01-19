@@ -7,6 +7,7 @@ public class PlayerData
 {
     public int difficulty = 0; // 0 : 쉬움, 1 : 보통, 2 : 어려움
     public string currentStage = "Stage 1";
+    public string name;
 
     // true : 스테이지 클리어
     public bool[] isClear = new bool[19]{
