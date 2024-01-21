@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
     public int maxWorldIndex; // 최대 월드 수
     private int maxStageIndex; // 현재 월드에 해당하는 최대 스테이지 수
     private int worldIndex = 1; // 현재 월드 인덱스
-    private int stageIndex = 5; // 현재 스테이지 인덱스
+    private int stageIndex = 0; // 현재 스테이지 인덱스
     private bool isMoving = false; // 플레이어가 이동 중인지 확인
 
     void Start()
@@ -54,11 +54,21 @@ public class PlayerMove : MonoBehaviour
         {
             if(stageIndex < maxStageIndex - 1)
             {
+                if(!DataManager.instance.StageClearCheck(worldIndex-1,stageIndex+1))
+                {
+                    return;
+                }
+
                 stageIndex++;
                 StartCoroutine(MoveStage());
             }
             else if(worldIndex < maxWorldIndex)
             {
+                if(!DataManager.instance.StageClearCheck(worldIndex+1,0))
+                {
+                    return;
+                }
+
                 worldIndex++;
                 MoveWorld();
             }

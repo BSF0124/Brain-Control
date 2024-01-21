@@ -12,7 +12,7 @@ public class PlayerData
     // true : 스테이지 클리어
     public bool[,] isClear = new bool[3,6]
     {
-        {true,true,true,true,true,true},
+        {true,true,true,false,false,false},
         {true,false,false,false,false,false},
         {true,false,false,false,false,false}
     };
@@ -76,7 +76,7 @@ public class DataManager : MonoBehaviour
         File.Delete(path + currentSlot.ToString());
     }
 
-    public bool StageClearCheck(int stage, int world)
+    public bool StageClearCheck(int world, int stage)
     {
         return currentPlayer.isClear[world,stage];
     }
