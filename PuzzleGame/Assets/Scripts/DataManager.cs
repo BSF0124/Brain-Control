@@ -6,13 +6,16 @@ using System.IO;
 public class PlayerData
 {
     public int difficulty = 0; // 0 : 쉬움, 1 : 보통, 2 : 어려움
-    public string currentStage = "Stage 1";
+    public int currentStage = 1;
+    public int currentWorld = 1;
 
     // true : 스테이지 클리어
-    public bool[] isClear = new bool[19]{
-        true,false,false,false,false,false,false,
-        false,false,false,false,false,false,
-        false,false,false,false,false,false};
+    public bool[,] isClear = new bool[3,6]
+    {
+        {true,true,true,true,true,true},
+        {true,false,false,false,false,false},
+        {true,false,false,false,false,false}
+    };
 }
 
 public class DataManager : MonoBehaviour
@@ -71,5 +74,10 @@ public class DataManager : MonoBehaviour
     public void DeleteData()
     {
         File.Delete(path + currentSlot.ToString());
+    }
+
+    public bool StageClearCheck(int stage, int world)
+    {
+        return currentPlayer.isClear[world,stage];
     }
 }
