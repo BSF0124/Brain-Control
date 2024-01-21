@@ -14,6 +14,11 @@ public class SelectData : MonoBehaviour
 
     void Start()
     {
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         for(int i = 0; i < 3; i++)
         {
             if(File.Exists(DataManager.instance.path + $"{i}"))
@@ -22,11 +27,12 @@ public class SelectData : MonoBehaviour
                 DataManager.instance.currentSlot = i;
                 DataManager.instance.LoadData();
 
-                slotText[i].text = "Slot " + i.ToString();
+                slotText[i].text = "Player " + (i+1).ToString();
             }
 
             else
             {
+                saveFile[i] = false;
                 slotText[i].text = "Empty";
             }
         }
@@ -64,7 +70,8 @@ public class SelectData : MonoBehaviour
     {
         DataManager.instance.currentSlot = num;
         DataManager.instance.DeleteData();
-        slotText[num].text = "Empty";
+        // slotText[num].text = "Empty";
+        Refresh();
     }
 
     public void GoGame()

@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
     private int stageIndex = 0; // 현재 스테이지 인덱스
     private bool isMoving = false; // 플레이어가 이동 중인지 확인
 
-
     void Start()
     {
         SetWorld();
