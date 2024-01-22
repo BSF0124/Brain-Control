@@ -5,7 +5,6 @@ using System.IO;
 
 public class PlayerData
 {
-    public int difficulty = 0; // 0 : 쉬움, 1 : 보통, 2 : 어려움
     public int currentStage = 1;
     public int currentWorld = 1;
 
