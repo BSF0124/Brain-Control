@@ -5,7 +5,7 @@ using System.IO;
 
 public class PlayerData
 {
-    public int currentStage = 1;
+    public int currentStage = 0;
     public int currentWorld = 1;
 
     // true : 스테이지 클리어

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class StageActive : MonoBehaviour
 {
-    public bool isActive = false;
+    private string currentStage;
 
     void Awake()
     {
         gameObject.SetActive(false);
-    }
-
-    public void Active()
-    {
-        gameObject.SetActive(true);
+        currentStage = "Stage " + (DataManager.instance.currentPlayer.currentStage+1).ToString();
+        if(currentStage == gameObject.name)
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

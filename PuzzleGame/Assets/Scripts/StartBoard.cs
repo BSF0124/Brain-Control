@@ -6,7 +6,7 @@ public class StartBoard : MonoBehaviour
 {
     // 생성할 메인 캐릭터
     public GameObject character;
-    public void CreateMain()
+    public void Start()
     {
         // 메인 캐릭터 생성
         GameObject mainCharacter = Instantiate(character);

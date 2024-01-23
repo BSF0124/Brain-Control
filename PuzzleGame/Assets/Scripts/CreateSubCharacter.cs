@@ -6,7 +6,7 @@ public class CreateSubCharacter : MonoBehaviour
 {
     // 생성할 서브 캐릭터
     public GameObject character;
-    public void CreateSub()
+    public void Start()
     {
         // 서브 캐릭터 생성
         GameObject subCharacter = Instantiate(character);
