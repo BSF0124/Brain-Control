@@ -6,10 +6,12 @@ public class CreateSubCharacter : MonoBehaviour
 {
     // 생성할 서브 캐릭터
     public GameObject character;
+    public Board board;
     public void Start()
     {
         // 서브 캐릭터 생성
         GameObject subCharacter = Instantiate(character);
+        subCharacter.name = "SubCharacter";
 
         // 서브 캐릭터의 부모 설정
         subCharacter.transform.parent = transform.parent;
