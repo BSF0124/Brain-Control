@@ -6,14 +6,14 @@ using System.IO;
 public class PlayerData
 {
     public int currentStage = 0;
-    public int currentWorld = 1;
+    public int currentWorld = 0;
 
     // true : 스테이지 클리어
     public bool[,] isClear = new bool[3,6]
-    {
-        {true,true,true,false,false,false},
-        {true,false,false,false,false,false},
-        {true,false,false,false,false,false}
+    {                                                                                                                                                                                                                                                                                                                                                                                                                                     
+        {false,false,false,false,false,false},
+        {false,false,false,false,false,false},
+        {false,false,false,false,false,false}
     };
 }
 

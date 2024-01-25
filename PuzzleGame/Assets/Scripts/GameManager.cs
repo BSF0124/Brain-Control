@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
         if(main_Clear && sub_Clear)
         {
             isGameClear = true;
+            DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.currentWorld,DataManager.instance.currentPlayer.currentStage] = true;
         }
 
         if(isGameClear && (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))

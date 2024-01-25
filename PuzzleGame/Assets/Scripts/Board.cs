@@ -19,13 +19,23 @@ public class Board : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(gameObject.tag == "LeftBoard")
+        {
             subCharacter.Move_Left();
+            print("left");
+        }
         else if(gameObject.tag == "RightBoard")
+        {
             subCharacter.Move_Right();
+            print("right");
+        }
         else if(gameObject.tag == "UpBoard")
+        {
             subCharacter.Move_Up();
+        }
         else if(gameObject.tag == "DownBoard")
+        {
             subCharacter.Move_Down();
+        }
 
         if(other.gameObject.tag == "MainCharacter")
             Activated();
