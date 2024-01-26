@@ -8,7 +8,7 @@ public class MainCharacter : MonoBehaviour
     private Vector3 targetPosition; // 캐릭터가 이동할 좌표
     private int column = 0, row = 0; // 캐릭터 현재 위치
     private bool isMoving = false, isShaking = false; // 캐릭터 이동 제어
-    private MainBoard mainBoard;
+    private MainBoard mainBoard = MainBoard.instance;
     private GameManager gameManager;
 
     void Start()

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private FadeEffect fadeEffect;
+    public FadeEffect fadeEffect;
     
     [HideInInspector]
     public bool main_Clear=false, sub_Clear=false, isGameClear=false, isSceneMove=false;
@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        fadeEffect = GameObject.Find("FadeImage").GetComponent<FadeEffect>();
         fadeEffect.FadeOut();
     }
 
