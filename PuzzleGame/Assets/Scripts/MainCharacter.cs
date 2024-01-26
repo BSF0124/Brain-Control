@@ -40,70 +40,25 @@ public class MainCharacter : MonoBehaviour
         {Move_Right();}
     }
 
-    // 위쪽 이동
-    void Move_Up() {
-        if(row == 0)
-        {Shake();}
-
-        else if(mainBoard.IsBoardVisited(column, row-1))
-        {Shake();}
-
-        else
-        {
-            targetPosition += Vector3.up;
-            StartCoroutine(MoveToTarget());
-            mainBoard.MarkBoardVisited(column, --row);
-        }
-    }
-
-    // 아래쪽 이동
-    void Move_Down() {
-        if(row == mainBoard.row-1)
-        {Shake();}
-
-        else if(mainBoard.IsBoardVisited(column, row+1))
+    void Move(int deltaColumn, int deltaRow, Vector3 direction)
+    {
+        if (column + deltaColumn < 0 || column + deltaColumn >= mainBoard.column ||
+        row + deltaRow < 0 || row + deltaRow >= mainBoard.row ||
+        mainBoard.IsBoardVisited(column + deltaColumn, row + deltaRow))
         {Shake();}
 
         else
         {
-            targetPosition += Vector3.down;
-            StartCoroutine(MoveToTarget());
-            mainBoard.MarkBoardVisited(column, ++row);
+        targetPosition += direction;
+        StartCoroutine(MoveToTarget());
+        mainBoard.MarkBoardVisited(column += deltaColumn, row += deltaRow);
         }
     }
 
-    // 왼쪽 이동
-    void Move_Left() {
-        if(column == 0)
-        {Shake();}
-
-        else if(mainBoard.IsBoardVisited(column-1, row))
-        {Shake();}
-
-        else
-        {
-            targetPosition += Vector3.left;
-            StartCoroutine(MoveToTarget());
-            mainBoard.MarkBoardVisited(--column, row);
-        }
-    }
-
-    // 오른쪽 이동
-    void Move_Right() {
-        if(column == mainBoard.column-1)
-        {Shake();}
-
-        else if(mainBoard.IsBoardVisited(column+1, row))
-        {Shake();}
-
-        else
-        {
-            targetPosition += Vector3.right;
-            StartCoroutine(MoveToTarget());
-            mainBoard.MarkBoardVisited(++column, row);
-        }
-    }
-    
+    void Move_Up() { Move(0, -1, Vector3.up); }
+    void Move_Down() { Move(0, 1, Vector3.down); }
+    void Move_Left() { Move(-1, 0, Vector3.left); }
+    void Move_Right() { Move(1, 0, Vector3.right); }
 
     // 캐릭터 이동
     IEnumerator MoveToTarget()
@@ -126,14 +81,14 @@ public class MainCharacter : MonoBehaviour
         });
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "EndBoard"){
-            gameManager.main_Clear = true;
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == "EndBoard")
             isMoving = true;
+            gameManager.main_Clear = true;
     }
+
+    // private void OnTriggerEnter2D(Collider2D other) {
+    //     if(other.gameObject.tag == "EndBoard"){
+    //     }
+    // }
 }

@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+public enum LadderState
+{
+    None,Up,Down
+}
+
 public class SubCharacter : MonoBehaviour
 {
     private Vector3 targetPosition;
-
-    public float sum_X, sum_Y; // 캐릭터 상하좌우 이동 거리
-    private bool ladder_up = false; // 올라갈 수 있는지 확인
-    private bool ladder_down = false; // 내려갈 수 있는지 확인
-
     GameManager GameManager;
+    public float sum_X, sum_Y; // 캐릭터 상하좌우 이동 거리
+    // private bool ladder_up = false; // 올라갈 수 있는지 확인
+    // private bool ladder_down = false; // 내려갈 수 있는지 확인
+    private LadderState ladderState = LadderState.None;
+
 
     void Start()
     {
@@ -35,7 +40,7 @@ public class SubCharacter : MonoBehaviour
     // 캐릭터가 사다리 오브젝트와 충돌되어있으면 올라감/내려감
     public void Move_Up()
     {
-        if(ladder_up)
+        if(ladderState == LadderState.Up)
         {
             targetPosition += new Vector3(0, sum_Y, 0);
             transform.DOLocalMove(targetPosition, 0.25f);
@@ -44,7 +49,7 @@ public class SubCharacter : MonoBehaviour
 
     public void Move_Down()
     {
-        if(ladder_down)
+        if(ladderState == LadderState.Down)
         {
             targetPosition -= new Vector3(0, sum_Y, 0);
             transform.DOLocalMove(targetPosition, 0.25f);
@@ -54,21 +59,18 @@ public class SubCharacter : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "ladder_Up")
-            ladder_up = true;
+            ladderState = LadderState.Up;
 
         if(other.gameObject.tag == "ladder_Down")
-            ladder_down = true;
+            ladderState = LadderState.Down;
         
         if(other.gameObject.tag == "Goal")
             GameManager.sub_Clear = true;
     }
     
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.tag == "ladder_Up")
-            ladder_up = false;
-
-        if(other.gameObject.tag == "ladder_Down")
-            ladder_down = false;
+        if(other.gameObject.tag == "ladder_Up" || other.gameObject.tag == "ladder_Down")
+            ladderState = LadderState.None;
         
         if(other.gameObject.tag == "Goal")
             GameManager.sub_Clear = false;
