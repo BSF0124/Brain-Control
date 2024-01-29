@@ -11,7 +11,6 @@ public enum LadderState
 public class SubCharacter : MonoBehaviour
 {
     private Vector3 targetPosition;
-    GameManager GameManager;
     public float sum_X, sum_Y; // 캐릭터 상하좌우 이동 거리
     // private bool ladder_up = false; // 올라갈 수 있는지 확인
     // private bool ladder_down = false; // 내려갈 수 있는지 확인
@@ -20,7 +19,6 @@ public class SubCharacter : MonoBehaviour
 
     void Start()
     {
-        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetPosition = transform.localPosition;
     }
 
@@ -65,7 +63,7 @@ public class SubCharacter : MonoBehaviour
             ladderState = LadderState.Down;
         
         if(other.gameObject.tag == "Goal")
-            GameManager.sub_Clear = true;
+            GameManager.instance.isSubClear = true;
     }
     
     private void OnTriggerExit2D(Collider2D other) {
@@ -73,6 +71,6 @@ public class SubCharacter : MonoBehaviour
             ladderState = LadderState.None;
         
         if(other.gameObject.tag == "Goal")
-            GameManager.sub_Clear = false;
+            GameManager.instance.isSubClear = false;
     }
 }

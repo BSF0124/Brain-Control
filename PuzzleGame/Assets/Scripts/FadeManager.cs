@@ -11,8 +11,8 @@ public class FadeManager : MonoBehaviour
     public Image fadeImage;
     public TextMeshProUGUI clearText;
     public TextMeshProUGUI enterText;
-    public float imageDuration = 1;
-    public float textDuration = 1;
+    public float imageDuration = 0.5f;
+    public float textDuration = 0.5f;
 
     private void Awake()
     {
@@ -26,31 +26,72 @@ public class FadeManager : MonoBehaviour
             Destroy(instance.gameObject);
         }
 
-        FadeOutImage();
+        FadeImage(1,0,false);
     }
 
-    public void FadeInImage()
+    public void FadeImage(float start, float end, bool isActive)
     {
-        StartCoroutine(FadeIn(fadeImage, imageDuration));
+        if(isActive)
+        {
+            StartCoroutine(Fade_1(fadeImage, imageDuration, start, end));
+        }
+
+        else
+        {
+            StartCoroutine(Fade_0(fadeImage, imageDuration, start, end));
+        }
     }
 
-    public void FadeOutImage()
+    public void FadeText(float start, float end, bool isActive)
     {
-        StartCoroutine(FadeOut(fadeImage, imageDuration));
+        if(isActive)
+        {
+            StartCoroutine(Fade_1(clearText, textDuration, start, end));
+        }
+
+        else
+        {
+            StartCoroutine(Fade_0(clearText, textDuration, start, end));
+        }
     }
 
-    public void FadeInText(TextMeshProUGUI text)
+    // fade후 오브젝트 비활성화
+    private IEnumerator Fade_0(Graphic graphic, float duration, float start, float end)
     {
-        StartCoroutine(FadeIn(text, textDuration));
+        graphic.gameObject.SetActive(true);
+        
+        Color temp = graphic.color;
+        temp.a = start;
+        graphic.color = temp;
+
+        graphic.DOFade(end, duration);
+
+        yield return new WaitForSeconds(duration);
+
+        graphic.gameObject.SetActive(false);
     }
 
-    public void FadeOutText(TextMeshProUGUI text)
+    // fade후 오브젝트 활성화 유지
+    private IEnumerator Fade_1(Graphic graphic, float duration, float start, float end)
     {
-        StartCoroutine(FadeOut(text, textDuration));
+        graphic.gameObject.SetActive(true);
+        
+        Color temp = graphic.color;
+        temp.a = start;
+        graphic.color = temp;
+
+        graphic.DOFade(end, duration);
+        yield return new WaitForSeconds(duration);
     }
 
+    // fade in out 반복
     public void FadeLoop()
     {
+        if(!enterText.gameObject.activeSelf)
+        {
+            enterText.gameObject.SetActive(true);
+        }
+
         enterText.DOKill();
 
         enterText.DOFade(1, textDuration)
@@ -66,31 +107,9 @@ public class FadeManager : MonoBehaviour
             });
     }
 
-    private IEnumerator FadeIn(Graphic graphic, float duration)
+    public void FadeLoopStop()
     {
-        graphic.gameObject.SetActive(true);
-        Color temp = graphic.color;
-        temp.a = 0;
-        graphic.color = temp;
-
-        graphic.DOFade(1, duration);
-        yield return new WaitForSeconds(duration);
-    }
-
-    private IEnumerator FadeOut(Graphic graphic, float duration)
-    {
-        if(!graphic.gameObject.activeSelf)
-        {
-            graphic.gameObject.SetActive(true);
-        }
-        
-        Color temp = graphic.color;
-        temp.a = 1;
-        graphic.color = temp;
-
-        graphic.DOFade(0, duration);
-        yield return new WaitForSeconds(duration);
-
-        graphic.gameObject.SetActive(false);
+        enterText.DOKill();
+        enterText.DOFade(0, textDuration);
     }
 }

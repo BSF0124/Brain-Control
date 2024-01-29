@@ -82,7 +82,7 @@ public class SelectData : MonoBehaviour
     // 씬 이동
     private IEnumerator GoGame()
     {
-        FadeManager.instance.FadeInImage();
+        FadeManager.instance.FadeImage(0, 1, true);
         yield return new WaitForSeconds(FadeManager.instance.imageDuration);
         SceneManager.LoadScene("World");
     }

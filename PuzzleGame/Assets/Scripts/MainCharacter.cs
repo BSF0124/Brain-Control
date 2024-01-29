@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class MainCharacter : MonoBehaviour
@@ -9,22 +10,26 @@ public class MainCharacter : MonoBehaviour
     private int column = 0, row = 0; // 캐릭터 현재 위치
     private bool isMoving = false, isShaking = false; // 캐릭터 이동 제어
     private MainBoard mainBoard = MainBoard.instance;
-    private GameManager gameManager;
 
     void Start()
     {
         mainBoard = GameObject.Find("MainBoard").GetComponent<MainBoard>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetPosition = transform.position;
     }
 
     void Update()
     {
-        if(gameManager.isGameClear)
+        if(GameManager.instance.isSceneMove)
+        {return;}
+
+        if(GameManager.instance.isGameClear)
         {
             // 엔터키 입력시 씬 이동
-            if(Input.GetKeyDown(KeyCode.Return))
-            {gameManager.MoveScene();}
+            if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                GameManager.instance.isSceneMove = true;
+                StartCoroutine(GoWorld());
+            }
         }
 
         if (isMoving || isShaking)
@@ -83,8 +88,22 @@ public class MainCharacter : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.tag == "EndBoard")
+        {
             isMoving = true;
-            gameManager.main_Clear = true;
+            GameManager.instance.isMainClear = true;
+        }
+    }
+
+    // 월드 씬 이동
+    private IEnumerator GoWorld()
+    {
+        GameManager.instance.isSceneMove = true;
+        FadeManager.instance.FadeLoopStop();
+        FadeManager.instance.FadeText(1, 0, true);
+        FadeManager.instance.FadeImage(0.9f, 1, true);
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("World");
+        GameManager.instance.ResetBool();
     }
 
     // private void OnTriggerEnter2D(Collider2D other) {

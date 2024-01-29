@@ -102,7 +102,7 @@ public class PlayerMove : MonoBehaviour
         {
             if(onStage)
             {
-                SceneManager.LoadScene("Stage " + (worldIndex+1));
+                StartCoroutine(GoStage());
             }
         }
     }
@@ -186,5 +186,13 @@ public class PlayerMove : MonoBehaviour
         DataManager.instance.currentPlayer.currentWorld = worldIndex;
         DataManager.instance.currentPlayer.currentStage = stageIndex;
         DataManager.instance.SaveData();
+    }
+
+    // 스테이지 씬 이동
+    private IEnumerator GoStage()
+    {
+        FadeManager.instance.FadeImage(0, 1, true);
+        yield return new WaitForSeconds(FadeManager.instance.imageDuration);
+        SceneManager.LoadScene("Stage " + (worldIndex+1));
     }
 }

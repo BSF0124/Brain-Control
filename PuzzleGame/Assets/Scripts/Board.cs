@@ -21,12 +21,10 @@ public class Board : MonoBehaviour
         if(gameObject.tag == "LeftBoard")
         {
             subCharacter.Move_Left();
-            print("left");
         }
         else if(gameObject.tag == "RightBoard")
         {
             subCharacter.Move_Right();
-            print("right");
         }
         else if(gameObject.tag == "UpBoard")
         {

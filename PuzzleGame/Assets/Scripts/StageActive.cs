@@ -7,6 +7,6 @@ public class StageActive : MonoBehaviour
     public bool isActive = false;
     void Start()
     {
-        enabled = isActive;
+        gameObject.SetActive(isActive);
     }
 }

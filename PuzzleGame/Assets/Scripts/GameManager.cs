@@ -5,45 +5,55 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public FadeEffect fadeEffect;
-    
-    [HideInInspector]
-    public bool main_Clear=false, sub_Clear=false, isGameClear=false, isSceneMove=false;
-    public string sceneName;
+    public static GameManager instance;
 
-    void Start()
+    [HideInInspector]
+    public bool isMainClear=false; // 메인 캐릭터 도착 지점 도달
+
+    [HideInInspector]
+    public bool isSubClear=false; // 서브 캐릭터 도착 지점 도달
+
+    [HideInInspector]
+    public bool isGameClear=false; // 메인과 서브 캐릭터 모두 도착 지점 도달
+
+    [HideInInspector]
+    public bool isSceneMove=false; // 씬이 이동중임
+
+    void Awake()
     {
-        fadeEffect.FadeOut();
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else if(instance != this)
+        {
+            Destroy(instance.gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
     {
         // 메인과 서브 캐릭터 모두 클리어 확인
-        if(main_Clear && sub_Clear)
+        if(isMainClear && isSubClear && !isGameClear)
         {
             isGameClear = true;
+            FadeManager.instance.FadeImage(0, 0.9f, true);
+            FadeManager.instance.FadeText(0, 1, true);
+            FadeManager.instance.FadeLoop();
             DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.currentWorld,DataManager.instance.currentPlayer.currentStage] = true;
-        }
-
-        if(isGameClear && (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
-        {
-            isSceneMove = true;
-            MoveScene();
+            DataManager.instance.SaveData();
         }
 
         if(Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(0);
-    }
-    
-    // 씬 이동 코루틴 호출
-    public void MoveScene() {
-        StartCoroutine(Transition());
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // 페이드 아웃 -> 씬 이동
-    private IEnumerator Transition()
+    public void ResetBool()
     {
-        yield return new WaitForSeconds(fadeEffect.fadeTime);
-        SceneManager.LoadScene(sceneName);
+        isMainClear = false;
+        isSubClear = false;
+        isGameClear = false;
+        isSceneMove = false;
     }
 }
