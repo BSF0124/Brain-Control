@@ -16,7 +16,8 @@ public class SelectData : MonoBehaviour
     {
         Refresh();
     }
-
+    
+    // 데이터 새로고침
     public void Refresh()
     {
         for(int i = 0; i < 3; i++)
@@ -40,6 +41,7 @@ public class SelectData : MonoBehaviour
         DataManager.instance.DataClear();
     }
 
+    // 데이터 슬롯 선택 메서드
     public void Slot(int num)
     {
         DataManager.instance.currentSlot = num;
@@ -47,40 +49,41 @@ public class SelectData : MonoBehaviour
         if(saveFile[num])
         {
             DataManager.instance.LoadData();
-            GoGame();
+            StartCoroutine(GoGame());
         }
 
         else
         {
-            GoGame();
+            DataManager.instance.SaveData();
+            StartCoroutine(GoGame());
         }
     }
 
+    // 데잍 선택창 표시
     public void GameStart()
     {
         startPanel.gameObject.SetActive(true);
     }
 
+    // 데이터 선택창 숨김
     public void HideStart()
     {
         startPanel.gameObject.SetActive(false);
     }
 
+    // 데이터 삭제
     public void Delete(int num)
     {
         DataManager.instance.currentSlot = num;
         DataManager.instance.DeleteData();
-        // slotText[num].text = "Empty";
         Refresh();
     }
 
-    public void GoGame()
+    // 씬 이동
+    private IEnumerator GoGame()
     {
-        if(!saveFile[DataManager.instance.currentSlot])
-        {
-            DataManager.instance.SaveData();
-        }
-
+        FadeManager.instance.FadeInImage();
+        yield return new WaitForSeconds(FadeManager.instance.imageDuration);
         SceneManager.LoadScene("World");
     }
 }

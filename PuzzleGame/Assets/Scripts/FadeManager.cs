@@ -25,60 +25,72 @@ public class FadeManager : MonoBehaviour
         {
             Destroy(instance.gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+
+        FadeOutImage();
     }
 
-    public void ImageFadeIn()
+    public void FadeInImage()
     {
-        StartCoroutine(ImageFade(0,1));
+        StartCoroutine(FadeIn(fadeImage, imageDuration));
     }
 
-    public void ImageFadeOut()
+    public void FadeOutImage()
     {
-        StartCoroutine(ImageFade(1,0));
+        StartCoroutine(FadeOut(fadeImage, imageDuration));
     }
 
-    private IEnumerator ImageFade(float start, float end)
+    public void FadeInText(TextMeshProUGUI text)
     {
-        Color temp = fadeImage.color;
-        temp.a = start;
-        fadeImage.color = temp;
-        fadeImage.DOFade(end, imageDuration);
-        yield return  new WaitForSeconds(imageDuration);
+        StartCoroutine(FadeIn(text, textDuration));
     }
 
-    public void TextFadeIn(TextMeshProUGUI text)
+    public void FadeOutText(TextMeshProUGUI text)
     {
-        StartCoroutine(TextFade(0,1,text));
+        StartCoroutine(FadeOut(text, textDuration));
     }
 
-    public void TextFadeOut(TextMeshProUGUI text)
+    public void FadeLoop()
     {
-        StartCoroutine(TextFade(1,0,text));
-    }
+        enterText.DOKill();
 
-    public void FadeLoop(TextMeshProUGUI text)
-    {
-        text.DOKill();
-        text.DOFade(1, textDuration)
+        enterText.DOFade(1, textDuration)
             .SetEase(Ease.InOutQuad)
             .OnComplete(() =>
             {
-                text.DOFade(0, textDuration)
-                    .SetEase(Ease.InOutQuad)
-                    .OnComplete(() =>
-                    {
-                        FadeLoop(text);
-                    });
+                enterText.DOFade(0, textDuration)
+                .SetEase(Ease.InOutQuad)
+                .OnComplete(() =>
+                {
+                    FadeLoop();
+                });
             });
     }
 
-    private IEnumerator TextFade(float start, float end, TextMeshProUGUI text)
+    private IEnumerator FadeIn(Graphic graphic, float duration)
     {
-        Color temp = text.color;
-        temp.a = start;
-        text.color = temp;
-        text.DOFade(end, textDuration);
-        yield return  new WaitForSeconds(textDuration);
+        graphic.gameObject.SetActive(true);
+        Color temp = graphic.color;
+        temp.a = 0;
+        graphic.color = temp;
+
+        graphic.DOFade(1, duration);
+        yield return new WaitForSeconds(duration);
+    }
+
+    private IEnumerator FadeOut(Graphic graphic, float duration)
+    {
+        if(!graphic.gameObject.activeSelf)
+        {
+            graphic.gameObject.SetActive(true);
+        }
+        
+        Color temp = graphic.color;
+        temp.a = 1;
+        graphic.color = temp;
+
+        graphic.DOFade(0, duration);
+        yield return new WaitForSeconds(duration);
+
+        graphic.gameObject.SetActive(false);
     }
 }

@@ -36,7 +36,7 @@ public class DataManager : MonoBehaviour
         {
             Destroy(instance.gameObject);
         }
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
 
         // 경로 설정
         path = Application.persistentDataPath + "/save";
