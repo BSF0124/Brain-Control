@@ -9,8 +9,9 @@ public class StageManager : MonoBehaviour
 
     void Awake()
     {
-        stageActive = GameObject.Find("Stage " + (DataManager.instance.currentPlayer.currentStage+1).ToString()).GetComponent<StageActive>();
+        stageActive = GameObject.Find("Stage " + (PlayerMove.currentStage+1).ToString()).GetComponent<StageActive>();
         stageActive.isActive = true;
-        mainCamera.transform.position = new Vector3(DataManager.instance.currentPlayer.currentStage*40, mainCamera.transform.position.y, mainCamera.transform.position.z);
+        mainCamera.transform.position = new Vector3(PlayerMove.currentStage*40, mainCamera.transform.position.y, mainCamera.transform.position.z);
+        FadeManager.instance.FadeImage(1, 0, false);
     }
 }

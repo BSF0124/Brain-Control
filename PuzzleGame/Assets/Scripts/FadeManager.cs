@@ -8,11 +8,11 @@ using DG.Tweening;
 public class FadeManager : MonoBehaviour
 {
     public static FadeManager instance;
-    public Image fadeImage;
-    public TextMeshProUGUI clearText;
-    public TextMeshProUGUI enterText;
-    public float imageDuration = 0.5f;
-    public float textDuration = 0.5f;
+    public Image fadeImage; // fade 이미지
+    public TextMeshProUGUI clearText; // clear 텍스트
+    public TextMeshProUGUI enterText; // enter 텍스트
+    public float imageDuration = 0.5f; // 이미지 fade 시간
+    public float textDuration = 0.5f; // 텍스트 fade 시간
 
     private void Awake()
     {
@@ -26,9 +26,10 @@ public class FadeManager : MonoBehaviour
             Destroy(instance.gameObject);
         }
 
-        FadeImage(1,0,false);
+        // FadeImage(1,0,false);
     }
 
+    // 이미지 fade 효과
     public void FadeImage(float start, float end, bool isActive)
     {
         if(isActive)
@@ -42,6 +43,7 @@ public class FadeManager : MonoBehaviour
         }
     }
 
+    // 텍스트 fade 효과
     public void FadeText(float start, float end, bool isActive)
     {
         if(isActive)
@@ -58,7 +60,10 @@ public class FadeManager : MonoBehaviour
     // fade후 오브젝트 비활성화
     private IEnumerator Fade_0(Graphic graphic, float duration, float start, float end)
     {
-        graphic.gameObject.SetActive(true);
+        if(!graphic.gameObject.activeSelf)
+        {
+            graphic.gameObject.SetActive(true);
+        }
         
         Color temp = graphic.color;
         temp.a = start;
@@ -74,7 +79,10 @@ public class FadeManager : MonoBehaviour
     // fade후 오브젝트 활성화 유지
     private IEnumerator Fade_1(Graphic graphic, float duration, float start, float end)
     {
-        graphic.gameObject.SetActive(true);
+        if(!graphic.gameObject.activeSelf)
+        {
+            graphic.gameObject.SetActive(true);
+        }
         
         Color temp = graphic.color;
         temp.a = start;
@@ -84,7 +92,7 @@ public class FadeManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
     }
 
-    // fade in out 반복
+    // fade in, out 반복
     public void FadeLoop()
     {
         if(!enterText.gameObject.activeSelf)

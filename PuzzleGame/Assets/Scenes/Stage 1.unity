@@ -4930,7 +4930,6 @@ GameObject:
   - component: {fileID: 1464957320}
   - component: {fileID: 1464957323}
   - component: {fileID: 1464957322}
-  - component: {fileID: 1464957324}
   m_Layer: 5
   m_Name: FadeImage
   m_TagString: Untagged
@@ -4995,19 +4994,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464957319}
   m_CullTransparentMesh: 1
---- !u!114 &1464957324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1464957319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da6428a40e3ec434e80e22927eaec223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeTime: 1
 --- !u!4 &1467537188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 684388276973546236, guid: e5318ba8475f6a04eba5ed606d062f28, type: 3}

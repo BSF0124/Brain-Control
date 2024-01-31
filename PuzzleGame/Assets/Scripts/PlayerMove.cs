@@ -11,21 +11,34 @@ public class PlayerMove : MonoBehaviour
     private WorldManager worldManager;
 
     public float moveSpeed; // 플레이어 이동 속도
-    public int maxWorldIndex; // 최대 월드 수
-    private int maxStageIndex; // 현재 월드에 해당하는 최대 스테이지 수
-    private int worldIndex; // 현재 월드 인덱스
-    private int stageIndex; // 현재 스테이지 인덱스
+    public int maxWorld = 3; // 최대 월드 수
+    private int[] maxStage = new int[3]{6,6,6}; // 현재 월드의 스테이지 수
+    public static int currentWorld; // 현재 월드 인덱스
+    public static int currentStage; // 현재 스테이지 인덱스
+    private int stageIndex;
     private bool isMoving = false; // 플레이어가 이동 중인지 확인
     private bool onStage = false;
 
     void Start()
     {
-        worldIndex = DataManager.instance.currentPlayer.currentWorld;
-        stageIndex = DataManager.instance.currentPlayer.currentStage;
+        stageIndex = DataManager.instance.currentPlayer.stageIndex;
+        currentWorld = 0;
+        currentStage = stageIndex;
+
+        for(int i=0; i<maxWorld; i++)
+        {
+            if(currentStage >= maxStage[i])
+            {
+                currentWorld++;
+                currentStage -= maxStage[i];
+            }
+        }
         SetWorld();
-        mainCamera.transform.position = new Vector3(worldIndex*20, 0, -5);
-        Vector3 temp = GameObject.Find("World " + (worldIndex+1)).GetComponent<WorldManager>().stage[stageIndex].position;
+        mainCamera.transform.position = new Vector3(currentWorld*20, 0, -5);
+        Vector3 temp = GameObject.Find("World " + (currentWorld+1)).GetComponent<WorldManager>().stage[currentStage].position;
         transform.position = temp;
+
+        FadeManager.instance.FadeImage(1, 0, false);
     }
 
     void Update()
@@ -44,19 +57,21 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow))
         {
             // 이전 스테이지로 이동
-            if(stageIndex > 0)
+            if(currentStage > 0)
             {
                 // 스테이지 이동
+                currentStage--;
                 stageIndex--;
                 StartCoroutine(MoveStage());
             }
 
             // 월드의 첫 번째 스테이지이면 이전 월드로 이동(첫 번째 월드는 제외)
-            else if(worldIndex > 0)
+            else if(currentWorld > 0)
             {
                 // 월드 이동
-                worldIndex--;
-                MoveWorld();
+                currentWorld--;
+                stageIndex--;
+                StartCoroutine(MoveWorldRoutine());
             }
         }
 
@@ -64,37 +79,39 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.RightArrow))
         {
             // 현재 스테이지를 클리어 했는지 확인
-            if(!DataManager.instance.StageClearCheck(worldIndex,stageIndex))
+            if(!DataManager.instance.StageClearCheck(stageIndex))
             {
                 return;
             }
             
             // 다음 스테이지로 이동
-            if(stageIndex < maxStageIndex - 1)
+            if(currentStage < maxStage[currentWorld] - 1)
             {
                 // 다음 스테이지를 클리어 하지 못했으면 이동하지 않음
-                // if(!DataManager.instance.StageClearCheck(worldIndex-1,stageIndex+1))
+                // if(!DataManager.instance.StageClearCheck(currentWorld-1,currentStage+1))
                 // {
                 //     return;
                 // }
 
                 // 스테이지 이동
+                currentStage++;
                 stageIndex++;
                 StartCoroutine(MoveStage());
             }
 
             // 월드의 마지막 스테이지이면 다음 월드로 이동(마지막 월드는 제외)
-            else if(worldIndex < maxWorldIndex)
+            else if(currentWorld < maxWorld-1)
             {
                 // 다음 스테이지를 클리어 하지 못했으면 이동하지 않음
-                // if(!DataManager.instance.StageClearCheck(worldIndex+1,0))
+                // if(!DataManager.instance.StageClearCheck(currentWorld+1,0))
                 // {
                 //     return;
                 // }
 
                 //월드 이동
-                worldIndex++;
-                MoveWorld();
+                currentWorld++;
+                stageIndex++;
+                StartCoroutine(MoveWorldRoutine());
             }
         }
 
@@ -102,6 +119,7 @@ public class PlayerMove : MonoBehaviour
         {
             if(onStage)
             {
+                StartMoving();
                 StartCoroutine(GoStage());
             }
         }
@@ -112,31 +130,26 @@ public class PlayerMove : MonoBehaviour
     {
         StartMoving();
 
-        Vector3 stagePosition = worldManager.stage[stageIndex].transform.position;
+        Vector3 stagePosition = worldManager.stage[currentStage].transform.position;
         Tweener tweener = transform.DOMove(stagePosition, moveSpeed).OnComplete(StopMoving);
         yield return tweener.WaitForCompletion();
     }
 
-    // 월드 이동 메서드
-    public void MoveWorld()
-    {
-        StartMoving();
-        StartCoroutine(MoveWorldRoutine());
-    }
 
     // 월드 이동 코루틴
     private IEnumerator MoveWorldRoutine()
     {
+        StartMoving();
         SetWorld();
 
-        if(stageIndex == 0)
-            stageIndex = maxStageIndex - 1;
+        if(currentStage == 0)
+            currentStage = maxStage[currentWorld] - 1;
         else
-            stageIndex = 0;
+            currentStage = 0;
 
         yield return slideInOut.SlideIn();
 
-        Vector3 worldPosition = new Vector3(worldIndex * 20, mainCamera.transform.position.y, mainCamera.transform.position.z);
+        Vector3 worldPosition = new Vector3(currentWorld * 20, mainCamera.transform.position.y, mainCamera.transform.position.z);
         mainCamera.transform.position = worldPosition;
 
         yield return slideInOut.SlideOut();
@@ -149,9 +162,8 @@ public class PlayerMove : MonoBehaviour
     // 월드와 스테이지 정보 불러오기
     private void SetWorld()
     {
-        var world = GameObject.Find("World " + (worldIndex+1));
+        var world = GameObject.Find("World " + (currentWorld+1));
         worldManager = world.GetComponent<WorldManager>();
-        maxStageIndex = worldManager.stage.Length;
     }
 
     private void StartMoving()
@@ -183,8 +195,7 @@ public class PlayerMove : MonoBehaviour
     // 데이터 저장
     private void Save()
     {
-        DataManager.instance.currentPlayer.currentWorld = worldIndex;
-        DataManager.instance.currentPlayer.currentStage = stageIndex;
+        DataManager.instance.currentPlayer.stageIndex = stageIndex;
         DataManager.instance.SaveData();
     }
 
@@ -193,6 +204,6 @@ public class PlayerMove : MonoBehaviour
     {
         FadeManager.instance.FadeImage(0, 1, true);
         yield return new WaitForSeconds(FadeManager.instance.imageDuration);
-        SceneManager.LoadScene("Stage " + (worldIndex+1));
+        SceneManager.LoadScene("Stage " + (currentWorld+1));
     }
 }

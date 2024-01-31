@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             FadeManager.instance.FadeImage(0, 0.9f, true);
             FadeManager.instance.FadeText(0, 1, true);
             FadeManager.instance.FadeLoop();
-            DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.currentWorld,DataManager.instance.currentPlayer.currentStage] = true;
+            DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.stageIndex] = true;
             DataManager.instance.SaveData();
         }
 

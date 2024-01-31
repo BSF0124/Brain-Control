@@ -5,15 +5,14 @@ using System.IO;
 
 public class PlayerData
 {
-    public int currentStage = 0;
-    public int currentWorld = 0;
+    public int stageIndex = 0;
 
     // true : 스테이지 클리어
-    public bool[,] isClear = new bool[3,6]
-    {                                                                                                                                                                                                                                                                                                                                                                                                                                     
-        {false,false,false,false,false,false},
-        {false,false,false,false,false,false},
-        {false,false,false,false,false,false}
+    public bool[] isClear = new bool[18]
+    {
+        false,false,false,false,false,false,
+        false,false,false,false,false,false,
+        false,false,false,false,false,false
     };
 }
 
@@ -75,8 +74,8 @@ public class DataManager : MonoBehaviour
         File.Delete(path + currentSlot.ToString());
     }
 
-    public bool StageClearCheck(int world, int stage)
+    public bool StageClearCheck(int stage)
     {
-        return currentPlayer.isClear[world,stage];
+        return currentPlayer.isClear[stage];
     }
 }
