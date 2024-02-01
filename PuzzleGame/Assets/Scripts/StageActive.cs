@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class StageActive : MonoBehaviour
 {
-    public bool isActive = false;
-    void Start()
+    void Awake()
     {
-        gameObject.SetActive(isActive);
+        // if(gameObject.name == ("Stage " + (PlayerMove.currentStage+1).ToString()))
+        // {
+        //     gameObject.SetActive(true);
+        // }
     }
 }

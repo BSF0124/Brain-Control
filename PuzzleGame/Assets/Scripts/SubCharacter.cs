@@ -11,7 +11,7 @@ public enum LadderState
 public class SubCharacter : MonoBehaviour
 {
     private Vector3 targetPosition;
-    public float sum_X, sum_Y; // 캐릭터 상하좌우 이동 거리
+    public float sum_X = 1, sum_Y = 1; // 캐릭터 상하좌우 이동 거리
     // private bool ladder_up = false; // 올라갈 수 있는지 확인
     // private bool ladder_down = false; // 내려갈 수 있는지 확인
     private LadderState ladderState = LadderState.None;
@@ -20,6 +20,18 @@ public class SubCharacter : MonoBehaviour
     void Start()
     {
         targetPosition = transform.localPosition;
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            Move_Left();
+        }
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            Move_Right();
+        }
     }
 
     public void Move_Left()

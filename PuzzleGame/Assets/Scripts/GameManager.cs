@@ -46,7 +46,23 @@ public class GameManager : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.R))
+        {
+            ResetBool();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            SceneManager.LoadScene(0);
+        }
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            SceneManager.LoadScene(1);
+        }
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            SceneManager.LoadScene(2);
+        }
     }
 
     public void ResetBool()
