@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             ResetBool();
+            FadeManager.instance.FadeImage(1, 0, true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
