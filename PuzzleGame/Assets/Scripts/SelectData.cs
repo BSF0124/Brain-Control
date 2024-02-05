@@ -22,7 +22,7 @@ public class SelectData : MonoBehaviour
     {
         for(int i = 0; i < 3; i++)
         {
-            if(File.Exists(DataManager.instance.path + $"{i}"))
+            if(File.Exists(DataManager.instance.path + "/save" + $"{i}"))
             {
                 saveFile[i] = true;
                 DataManager.instance.currentSlot = i;

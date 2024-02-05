@@ -1,0 +1,135 @@
+{
+  "stage": [
+    {},
+    {
+      "stageID": 1,
+      "map_Width": 4,
+      "map_Height": 1,
+      "map_X": 0,
+      "map_Y": 0,
+      "map_Elements": [83, 95, 95, 71],
+      "board_Width": 4,
+      "board_Height": 4,
+      "board_X": 0,
+      "board_Y": 0,
+      "board_Elements": [
+        83, 82, 76, 82, 76, 76, 76, 76, 76, 82, 82, 76, 82, 76, 82, 71
+      ]
+    },
+    {
+      "stageID": 2,
+      "map_Width": 4,
+      "map_Height": 1,
+      "map_X": 0,
+      "map_Y": 0,
+      "map_Elements": [83, 95, 95, 71],
+      "board_Width": 4,
+      "board_Height": 4,
+      "board_X": 0,
+      "board_Y": 0,
+      "board_Elements": [
+        83, 76, 82, 82, 82, 76, 76, 76, 76, 82, 76, 82, 76, 82, 82, 71
+      ]
+    },
+    {
+      "stageID": 3,
+      "map_Width": 5,
+      "map_Height": 1,
+      "map_X": 0,
+      "map_Y": 0,
+      "map_Elements": [83, 95, 95, 95, 71],
+      "board_Width": 5,
+      "board_Height": 4,
+      "board_X": 0,
+      "board_Y": 0,
+      "board_Elements": [
+        83, 82, 82, 76, 76, 82, 76, 82, 82, 76, 76, 82, 76, 76, 82, 82, 82, 76,
+        82, 71
+      ]
+    },
+    {
+      "stageID": 4,
+      "map_Width": 7,
+      "map_Height": 1,
+      "map_X": 0,
+      "map_Y": 0,
+      "map_Elements": [83, 95, 95, 95, 95, 95, 71],
+      "board_Width": 5,
+      "board_Height": 4,
+      "board_X": 0,
+      "board_Y": 0,
+      "board_Elements": [
+        83, 82, 76, 82, 82, 82, 76, 82, 76, 82, 76, 82, 76, 76, 76, 76, 82, 82,
+        82, 71
+      ]
+    },
+    {
+      "stageID": 5,
+      "map_Width": 5,
+      "map_Height": 2,
+      "map_X": 1,
+      "map_Y": 0,
+      "map_Elements": [87, 76, 95, 76, 87, 83, 76, 87, 76, 71],
+      "board_Width": 4,
+      "board_Height": 4,
+      "board_X": 0,
+      "board_Y": 0,
+      "board_Elements": [
+        83, 82, 82, 82, 76, 85, 76, 68, 82, 68, 85, 82, 85, 76, 76, 71
+      ]
+    },
+    {
+      "stageID": 6,
+      "map_Width": 6,
+      "map_Height": 2,
+      "map_X": 0,
+      "map_Y": 1,
+      "map_Elements": [95, 76, 95, 95, 76, 95, 83, 76, 87, 87, 76, 71],
+      "board_Width": 5,
+      "board_Height": 4,
+      "board_X": 0,
+      "board_Y": 0,
+      "board_Elements": [
+        83, 85, 76, 82, 82, 82, 68, 82, 82, 68, 85, 85, 68, 85, 82, 68, 76, 76,
+        82, 71
+      ]
+    },
+    {
+      "stageID": 7,
+      "map_Width": 9,
+      "map_Height": 2,
+      "map_X": 0,
+      "map_Y": 0,
+      "map_Elements": [
+        83, 76, 87, 95, 76, 95, 76, 95, 87, 95, 76, 95, 95, 76, 87, 76, 95, 71
+      ],
+      "board_Width": 5,
+      "board_Height": 5,
+      "board_X": 4,
+      "board_Y": 0,
+      "board_Elements": [
+        76, 85, 76, 85, 68, 82, 82, 82, 82, 85, 82, 82, 82, 68, 82, 76, 76, 76,
+        68, 82, 83, 82, 68, 82, 71
+      ]
+    },
+    {
+      "stageID": 8,
+      "map_Width": 9,
+      "map_Height": 3,
+      "map_X": 0,
+      "map_Y": 1,
+      "map_Elements": [
+        87, 87, 87, 87, 76, 95, 76, 95, 71, 83, 76, 87, 76, 76, 87, 76, 87, 76,
+        87, 76, 95, 76, 87, 95, 76, 95, 76
+      ],
+      "board_Width": 6,
+      "board_Height": 5,
+      "board_X": 5,
+      "board_Y": 0,
+      "board_Elements": [
+        85, 68, 76, 82, 76, 83, 85, 82, 82, 85, 68, 82, 68, 82, 85, 82, 82, 76,
+        76, 82, 82, 82, 85, 76, 68, 82, 76, 68, 85, 71
+      ]
+    }
+  ]
+}

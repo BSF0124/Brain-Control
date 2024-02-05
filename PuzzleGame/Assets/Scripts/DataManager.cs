@@ -16,26 +16,36 @@ public class PlayerData
     };
 }
 
-// public class MapData
-// {
-//     public int stageID;
-//     public int x;
-//     public int y;
-// }
+public class StageData
+{
+    public int stageID;
+    public int map_Width;
+    public int map_Height;
+    public int map_X;
+    public int map_Y;
+    public char[] map_Elements;
 
-// public class AllData
-// {
-//     public MapData[] stage;
-// }
+    public int board_Width;
+    public int board_Height;
+    public int board_X;
+    public int board_Y;
+    public char[] board_Elements;
+}
+
+public class AllStageData
+{
+    public StageData[] stage;
+}
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
-    // public AllData mapData;
+    public StageData stageData = new StageData();
     public PlayerData currentPlayer = new PlayerData(); // 현재 플레이어 데이터
+    public TextAsset datafile;
     public string path; // 경로
     public int currentSlot; // 사용 슬롯 번호
-    // public TextAsset mapDataText;
+    public AllStageData datas;
 
     private void Awake()
     {
@@ -53,19 +63,22 @@ public class DataManager : MonoBehaviour
 
         // 경로 설정
         path = Application.persistentDataPath;
-        
-        // mapData = JsonUtility.FromJson<AllData>(mapDataText.text);
 
+        datas = JsonUtility.FromJson<AllStageData>(datafile.text);
+        foreach(var VARIABLE in datas.stage)
+        {
+            print(VARIABLE.stageID);
+        }
     }
 
     // 데이터 저장
     public void SaveData()
     {
         // 데이터를 Json 형태로 변환
-        string data = JsonUtility.ToJson(currentPlayer);
+        string data = JsonUtility.ToJson(currentPlayer, true);
 
         // 데이터 저장
-        File.WriteAllText(path + "/save" + currentSlot.ToString(), data);
+        File.WriteAllText(path + "/save" + currentSlot.ToString() + ".json", data);
     }
 
     // 데이터 불러오기
