@@ -16,12 +16,26 @@ public class PlayerData
     };
 }
 
+// public class MapData
+// {
+//     public int stageID;
+//     public int x;
+//     public int y;
+// }
+
+// public class AllData
+// {
+//     public MapData[] stage;
+// }
+
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
+    // public AllData mapData;
     public PlayerData currentPlayer = new PlayerData(); // 현재 플레이어 데이터
     public string path; // 경로
     public int currentSlot; // 사용 슬롯 번호
+    // public TextAsset mapDataText;
 
     private void Awake()
     {
@@ -38,7 +52,10 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // 경로 설정
-        path = Application.persistentDataPath + "/save";
+        path = Application.persistentDataPath;
+        
+        // mapData = JsonUtility.FromJson<AllData>(mapDataText.text);
+
     }
 
     // 데이터 저장
@@ -48,14 +65,14 @@ public class DataManager : MonoBehaviour
         string data = JsonUtility.ToJson(currentPlayer);
 
         // 데이터 저장
-        File.WriteAllText(path + currentSlot.ToString(), data);
+        File.WriteAllText(path + "/save" + currentSlot.ToString(), data);
     }
 
     // 데이터 불러오기
     public void LoadData()
     {
         // 경로에 있는 Json 데이터를 읽어옴
-        string data = File.ReadAllText(path + currentSlot.ToString());
+        string data = File.ReadAllText(path + "/save" + currentSlot.ToString());
 
         // 데이터 불러옴
         currentPlayer = JsonUtility.FromJson<PlayerData>(data);
@@ -71,7 +88,7 @@ public class DataManager : MonoBehaviour
     // 데이터 삭제
     public void DeleteData()
     {
-        File.Delete(path + currentSlot.ToString());
+        File.Delete(path + "/save" + currentSlot.ToString());
     }
 
     public bool StageClearCheck(int stage)

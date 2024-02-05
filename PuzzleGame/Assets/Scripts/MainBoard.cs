@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class MainBoard : MonoBehaviour
 {
-    public static MainBoard instance;
     public int column, row;
+    private char[,] board;
     private bool[,] boardVisited; // 보드의 상태를 추적하는 배열
 
     void Start()
-    {
-        instance = this;
-        
+    {  
         //보드 크기 설정
         Transform parent = transform.parent;
         transform.parent = null;
