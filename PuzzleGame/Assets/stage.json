@@ -1,8 +1,6 @@
 {
   "stage": [
-    {},
     {
-      "stageID": 1,
       "map_Width": 4,
       "map_Height": 1,
       "map_X": 0,
@@ -17,7 +15,6 @@
       ]
     },
     {
-      "stageID": 2,
       "map_Width": 4,
       "map_Height": 1,
       "map_X": 0,
@@ -32,7 +29,6 @@
       ]
     },
     {
-      "stageID": 3,
       "map_Width": 5,
       "map_Height": 1,
       "map_X": 0,
@@ -48,7 +44,6 @@
       ]
     },
     {
-      "stageID": 4,
       "map_Width": 7,
       "map_Height": 1,
       "map_X": 0,
@@ -64,7 +59,6 @@
       ]
     },
     {
-      "stageID": 5,
       "map_Width": 5,
       "map_Height": 2,
       "map_X": 1,
@@ -79,7 +73,6 @@
       ]
     },
     {
-      "stageID": 6,
       "map_Width": 6,
       "map_Height": 2,
       "map_X": 0,
@@ -95,7 +88,6 @@
       ]
     },
     {
-      "stageID": 7,
       "map_Width": 9,
       "map_Height": 2,
       "map_X": 0,
@@ -113,7 +105,6 @@
       ]
     },
     {
-      "stageID": 8,
       "map_Width": 9,
       "map_Height": 3,
       "map_X": 0,

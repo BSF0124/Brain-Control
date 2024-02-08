@@ -22,13 +22,13 @@ public class SelectData : MonoBehaviour
     {
         for(int i = 0; i < 3; i++)
         {
-            if(File.Exists(DataManager.instance.path + "/save" + $"{i}"))
+            if(File.Exists($"{DataManager.instance.path}/save{i}.json"))
             {
                 saveFile[i] = true;
                 DataManager.instance.currentSlot = i;
                 DataManager.instance.LoadData();
 
-                slotText[i].text = "Player " + (i+1).ToString();
+                slotText[i].text = $"Player {i+1}";
             }
 
             else

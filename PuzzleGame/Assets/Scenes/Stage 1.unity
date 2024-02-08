@@ -542,6 +542,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 4
   row: 4
+  x: 0
+  y: 0
 --- !u!212 &65538094
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1077,6 +1079,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 4
   row: 4
+  x: 0
+  y: 0
 --- !u!212 &152349329
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2315,6 +2319,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 5
   row: 4
+  x: 0
+  y: 0
 --- !u!212 &319964137
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3682,6 +3688,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 5
   row: 4
+  x: 0
+  y: 0
 --- !u!212 &502861020
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6117,6 +6125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 4
   row: 4
+  x: 0
+  y: 0
 --- !u!212 &862337399
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8863,6 +8873,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 5
   row: 4
+  x: 0
+  y: 0
 --- !u!212 &1225198848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13425,6 +13437,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 4
   row: 4
+  x: 0
+  y: 0
 --- !u!4 &2041450469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 733990802877321840, guid: c4e5106835f704349b2837d30b6ba517, type: 3}
@@ -13794,6 +13808,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   column: 5
   row: 4
+  x: 0
+  y: 0
 --- !u!212 &2107455428
 SpriteRenderer:
   m_ObjectHideFlags: 0

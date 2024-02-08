@@ -5,11 +5,17 @@ using UnityEngine;
 public class MainBoard : MonoBehaviour
 {
     public int column, row;
+    public int x, y;
     private char[,] board;
     private bool[,] boardVisited; // 보드의 상태를 추적하는 배열
 
     void Start()
-    {  
+    {
+        column = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Width;
+        row = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Height;
+        x = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_X;
+        y = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Y;
+
         //보드 크기 설정
         Transform parent = transform.parent;
         transform.parent = null;
@@ -28,6 +34,12 @@ public class MainBoard : MonoBehaviour
         
         // 캐릭터 시작 좌표 true 설정
         boardVisited[0, 0] = true;
+
+        board = new char[column, row];
+        for(int i=0; i<column*row; i++)
+        {
+            board[i%row,i/4] = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Elements[i];
+        }
     }
 
     // 해당 인덱스의 보드를 밟았음을 표시

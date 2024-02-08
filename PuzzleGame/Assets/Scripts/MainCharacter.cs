@@ -7,7 +7,7 @@ using DG.Tweening;
 public class MainCharacter : MonoBehaviour
 {
     private Vector3 targetPosition; // 캐릭터가 이동할 좌표
-    private int column = 0, row = 0; // 캐릭터 현재 위치
+    private int x, y; // 캐릭터 현재 위치
     private bool isMoving = false, isShaking = false; // 캐릭터 이동 제어
     private MainBoard mainBoard;
 
@@ -45,18 +45,18 @@ public class MainCharacter : MonoBehaviour
         {Move_Right();}
     }
 
-    void Move(int deltaColumn, int deltaRow, Vector3 direction)
+    void Move(int column, int row, Vector3 direction)
     {
-        if (column + deltaColumn < 0 || column + deltaColumn >= mainBoard.column ||
-        row + deltaRow < 0 || row + deltaRow >= mainBoard.row ||
-        mainBoard.IsBoardVisited(column + deltaColumn, row + deltaRow))
+        if (x + column < 0 || x + column >= mainBoard.column ||
+        y + row < 0 || y + row >= mainBoard.row ||
+        mainBoard.IsBoardVisited(x + column, y + row))
         {Shake();}
 
         else
         {
         targetPosition += direction;
         StartCoroutine(MoveToTarget());
-        mainBoard.MarkBoardVisited(column += deltaColumn, row += deltaRow);
+        mainBoard.MarkBoardVisited(x += column, y += row);
         }
     }
 

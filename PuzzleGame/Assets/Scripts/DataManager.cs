@@ -15,10 +15,9 @@ public class PlayerData
         false,false,false,false,false,false
     };
 }
-
+[System.Serializable]
 public class StageData
 {
-    public int stageID;
     public int map_Width;
     public int map_Height;
     public int map_X;
@@ -31,8 +30,8 @@ public class StageData
     public int board_Y;
     public char[] board_Elements;
 }
-
-public class AllStageData
+[System.Serializable]
+public class StageList
 {
     public StageData[] stage;
 }
@@ -40,12 +39,13 @@ public class AllStageData
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
-    public StageData stageData = new StageData();
     public PlayerData currentPlayer = new PlayerData(); // 현재 플레이어 데이터
     public TextAsset datafile;
+    [HideInInspector]
     public string path; // 경로
+    [HideInInspector]
     public int currentSlot; // 사용 슬롯 번호
-    public AllStageData datas;
+    public StageList stageList;
 
     private void Awake()
     {
@@ -64,11 +64,7 @@ public class DataManager : MonoBehaviour
         // 경로 설정
         path = Application.persistentDataPath;
 
-        datas = JsonUtility.FromJson<AllStageData>(datafile.text);
-        foreach(var VARIABLE in datas.stage)
-        {
-            print(VARIABLE.stageID);
-        }
+        stageList = JsonUtility.FromJson<StageList>(datafile.text);
     }
 
     // 데이터 저장
@@ -78,14 +74,14 @@ public class DataManager : MonoBehaviour
         string data = JsonUtility.ToJson(currentPlayer, true);
 
         // 데이터 저장
-        File.WriteAllText(path + "/save" + currentSlot.ToString() + ".json", data);
+        File.WriteAllText($"{path}/save{currentSlot}.json", data);
     }
 
     // 데이터 불러오기
     public void LoadData()
     {
         // 경로에 있는 Json 데이터를 읽어옴
-        string data = File.ReadAllText(path + "/save" + currentSlot.ToString());
+        string data = File.ReadAllText($"{path}/save{currentSlot}");
 
         // 데이터 불러옴
         currentPlayer = JsonUtility.FromJson<PlayerData>(data);
@@ -101,7 +97,7 @@ public class DataManager : MonoBehaviour
     // 데이터 삭제
     public void DeleteData()
     {
-        File.Delete(path + "/save" + currentSlot.ToString());
+        File.Delete($"{path}/save{currentSlot}");
     }
 
     public bool StageClearCheck(int stage)

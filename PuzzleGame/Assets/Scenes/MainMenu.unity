@@ -3354,8 +3354,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a14182ac5e1067149bdbea94cc69fb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  datafile: {fileID: 4900000, guid: 5a463f127a7356e4db0ca04b7590aa29, type: 3}
   path: 
   currentSlot: 0
+  stageList:
+    stage: []
 --- !u!1 &2140116587
 GameObject:
   m_ObjectHideFlags: 0
