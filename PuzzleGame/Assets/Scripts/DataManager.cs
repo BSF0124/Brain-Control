@@ -81,7 +81,7 @@ public class DataManager : MonoBehaviour
     public void LoadData()
     {
         // 경로에 있는 Json 데이터를 읽어옴
-        string data = File.ReadAllText($"{path}/save{currentSlot}");
+        string data = File.ReadAllText($"{path}/save{currentSlot}.json");
 
         // 데이터 불러옴
         currentPlayer = JsonUtility.FromJson<PlayerData>(data);
@@ -97,7 +97,7 @@ public class DataManager : MonoBehaviour
     // 데이터 삭제
     public void DeleteData()
     {
-        File.Delete($"{path}/save{currentSlot}");
+        File.Delete($"{path}/save{currentSlot}.json");
     }
 
     public bool StageClearCheck(int stage)

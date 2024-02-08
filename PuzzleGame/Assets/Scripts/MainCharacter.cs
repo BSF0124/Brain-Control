@@ -13,6 +13,9 @@ public class MainCharacter : MonoBehaviour
 
     void Start()
     {
+        x = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_X;
+        y = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Y;
+
         mainBoard = GameObject.Find("MainBoard").GetComponent<MainBoard>();
         targetPosition = transform.position;
     }
@@ -32,7 +35,7 @@ public class MainCharacter : MonoBehaviour
             }
         }
 
-        if (isMoving || isShaking)
+        if (isMoving || isShaking || GameManager.instance.isMainClear == true)
         {return;} 
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) // 위쪽 방향키 입력
@@ -47,8 +50,8 @@ public class MainCharacter : MonoBehaviour
 
     void Move(int column, int row, Vector3 direction)
     {
-        if (x + column < 0 || x + column >= mainBoard.column ||
-        y + row < 0 || y + row >= mainBoard.row ||
+        if (x + column < 0 || x + column >= DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Width ||
+        y + row < 0 || y + row >= DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Height ||
         mainBoard.IsBoardVisited(x + column, y + row))
         {Shake();}
 
@@ -56,7 +59,8 @@ public class MainCharacter : MonoBehaviour
         {
         targetPosition += direction;
         StartCoroutine(MoveToTarget());
-        mainBoard.MarkBoardVisited(x += column, y += row);
+        mainBoard.VisitBoard(x += column, y += row);
+        mainBoard.MoveSubCharacter(x,y);
         }
     }
 
@@ -86,14 +90,6 @@ public class MainCharacter : MonoBehaviour
         });
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if(other.gameObject.tag == "EndBoard")
-        {
-            isMoving = true;
-            GameManager.instance.isMainClear = true;
-        }
-    }
-
     // 월드 씬 이동
     private IEnumerator GoWorld()
     {
@@ -105,9 +101,4 @@ public class MainCharacter : MonoBehaviour
         SceneManager.LoadScene("World");
         GameManager.instance.ResetBool();
     }
-
-    // private void OnTriggerEnter2D(Collider2D other) {
-    //     if(other.gameObject.tag == "EndBoard"){
-    //     }
-    // }
 }
