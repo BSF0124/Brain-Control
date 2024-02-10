@@ -97,8 +97,12 @@ public class SubCharacter : MonoBehaviour
 
         if((y == row-1) || (map[x,y] != 'L') || (map[x,y+1] == 'W'))
         {
+
+        }
+        else
+        {
             y++;
-            targetPosition += new Vector3(0, sum_Y, 0);
+            targetPosition -= new Vector3(0, sum_Y, 0);
             transform.DOLocalMove(targetPosition, 0.25f);
         }
     }

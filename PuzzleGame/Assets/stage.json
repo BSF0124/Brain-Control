@@ -61,8 +61,8 @@
     {
       "map_Width": 5,
       "map_Height": 2,
-      "map_X": 1,
-      "map_Y": 0,
+      "map_X": 0,
+      "map_Y": 1,
       "map_Elements": [87, 76, 95, 76, 87, 83, 76, 87, 76, 71],
       "board_Width": 4,
       "board_Height": 4,
@@ -91,7 +91,7 @@
       "map_Width": 9,
       "map_Height": 2,
       "map_X": 0,
-      "map_Y": 0,
+      "map_Y": 1,
       "map_Elements": [
         83, 76, 87, 95, 76, 95, 76, 95, 87, 95, 76, 95, 95, 76, 87, 76, 95, 71
       ],
