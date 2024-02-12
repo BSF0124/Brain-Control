@@ -4,17 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - MainCharacter
-  - LeftBoard
-  - RightBoard
-  - UpBoard
-  - DownBoard
-  - ActivatedBoard
-  - SubCharacter
-  - Goal
-  - StartBoard
-  - EndBoard
-  - World
   - Stage
   layers:
   - Default

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6129667935949088843}
   m_Layer: 0
   m_Name: DownBoard
-  m_TagString: DownBoard
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,4 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713d67c3c0dcf6d49a897edf0e58b950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivatedImage: {fileID: 21300000, guid: 974ef3f0dc7d6af498c57bc85367aa7a, type: 3}
+  activationImage: {fileID: 21300000, guid: 974ef3f0dc7d6af498c57bc85367aa7a, type: 3}

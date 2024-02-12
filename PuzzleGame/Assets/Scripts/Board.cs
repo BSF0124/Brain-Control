@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    private SpriteRenderer defaultImage;
-    public Sprite ActivatedImage;
+    private SpriteRenderer image;
+    public Sprite activationImage;
 
-    // 발판 활성화
-    public void Activated() 
+    void Start()
     {
-        // defaultImage.sprite = ActivatedImage;
-        // gameObject.tag = "ActivatedBoard";
+        image = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Activate();
+    }
+
+    public void Activate() 
+    {
+        image.sprite = activationImage;
     }
 }

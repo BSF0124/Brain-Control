@@ -39,13 +39,13 @@ public class MainCharacter : MonoBehaviour
         {return;} 
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) // 위쪽 방향키 입력
-        {Move_Up();}
+        {Move(0, -1, Vector3.up);}
         if (Input.GetKeyDown(KeyCode.DownArrow)) // 아래쪽 방향키 입력
-        {Move_Down();}
+        {Move(0, 1, Vector3.down);}
         if (Input.GetKeyDown(KeyCode.LeftArrow)) // 왼쪽 방향키 입력
-        {Move_Left();}
+        {Move(-1, 0, Vector3.left);}
         if (Input.GetKeyDown(KeyCode.RightArrow)) // 오른쪽 방향키 입력
-        {Move_Right();}
+        {Move(1, 0, Vector3.right);}
     }
 
     void Move(int column, int row, Vector3 direction)
@@ -63,11 +63,6 @@ public class MainCharacter : MonoBehaviour
         mainBoard.MoveSubCharacter(x,y);
         }
     }
-
-    void Move_Up() { Move(0, -1, Vector3.up); }
-    void Move_Down() { Move(0, 1, Vector3.down); }
-    void Move_Left() { Move(-1, 0, Vector3.left); }
-    void Move_Right() { Move(1, 0, Vector3.right); }
 
     // 캐릭터 이동
     IEnumerator MoveToTarget()

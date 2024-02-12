@@ -48,8 +48,6 @@ public class MainBoard : MonoBehaviour
     public void VisitBoard(int x, int y)
     {
         boardVisited[x, y] = true;
-        Board board = GameObject.Find($"{this.x+(this.y*column)}").GetComponent<Board>();
-        board.Activated();
     }
 
     // 보드를 밟았는지 여부를 반환

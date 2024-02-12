@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5070417863715779790}
   m_Layer: 0
   m_Name: SubCharacter
-  m_TagString: SubCharacter
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,5 +99,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sum_X: 1
   sum_Y: 1
-  column: 0
-  row: 0
