@@ -43,9 +43,16 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if(PauseMenu.isGamePaused)
+        {
+            return;
+        }
+
         // 플레이어가 이동중이면 키 입력 불가
         if(isMoving)
+        {
             return;
+        }
 
         HandleInput();
     }

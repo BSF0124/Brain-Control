@@ -34,6 +34,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if(PauseMenu.isGamePaused)
+        {
+            return;
+        }
+        
         // 메인과 서브 캐릭터 모두 클리어 확인
         if(isMainClear && isSubClear && !isGameClear)
         {
@@ -50,19 +55,6 @@ public class GameManager : MonoBehaviour
             ResetBool();
             FadeManager.instance.FadeImage(1, 0, true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            SceneManager.LoadScene(0);
-        }
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            SceneManager.LoadScene(1);
-        }
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            SceneManager.LoadScene(2);
         }
     }
 

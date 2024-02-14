@@ -22,6 +22,11 @@ public class MainCharacter : MonoBehaviour
 
     void Update()
     {
+        if(PauseMenu.isGamePaused)
+        {
+            return;
+        }
+        
         if(GameManager.instance.isSceneMove)
         {return;}
 
