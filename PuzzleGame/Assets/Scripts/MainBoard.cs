@@ -35,7 +35,7 @@ public class MainBoard : MonoBehaviour
         }
         
         // 캐릭터 시작 좌표 true 설정
-        boardVisited[x, y] = true;
+        VisitBoard(x,y);
 
         board = new char[column, row];
         for(int i=0; i<column*row; i++)

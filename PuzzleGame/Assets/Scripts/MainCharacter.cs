@@ -28,12 +28,14 @@ public class MainCharacter : MonoBehaviour
         }
         
         if(GameManager.instance.isSceneMove)
-        {return;}
+        {
+            return;
+        }
 
         if(GameManager.instance.isGameClear)
         {
             // 엔터키 입력시 씬 이동
-            if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Escape))
             {
                 GameManager.instance.isSceneMove = true;
                 StartCoroutine(GoWorld());
@@ -41,16 +43,26 @@ public class MainCharacter : MonoBehaviour
         }
 
         if (isMoving || isShaking || GameManager.instance.isMainClear == true)
-        {return;} 
+        {
+            return;
+        } 
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) // 위쪽 방향키 입력
-        {Move(0, -1, Vector3.up);}
+        {
+            Move(0, -1, Vector3.up);
+        }
         if (Input.GetKeyDown(KeyCode.DownArrow)) // 아래쪽 방향키 입력
-        {Move(0, 1, Vector3.down);}
+        {
+            Move(0, 1, Vector3.down);
+        }
         if (Input.GetKeyDown(KeyCode.LeftArrow)) // 왼쪽 방향키 입력
-        {Move(-1, 0, Vector3.left);}
+        {
+            Move(-1, 0, Vector3.left);
+        }
         if (Input.GetKeyDown(KeyCode.RightArrow)) // 오른쪽 방향키 입력
-        {Move(1, 0, Vector3.right);}
+        {
+            Move(1, 0, Vector3.right);
+        }
     }
 
     void Move(int column, int row, Vector3 direction)

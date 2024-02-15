@@ -21,8 +21,8 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        stageIndex = DataManager.instance.currentPlayer.stageIndex;
         currentWorld = 0;
+        stageIndex = DataManager.instance.currentPlayer.stageIndex;
         currentStage = stageIndex;
 
         for(int i=0; i<maxWorld; i++)
@@ -31,6 +31,10 @@ public class PlayerMove : MonoBehaviour
             {
                 currentWorld++;
                 currentStage -= maxStage[i];
+            }
+            else
+            {
+                break;
             }
         }
         SetWorld();

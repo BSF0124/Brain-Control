@@ -12,12 +12,19 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+        
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(isGamePaused)
+            if(GameManager.instance.isGameClear)
+            {
+                return;
+            }
+            
+            else if(isGamePaused)
             {
                 Resume();
             }
+
             else
             {
                 Pause();

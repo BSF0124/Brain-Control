@@ -49,8 +49,7 @@ public class GameManager : MonoBehaviour
             DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.stageIndex] = true;
             DataManager.instance.SaveData();
         }
-
-        if(Input.GetKeyDown(KeyCode.R))
+        if(!isGameClear && Input.GetKeyDown(KeyCode.R))
         {
             ResetBool();
             FadeManager.instance.FadeImage(1, 0, true);
