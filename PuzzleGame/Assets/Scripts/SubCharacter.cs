@@ -2,24 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-
-// public enum LadderState
-// {
-//     None,Up,Down
-// }
+using TMPro;
 
 public class SubCharacter : MonoBehaviour
 {
+    public TextMeshPro distanceTextPrefab;
+    private TextMeshPro distanceText;
     private Vector3 targetPosition;
-    public float sum_X = 1, sum_Y = 1; // 캐릭터 상하좌우 이동 거리
-    // private bool ladder_up = false; // 올라갈 수 있는지 확인
-    // private bool ladder_down = false; // 내려갈 수 있는지 확인
-    // private LadderState ladderState = LadderState.None;
+
+    [HideInInspector]
+    public int distance_x, distance_y; // 남은 거리
+    public float sum_X = 1, sum_Y = 1; // 캐릭터 이동 거리
 
     private int column, row; // 맵의 가로, 세로의 크기
     private int x, y; // 서브 캐릭터의 위치
     private char[,] map; // 맵의 구조
-    // S : 시작점, G : 도착점, L : 사다리, W : 벽, _ : 빈 공간
+    // S:시작점, G:도착점, L:사다리, W:벽, _:빈 공간
 
 
     void Start()
@@ -35,7 +33,18 @@ public class SubCharacter : MonoBehaviour
         for(int i=0; i<column*row; i++)
         {
             map[i%column,i/column] = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Elements[i];
+            
+            if(map[i%column, i/column] == 'G')
+            {
+                distance_x = i%column;
+                distance_y = -(i/column);
+            }
         }
+        distanceText =Instantiate(distanceTextPrefab,gameObject.transform.parent);
+        distanceText.transform.localPosition = targetPosition + Vector3.up;
+        distance_x += x;
+        distance_y += y;
+        DistanceTextUpdate();
     }
 
     void Update()
@@ -54,13 +63,17 @@ public class SubCharacter : MonoBehaviour
     {
         if((x == 0) || (map[x-1,y] == 'W'))
         {
-
+            Shake();
         }
         else
         {
             x--;
             targetPosition -= new Vector3(sum_X, 0, 0);
             transform.DOLocalMove(targetPosition, 0.25f);
+            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            distance_x++;
+            DistanceTextUpdate();
+            
         }
 
     }
@@ -68,13 +81,16 @@ public class SubCharacter : MonoBehaviour
     {
         if((x == column-1) || (map[x+1,y] == 'W'))
         {
-
+            Shake();
         }
         else
         {
             x++;
             targetPosition += new Vector3(sum_X, 0, 0);
             transform.DOLocalMove(targetPosition, 0.25f);
+            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            distance_x--;
+            DistanceTextUpdate();
         }
     }
 
@@ -83,13 +99,16 @@ public class SubCharacter : MonoBehaviour
 
         if((y == 0) || (map[x,y] != 'L') || (map[x,y-1] == 'W'))
         {
-
+            Shake();
         }
         else
         {
             y--;
             targetPosition += new Vector3(0, sum_Y, 0);
             transform.DOLocalMove(targetPosition, 0.25f);
+            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            distance_y--;
+            DistanceTextUpdate();
         }
     }
     public void Move_Down()
@@ -97,13 +116,34 @@ public class SubCharacter : MonoBehaviour
 
         if((y == row-1) || (map[x,y] != 'L') || (map[x,y+1] == 'W'))
         {
-
+            Shake();
         }
         else
         {
             y++;
             targetPosition -= new Vector3(0, sum_Y, 0);
             transform.DOLocalMove(targetPosition, 0.25f);
+            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            distance_y++;
+            DistanceTextUpdate();
+        }
+    }
+
+    void Shake()
+    {
+        transform.DOShakePosition(0.3f, 0.05f, 25, 90);
+    }
+    
+    void DistanceTextUpdate()
+    {
+        if(distance_x == 0 && distance_y == 0)
+        {
+            distanceText.text = "Goal!";
+        }
+
+        else
+        {
+            distanceText.text = $"[{distance_x},{distance_y}]";
         }
     }
 }

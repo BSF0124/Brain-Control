@@ -97,5 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dfeaea141d3b3e4b928452aeccfb559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceText: {fileID: 0}
+  distanceTextPrefab: {fileID: 4612860137333558689, guid: 484cf10aad44ec848a373e8580338c8f, type: 3}
+  distance_x: 0
+  distance_y: 0
   sum_X: 1
   sum_Y: 1

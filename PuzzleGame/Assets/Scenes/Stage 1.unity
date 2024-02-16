@@ -6081,7 +6081,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -18158,6 +18158,10 @@ PrefabInstance:
       propertyPath: sum_Y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: distanceText
+      value: 
+      objectReference: {fileID: 4612860137333558689, guid: 484cf10aad44ec848a373e8580338c8f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

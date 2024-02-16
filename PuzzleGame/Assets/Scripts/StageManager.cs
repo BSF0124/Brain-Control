@@ -6,6 +6,7 @@ public class StageManager : MonoBehaviour
 {
     public GameObject[] stage;
     public Camera mainCamera;
+    
     void Awake()
     {
         for(int i = 0; i < stage.Length; i++)
