@@ -18,6 +18,7 @@ public class PlayerData
 [System.Serializable]
 public class StageData
 {
+    public string stageID;
     public int map_Width;
     public int map_Height;
     public int map_X;

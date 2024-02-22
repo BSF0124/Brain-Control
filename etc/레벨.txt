@@ -1,0 +1,106 @@
+D : 68 / E : 69 / G : 71 / L : 76 / R : 82 / S : 83 / U : 85 / W : 87
+-------------------------------
+스테이지 ID
+맵 크기(x,y) / 시작 위치(x,y)
+맵 구성
+보드 크기(x,y) / 시작 위치(x,y)
+보드 구성
+-------------------------------
+1-1
+4,1 / 0,0
+{S, E, E, G}
+4,4 / 0,0
+{S, R, L, R, 
+L, L, L, L, 
+L, R, R, L, 
+R, L, R, G}
+
+1-2
+4,1 / 0,0
+{S, E, E, G}
+4,4 / 0,0
+{S, L, R, R, 
+R, L, L, L, 
+L, R, L, R, 
+L, R, R, G}
+
+1-3
+5,1 / 0,0
+{S, E, E, E, G}
+5,4 / 0,0
+{S, R, R, L, L, 
+R, L, R, R, L, 
+L, R, L, L, R, 
+R, R, L, R, G}
+
+
+1-4
+7,1 / 0,0
+{S, E, E, E, E, E, G}
+5,4 / 0,0
+{S, R, L, R, R, 
+R, L, R, L, R, 
+L, R, L, L, L, 
+L, R, R, R, G}
+
+1-5
+5,2 / 0,1
+{W, L, E, L, W, S, L, W, L, G}
+4,4 / 0,0
+{S, R, R, R, 
+L, U, L, D, 
+R, D, U, R,
+ U, L, L, G}
+
+1-6
+6,2 / 0,1
+{E, L, E, E, L, E, 
+S, L, W, W, L, G}
+5,4 / 0,0
+{S, U, L, R, R, 
+R, D, R, R, D, 
+U, U, D, U, R, 
+D, L, L, R, G}
+
+1-7
+9,2 / 0,0
+{S, L, W, E, L, E, L, E, W, 
+E, L, E, E, L, W, L, E, G}
+5,5 / 0,4
+{R, R, U, D, U, 
+L, L, R, R, L, 
+D, R, U, D, R, 
+R, L, R, D, R, 
+S, R, D, R, G}
+
+1-8
+9,3 / 0,1
+{W, W, W, W, L, E, L, W, G, 
+S, L, W, L, L, W, L, W, L, 
+W, L, E, L, W, E, L, E, L}
+6,5 / 5,0
+{U, D, L, R, L, S, 
+U, R, R, U, D, R, 
+D, R, U, R, R, L, 
+L, R, R, R, U, L, 
+D, R, L, D, U, G}
+----------------------------------
+2-1
+5,6 / 0,0
+{S,E,E,L,W,
+W,W,W,L,W, 
+L,E,E,L,E, 
+L,W,W,W,W,
+L,W,W,G,W,
+L,E,E,L,E}
+9,9 / 1,1
+{W,W,W,W,W,W,W,W,W,
+W,S,R,R,W,D,D,R,W,
+W,R,W,R,W,D,W,R,W,
+W,R,W,D,D,L,W,R,W,
+W,R,W,W,W,L,W,R,W,
+W,D,D,R,L,L,W,L,W,
+W,W,W,W,W,D,W,U,W,
+W,G,R,R,D,D,U,G,W,
+W,W,W,W,W,W,W,W,W
+}
