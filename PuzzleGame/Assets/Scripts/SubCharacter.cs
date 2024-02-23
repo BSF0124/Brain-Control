@@ -13,11 +13,11 @@ public class SubCharacter : MonoBehaviour
     [HideInInspector]
     public int distance_x, distance_y; // 남은 거리
     public float sum_X = 1, sum_Y = 1; // 캐릭터 이동 거리
-
     private int column, row; // 맵의 가로, 세로의 크기
     private int x, y; // 서브 캐릭터의 위치
     private char[,] map; // 맵의 구조
     // S:시작점, G:도착점, L:사다리, W:벽, _:빈 공간
+    private float duration = 0.1f;
 
 
     void Start()
@@ -41,7 +41,16 @@ public class SubCharacter : MonoBehaviour
             }
         }
         distanceText =Instantiate(distanceTextPrefab,gameObject.transform.parent);
-        distanceText.transform.localPosition = targetPosition + Vector3.up;
+        
+        if(targetPosition.y + 1 >= 8)
+        {
+            distanceText.transform.localPosition = targetPosition + Vector3.down;
+        }
+        else
+        {
+            distanceText.transform.localPosition = targetPosition + Vector3.up;
+        }
+
         distance_x += x;
         distance_y += y;
         DistanceTextUpdate();
@@ -69,8 +78,16 @@ public class SubCharacter : MonoBehaviour
         {
             x--;
             targetPosition -= new Vector3(sum_X, 0, 0);
-            transform.DOLocalMove(targetPosition, 0.25f);
-            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            if(targetPosition.y + 1 >= 8)
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.down, 0.25f);
+            }
+            else
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.up, duration);
+            }
             distance_x++;
             DistanceTextUpdate();
             
@@ -87,8 +104,16 @@ public class SubCharacter : MonoBehaviour
         {
             x++;
             targetPosition += new Vector3(sum_X, 0, 0);
-            transform.DOLocalMove(targetPosition, 0.25f);
-            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            if(targetPosition.y + 1 >= 8)
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.down, 0.25f);
+            }
+            else
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.up, duration);
+            }
             distance_x--;
             DistanceTextUpdate();
         }
@@ -105,8 +130,17 @@ public class SubCharacter : MonoBehaviour
         {
             y--;
             targetPosition += new Vector3(0, sum_Y, 0);
-            transform.DOLocalMove(targetPosition, 0.25f);
-            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+
+            if(targetPosition.y + 1 >= 8)
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.down, 0.25f);
+            }
+            else
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            }
             distance_y--;
             DistanceTextUpdate();
         }
@@ -122,8 +156,16 @@ public class SubCharacter : MonoBehaviour
         {
             y++;
             targetPosition -= new Vector3(0, sum_Y, 0);
-            transform.DOLocalMove(targetPosition, 0.25f);
-            distanceText.transform.DOLocalMove(targetPosition + Vector3.up, 0.25f);
+            if(targetPosition.y + 1 >= 8)
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.down, 0.25f);
+            }
+            else
+            {
+                transform.DOLocalMove(targetPosition, 0.25f);
+                distanceText.transform.DOLocalMove(targetPosition + Vector3.up, duration);
+            }
             distance_y++;
             DistanceTextUpdate();
         }
@@ -131,7 +173,7 @@ public class SubCharacter : MonoBehaviour
 
     void Shake()
     {
-        transform.DOShakePosition(0.3f, 0.05f, 25, 90);
+        transform.DOShakePosition(duration, 0.05f, 25, 90);
     }
     
     void DistanceTextUpdate()

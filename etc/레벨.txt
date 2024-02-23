@@ -104,3 +104,19 @@ W,W,W,W,W,D,W,U,W,
 W,G,R,R,D,D,U,G,W,
 W,W,W,W,W,W,W,W,W
 }
+
+2-2
+5,5 / 2,2
+{L,E,G,E,L,
+L,W,W,W,L,
+L,E,S,E,L,
+L,W,W,W,L,
+L,E,G,E,L}
+15,7 / 13,1
+{W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,
+W,G,R,D,D,L,L,U,W,U,U,L,W,S,W,
+W,L,W,W,W,L,W,U,W,R,W,L,W,L,W,
+W,L,W,G,W,L,R,U,U,R,W,R,R,L,W,
+W,D,W,L,W,W,D,W,W,L,W,L,W,D,W,
+W,D,R,R,R,R,D,W,W,R,R,R,R,D,W,
+W,W,W,W,W,W,W,W,W,W,W,W,W,W,W}

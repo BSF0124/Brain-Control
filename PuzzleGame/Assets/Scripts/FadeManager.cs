@@ -11,8 +11,8 @@ public class FadeManager : MonoBehaviour
     public Image fadeImage; // fade 이미지
     public TextMeshProUGUI clearText; // clear 텍스트
     public TextMeshProUGUI enterText; // enter 텍스트
-    public float imageDuration = 0.5f; // 이미지 fade 시간
-    public float textDuration = 0.5f; // 텍스트 fade 시간
+    public float imageDuration = 0.2f; // 이미지 fade 시간
+    public float textDuration = 0.2f; // 텍스트 fade 시간
 
     private void Awake()
     {

@@ -9,6 +9,7 @@ public class MainCharacter : MonoBehaviour
     private Vector3 targetPosition; // 캐릭터가 이동할 좌표
     private int x, y; // 캐릭터 현재 위치
     private bool isMoving = false, isShaking = false; // 캐릭터 이동 제어
+    private float duration = 0.1f;
     private MainBoard mainBoard;
 
     void Start()
@@ -86,8 +87,8 @@ public class MainCharacter : MonoBehaviour
     {
         isMoving = true;
 
-        transform.DOMove(targetPosition, 0.25f);
-        yield return new WaitForSeconds(0.23f);
+        transform.DOMove(targetPosition, duration);
+        yield return new WaitForSeconds(duration);
 
         isMoving = false;
     }
@@ -96,7 +97,7 @@ public class MainCharacter : MonoBehaviour
     void Shake()
     {
         isShaking = true;
-        transform.DOShakePosition(0.3f, 0.05f, 25, 90).OnComplete(() =>
+        transform.DOShakePosition(duration, 0.05f, 25, 90).OnComplete(() =>
         {
             isShaking = false;
         });

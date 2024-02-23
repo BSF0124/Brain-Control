@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     public Camera mainCamera; // 메인 카메라
     private WorldManager worldManager;
     private Animator animator;
-    public float moveSpeed; // 플레이어 이동 속도
+    private float duration = 0.2f; // 플레이어 이동 속도
     public int maxWorld = 3; // 최대 월드 수
     private int[] maxStage = new int[3]{8,6,6}; // 현재 월드의 스테이지 수
     public static int currentWorld; // 현재 월드 인덱스
@@ -134,7 +134,7 @@ public class PlayerMove : MonoBehaviour
     {
         StartMoving();
         Vector3 stagePosition = worldManager.stage[currentStage].transform.position;
-        Tweener tweener = transform.DOMove(stagePosition, moveSpeed).OnComplete(StopMoving);
+        Tweener tweener = transform.DOMove(stagePosition, duration).OnComplete(StopMoving);
         yield return tweener.WaitForCompletion();
         animator.SetBool("moveLeft", false);
         animator.SetBool("moveRight", false);

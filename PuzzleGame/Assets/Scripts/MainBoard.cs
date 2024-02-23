@@ -79,34 +79,49 @@ public class MainBoard : MonoBehaviour
             current_X = initial_X;
             for(int j=0; j<column; j++)
             {
+                GameObject newBoard;
                 Vector3 position = new Vector3(current_X, current_Y, -1);
                 if(board[j,i] == 'S')
                 {
-                    Instantiate(boards[0], position, Quaternion.identity, parent);
+                    newBoard = Instantiate(boards[0]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
                 }
                 else if(board[j,i] == 'U')
                 {
-                    Instantiate(boards[1], position, Quaternion.identity, parent);
+                    newBoard = Instantiate(boards[1]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
                 }
                 else if(board[j,i] == 'D')
                 {
-                    Instantiate(boards[2], position, Quaternion.identity, parent);
+                    newBoard = Instantiate(boards[2]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
                 }
                 else if(board[j,i] == 'L')
                 {
-                    Instantiate(boards[3], position, Quaternion.identity, parent);
+                    newBoard = Instantiate(boards[3]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
                 }
                 else if(board[j,i] == 'R')
                 {
-                    Instantiate(boards[4], position, Quaternion.identity, parent);
+                    newBoard = Instantiate(boards[4]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
                 }
                 else if(board[j,i] == 'G')
                 {
-                    Instantiate(boards[5], position, Quaternion.identity, parent);
+                    newBoard = Instantiate(boards[5]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
                 }
                 else if(board[j,i] == 'W')
                 {
-                    Instantiate(boards[6], position, Quaternion.identity, parent);
+                    newBoard = Instantiate(boards[6]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
                 }
                 current_X += sum_X;
             }
