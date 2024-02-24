@@ -22,9 +22,9 @@ public class MainBoard : MonoBehaviour
         
         //보드 크기 설정
         Transform parent = transform.parent;
-        transform.parent = null;
-        transform.localScale = new Vector3(column+1, row+1, 1);
-        transform.parent = parent;
+        // transform.parent = null;
+        // transform.localScale = new Vector3(column+1, row+1, 1);
+        // transform.parent = parent;
 
         // 보드 상태 배열 초기화
         boardVisited = new bool[column, row];

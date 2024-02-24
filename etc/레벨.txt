@@ -1,4 +1,6 @@
 D : 68 / E : 69 / G : 71 / L : 76 / R : 82 / S : 83 / U : 85 / W : 87
+
+D(Down) / E(Empty) / G(Goal) / L(맵:Ladder, 보드:Left) / R(Right) / S(Start)/ U(Up) / W(Wall)
 -------------------------------
 스테이지 ID
 맵 크기(x,y) / 시작 위치(x,y)
@@ -45,7 +47,8 @@ L, R, R, R, G}
 
 1-5
 5,2 / 0,1
-{W, L, E, L, W, S, L, W, L, G}
+{W, L, E, L, W, 
+S, L, W, L, G}
 4,4 / 0,0
 {S, R, R, R, 
 L, U, L, D, 
@@ -107,7 +110,7 @@ W,W,W,W,W,W,W,W,W
 
 2-2
 5,5 / 2,2
-{L,E,G,E,L,
+{L,E,E,E,L,
 L,W,W,W,L,
 L,E,S,E,L,
 L,W,W,W,L,
@@ -120,3 +123,23 @@ W,L,W,G,W,L,R,U,U,R,W,R,R,L,W,
 W,D,W,L,W,W,D,W,W,L,W,L,W,D,W,
 W,D,R,R,R,R,D,W,W,R,R,R,R,D,W,
 W,W,W,W,W,W,W,W,W,W,W,W,W,W,W}
+
+2-3
+7,7 / 0,2
+{W,W,L,E,L,W,W,
+W,L,L,W,L,L,W,
+S,L,W,W,W,L,L,
+W,W,W,W,W,W,L,
+G,L,W,W,W,L,L,
+W,L,L,W,L,L,W,
+W,W,L,E,L,W,W}
+9,9 / 4,7
+{W,W,W,W,W,W,W,W,W,
+W,L,R,D,D,L,L,G,W,
+W,D,W,W,W,D,W,L,W,
+W,R,D,R,U,L,D,U,W,
+W,W,W,R,W,D,W,L,W,
+W,L,R,U,W,L,L,U,W,
+W,U,W,U,W,W,W,U,W,
+W,D,U,R,S,R,U,R,W,
+W,W,W,W,W,W,W,W,W}
