@@ -149,7 +149,7 @@ W,W,W,W,W,W,W,W,W}
 L,W,L,W,L,W,L,W,L,W,
 S,E,L,E,L,E,L,E,L,G,
 L,W,L,W,L,W,L,W,L,W,
-L,E,L,E,L,E,L,E,L,W,}
+L,E,L,E,L,E,L,E,L,W}
 
 20,7 / 1,3
 {W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,
@@ -159,3 +159,23 @@ W,S,R,R,W,R,R,D,W,R,W,D,W,R,U,U,R,R,G,W,
 W,D,W,R,W,W,W,D,W,D,W,D,W,R,W,W,W,W,W,W,
 W,D,R,R,U,U,L,L,W,D,L,L,U,U,W,W,W,W,W,W,
 W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W}
+
+2-5
+11,6 / 0,6
+{W,W,W,W,W,W,W,L,E,E,E,
+W,W,L,E,E,E,E,L,W,W,L,
+G,E,L,W,W,W,W,W,W,W,L,
+W,W,W,W,W,W,W,W,L,E,L,
+W,W,W,W,L,E,E,E,L,W,W,
+S,E,E,E,L,W,W,W,W,W,W}
+
+15,9 / 9,1
+{W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,
+W,G,R,R,W,L,U,L,W,S,L,L,L,L,W,
+W,W,W,R,W,R,W,L,W,W,L,W,W,U,W,
+W,D,R,D,R,R,U,U,L,L,L,G,W,L,W,
+W,R,W,W,D,W,W,L,W,W,W,W,W,L,W,
+W,R,W,G,R,R,W,U,W,G,D,D,W,L,W,
+W,R,W,W,W,R,W,U,W,W,W,D,W,L,W,
+W,D,R,D,R,R,U,L,L,R,L,R,L,U,W,
+W,W,W,W,W,W,W,W,W,W,W,W,W,W,W}
