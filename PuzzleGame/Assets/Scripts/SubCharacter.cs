@@ -13,8 +13,11 @@ public class SubCharacter : MonoBehaviour
     [HideInInspector]
     public int distance_x, distance_y; // 남은 거리
     public float sum_X = 1, sum_Y = 1; // 캐릭터 이동 거리
+
     private int column, row; // 맵의 가로, 세로의 크기
     private int x, y; // 서브 캐릭터의 위치
+    private int goalCount = 0;
+    private bool goalCheck = false;
     private char[,] map; // 맵의 구조
     // S:시작점, G:도착점, L:사다리, W:벽, _:빈 공간
     private float duration = 0.1f;
@@ -34,14 +37,25 @@ public class SubCharacter : MonoBehaviour
         {
             map[i%column,i/column] = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Elements[i];
             
-            if(map[i%column, i/column] == 'G')
+            if(goalCount == 0 && (map[i%column, i/column] == 'G' || map[i%column, i/column] == 'B'))
             {
+                goalCount++;
                 distance_x = i%column;
                 distance_y = -(i/column);
             }
+            else if(map[i%column, i/column] == 'G' || map[i%column, i/column] == 'B')
+            {
+                goalCount++;
+            }
         }
-        distanceText =Instantiate(distanceTextPrefab,gameObject.transform.parent);
-        
+
+        distanceText = Instantiate(distanceTextPrefab,gameObject.transform.parent);
+
+        if(goalCount > 1)
+        {
+            goalCheck = true;
+        }
+
         if(targetPosition.y + 1 >= 8)
         {
             distanceText.transform.localPosition = targetPosition + Vector3.down;
@@ -50,15 +64,15 @@ public class SubCharacter : MonoBehaviour
         {
             distanceText.transform.localPosition = targetPosition + Vector3.up;
         }
-
         distance_x += x;
         distance_y += y;
         DistanceTextUpdate();
+        
     }
 
     void Update()
     {
-        if(map[x,y] == 'G')
+        if(map[x,y] == 'G' || map[x,y] == 'B')
         {
             GameManager.instance.isSubClear = true;
         }
@@ -122,7 +136,7 @@ public class SubCharacter : MonoBehaviour
     public void Move_Up()
     {
 
-        if((y == 0) || (map[x,y] != 'L') || (map[x,y-1] == 'W'))
+        if((y == 0) || (map[x,y] != 'L') || (map[x,y] != 'B') || (map[x,y-1] == 'W'))
         {
             Shake();
         }
@@ -148,7 +162,7 @@ public class SubCharacter : MonoBehaviour
     public void Move_Down()
     {
 
-        if((y == row-1) || (map[x,y] != 'L') || (map[x,y+1] == 'W'))
+        if((y == row-1) || (map[x,y] != 'L') || (map[x,y] != 'B') || (map[x,y+1] == 'W'))
         {
             Shake();
         }
@@ -178,7 +192,11 @@ public class SubCharacter : MonoBehaviour
     
     void DistanceTextUpdate()
     {
-        if(distance_x == 0 && distance_y == 0)
+        if(goalCheck)
+        {
+            distanceText.text = "?,?";
+        }
+        else if(distance_x == 0 && distance_y == 0)
         {
             distanceText.text = "Goal!";
         }
