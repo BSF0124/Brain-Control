@@ -66,7 +66,7 @@ public class PlayerMove : MonoBehaviour
     private void HandleInput()
     {
         // 이전 스테이지로 이동
-        if(Input.GetKeyDown(KeyCode.LeftArrow))
+        if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             // 이전 스테이지로 이동
             if(currentStage > 0)
@@ -90,7 +90,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 다음 스테이지로 이동
-        if(Input.GetKeyDown(KeyCode.RightArrow))
+        if(Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             // 현재 스테이지를 클리어 했는지 확인
             if(!DataManager.instance.StageClearCheck(stageIndex))

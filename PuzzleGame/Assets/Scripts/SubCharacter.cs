@@ -136,7 +136,7 @@ public class SubCharacter : MonoBehaviour
     public void Move_Up()
     {
 
-        if((y == 0) || (map[x,y] != 'L') || (map[x,y] != 'B') || (map[x,y-1] == 'W'))
+        if((y == 0) || ((map[x,y] != 'L') && (map[x,y] != 'B')) || (map[x,y-1] == 'W'))
         {
             Shake();
         }
@@ -162,7 +162,7 @@ public class SubCharacter : MonoBehaviour
     public void Move_Down()
     {
 
-        if((y == row-1) || (map[x,y] != 'L') || (map[x,y] != 'B') || (map[x,y+1] == 'W'))
+        if((y == row-1) || ((map[x,y] != 'L') && (map[x,y] != 'B')) || (map[x,y+1] == 'W'))
         {
             Shake();
         }

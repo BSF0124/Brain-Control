@@ -6,7 +6,8 @@ using UnityEngine;
 public class MainBoard : MonoBehaviour
 {
     public SubCharacter subCharacter;
-    public GameObject[] boards; // 보드 오브젝트
+    public GameObject[] boards; // 보드 종류
+    //0:Start, 1:Up 2:Dowm 3:Left 4:Right 5:Goal 6:Wall
     private int column, row; // 보드의 크기
     private char[,] board; // 보드 구성
     private bool[,] boardVisited; // 보드 밟음 여부
