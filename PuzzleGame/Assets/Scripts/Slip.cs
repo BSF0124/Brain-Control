@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class MainCharacter : MonoBehaviour
+public class Slip : MonoBehaviour
 {
     private Vector3 targetPosition; // 캐릭터가 이동할 좌표
     private int x, y; // 캐릭터 현재 위치
@@ -79,6 +79,7 @@ public class MainCharacter : MonoBehaviour
         StartCoroutine(MoveToTarget());
         mainBoard.VisitBoard(x += column, y += row);
         mainBoard.MoveSubCharacter(x,y);
+        Move(column, row, direction);
         }
     }
 

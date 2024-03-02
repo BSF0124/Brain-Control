@@ -8,8 +8,9 @@ public class PlayerData
     public int stageIndex = 0;
 
     // true : 스테이지 클리어
-    public bool[] isClear = new bool[18]
+    public bool[] isClear = new bool[26]
     {
+        false,false,false,false,false,false,false,false,
         false,false,false,false,false,false,
         false,false,false,false,false,false,
         false,false,false,false,false,false

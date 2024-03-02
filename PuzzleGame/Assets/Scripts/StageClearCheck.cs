@@ -8,7 +8,8 @@ public class StageClearCheck : MonoBehaviour
     {
         string[] str = gameObject.name.Split();
         int index = int.Parse(str[1]) - 1;
-
+        print(index);
+        
         SpriteRenderer sprite =  gameObject.GetComponent<SpriteRenderer>();
         if(DataManager.instance.currentPlayer.isClear[index])
         {
