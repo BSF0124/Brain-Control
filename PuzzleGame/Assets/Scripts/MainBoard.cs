@@ -7,7 +7,7 @@ public class MainBoard : MonoBehaviour
 {
     public SubCharacter subCharacter;
     public GameObject[] boards; // 보드 종류
-    //0:Start, 1:Up 2:Dowm 3:Left 4:Right 5:Goal 6:Wall
+    //0:Start, 1:Up 2:Dowm 3:Left 4:Right 5:Goal 6:Wall 7:Tool
     private int column, row; // 보드의 크기
     private char[,] board; // 보드 구성
     private bool[,] boardVisited; // 보드 밟음 여부
@@ -124,6 +124,12 @@ public class MainBoard : MonoBehaviour
                     newBoard.transform.parent = parent;
                     newBoard.transform.localPosition = position;
                 }
+                else if(board[j,i] == 'T')
+                {
+                    newBoard = Instantiate(boards[7]);
+                    newBoard.transform.parent = parent;
+                    newBoard.transform.localPosition = position;
+                }
                 current_X += sum_X;
             }
             current_Y -= sum_Y;
@@ -145,25 +151,47 @@ public class MainBoard : MonoBehaviour
     // 밟은 보드에 따른 서브 캐릭터 이동
     public void MoveSubCharacter(int x, int y)
     {
-        if(board[x,y] == 'L')
+        switch(board[x,y])
         {
-            subCharacter.Move_Left();
+            case 'L':
+                subCharacter.Move_Left();
+                break;
+            case 'R':
+                subCharacter.Move_Right();
+                break;
+            case 'U':
+                subCharacter.Move_Up();
+                break;
+            case 'D':
+                subCharacter.Move_Down();
+                break;
+            case 'T':
+                subCharacter.BoardActivated();
+                break;
+            case 'G':
+                GameManager.instance.isMainClear = true;
+                break;
         }
-        if(board[x,y] == 'R')
-        {
-            subCharacter.Move_Right();
-        }
-        if(board[x,y] == 'U')
-        {
-            subCharacter.Move_Up();
-        }
-        if(board[x,y] == 'D')
-        {
-            subCharacter.Move_Down();
-        }
-        if(board[x,y] == 'G')
-        {
-            GameManager.instance.isMainClear = true;
-        }
+
+        // if(board[x,y] == 'L')
+        // {
+        //     subCharacter.Move_Left();
+        // }
+        // if(board[x,y] == 'R')
+        // {
+        //     subCharacter.Move_Right();
+        // }
+        // if(board[x,y] == 'U')
+        // {
+        //     subCharacter.Move_Up();
+        // }
+        // if(board[x,y] == 'D')
+        // {
+        //     subCharacter.Move_Down();
+        // }
+        // if(board[x,y] == 'G')
+        // {
+        //     GameManager.instance.isMainClear = true;
+        // }
     }
 }

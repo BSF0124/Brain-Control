@@ -19,9 +19,13 @@ public class SubCharacter : MonoBehaviour
     private int goalCount = 0;
     private bool goalCheck = false;
     private char[,] map; // 맵의 구조
-    // S:시작점, G:도착점, L:사다리, W:벽, _:빈 공간
+    // S:시작점, G:도착점, L:사다리, W:벽, E:길
+    // 짝수:비활성화 길, 홀수:비활성화 사다리
     private float duration = 0.1f;
 
+    private int[,] deactivatedBoard;
+    private int deactivatedCount = 0;
+    private int deactivatedTotal = 0;
 
     void Start()
     {
@@ -36,6 +40,14 @@ public class SubCharacter : MonoBehaviour
         for(int i=0; i<column*row; i++)
         {
             map[i%column,i/column] = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Elements[i];
+
+            if(map[i%column,i/column] < 65)
+            {
+                deactivatedBoard[i,0] = map[i%column,i/column];
+                deactivatedBoard[i,1] = i%column;
+                deactivatedBoard[i,2] = i/column;
+                deactivatedTotal++;
+            }
             
             if(goalCount == 0 && (map[i%column, i/column] == 'G' || map[i%column, i/column] == 'B'))
             {
@@ -84,7 +96,7 @@ public class SubCharacter : MonoBehaviour
 
     public void Move_Left()
     {
-        if((x == 0) || (map[x-1,y] == 'W'))
+        if((x == 0) || (map[x-1,y] == 'W') || (map[x-1,y] < 65))
         {
             Shake();
         }
@@ -110,7 +122,7 @@ public class SubCharacter : MonoBehaviour
     }
     public void Move_Right()
     {
-        if((x == column-1) || (map[x+1,y] == 'W'))
+        if((x == column-1) || (map[x+1,y] == 'W') || (map[x+1,y] < 65))
         {
             Shake();
         }
@@ -136,7 +148,7 @@ public class SubCharacter : MonoBehaviour
     public void Move_Up()
     {
 
-        if((y == 0) || ((map[x,y] != 'L') && (map[x,y] != 'B')) || (map[x,y-1] == 'W'))
+        if((y == 0) || ((map[x,y] != 'L') && (map[x,y] != 'B')) || (map[x,y-1] == 'W') || (map[x,y-1] < 65))
         {
             Shake();
         }
@@ -162,7 +174,7 @@ public class SubCharacter : MonoBehaviour
     public void Move_Down()
     {
 
-        if((y == row-1) || ((map[x,y] != 'L') && (map[x,y] != 'B')) || (map[x,y+1] == 'W'))
+        if((y == row-1) || ((map[x,y] != 'L') && (map[x,y] != 'B')) || (map[x,y+1] == 'W') || (map[x,y+1] < 65))
         {
             Shake();
         }
@@ -182,6 +194,31 @@ public class SubCharacter : MonoBehaviour
             }
             distance_y++;
             DistanceTextUpdate();
+        }
+    }
+
+    public void BoardActivated()
+    {
+        int i = 0;
+        while(true)
+        {
+            if(deactivatedCount == deactivatedTotal)
+                return;
+            
+            if(deactivatedBoard[i,0] == i)
+            {
+                if(i % 2 == 0)
+                {
+                    map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'E';
+                }
+
+                else
+                {
+                    map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'L';
+                }
+            }
+            i++;
+            deactivatedCount++;
         }
     }
 
