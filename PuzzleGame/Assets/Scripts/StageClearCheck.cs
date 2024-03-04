@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class StageClearCheck : MonoBehaviour
 {
+    private Animator animator;
+
     void Start()
     {
+        animator = GetComponent<Animator>();
+
         string[] str = gameObject.name.Split();
         int index = int.Parse(str[1]) - 1;
         
-        SpriteRenderer sprite =  gameObject.GetComponent<SpriteRenderer>();
         if(DataManager.instance.currentPlayer.isClear[index])
         {
-            sprite.color = new Color(0/255f, 200/255f, 255/255f);
+            animator.SetBool("Clear", true);
         }
 
-        else
-        {
-            sprite.color = Color.white;
-        }
+        // else
+        // {
+        //     animator.SetBool("Clear", false);
+        // }
     }
 }
