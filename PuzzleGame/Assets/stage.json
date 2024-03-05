@@ -6,7 +6,7 @@
       "map_Height": 1,
       "map_X": 0,
       "map_Y": 0,
-      "map_Elements": [83, 95, 95, 71],
+      "map_Elements": [83, 69, 69, 71],
       "board_Width": 4,
       "board_Height": 4,
       "board_X": 0,
@@ -21,7 +21,7 @@
       "map_Height": 1,
       "map_X": 0,
       "map_Y": 0,
-      "map_Elements": [83, 95, 95, 71],
+      "map_Elements": [83, 69, 69, 71],
       "board_Width": 4,
       "board_Height": 4,
       "board_X": 0,
@@ -36,7 +36,7 @@
       "map_Height": 1,
       "map_X": 0,
       "map_Y": 0,
-      "map_Elements": [83, 95, 95, 95, 71],
+      "map_Elements": [83, 69, 69, 69, 71],
       "board_Width": 5,
       "board_Height": 4,
       "board_X": 0,
@@ -52,7 +52,7 @@
       "map_Height": 1,
       "map_X": 0,
       "map_Y": 0,
-      "map_Elements": [83, 95, 95, 95, 95, 95, 71],
+      "map_Elements": [83, 69, 69, 69, 69, 69, 71],
       "board_Width": 5,
       "board_Height": 4,
       "board_X": 0,
@@ -68,7 +68,7 @@
       "map_Height": 2,
       "map_X": 0,
       "map_Y": 1,
-      "map_Elements": [87, 76, 95, 76, 87, 83, 76, 87, 76, 71],
+      "map_Elements": [87, 76, 69, 76, 87, 83, 76, 87, 76, 71],
       "board_Width": 4,
       "board_Height": 4,
       "board_X": 0,
@@ -83,7 +83,7 @@
       "map_Height": 2,
       "map_X": 0,
       "map_Y": 1,
-      "map_Elements": [95, 76, 95, 95, 76, 95, 83, 76, 87, 87, 76, 71],
+      "map_Elements": [69, 76, 69, 69, 76, 69, 83, 76, 87, 87, 76, 71],
       "board_Width": 5,
       "board_Height": 4,
       "board_X": 0,
@@ -100,7 +100,7 @@
       "map_X": 0,
       "map_Y": 0,
       "map_Elements": [
-        83, 76, 87, 95, 76, 95, 76, 95, 87, 95, 76, 95, 95, 76, 87, 76, 95, 71
+        83, 76, 87, 69, 76, 69, 76, 69, 87, 69, 76, 69, 69, 76, 87, 76, 69, 71
       ],
       "board_Width": 5,
       "board_Height": 5,
@@ -118,8 +118,8 @@
       "map_X": 0,
       "map_Y": 1,
       "map_Elements": [
-        87, 87, 87, 87, 76, 95, 76, 87, 71, 83, 76, 87, 76, 76, 87, 76, 87, 76,
-        87, 76, 95, 76, 87, 95, 76, 95, 76
+        87, 87, 87, 87, 76, 69, 76, 87, 71, 83, 76, 87, 76, 76, 87, 76, 87, 76,
+        87, 76, 69, 76, 87, 69, 76, 69, 76
       ],
       "board_Width": 6,
       "board_Height": 5,
