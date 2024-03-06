@@ -23,6 +23,7 @@ public class SubCharacter : MonoBehaviour
     private int column, row; // 맵의 가로, 세로의 크기
     private int current_x, current_y; // 현재 위치
     private int goalCount = 0;
+    private int stageIndex;
     private int[,] deactivatedBoard; // 비활성화 맵 정보
     private int deactivatedCount = 0;
     private int deactivatedTotal = 0; // 총 비활성화 개수
@@ -30,11 +31,13 @@ public class SubCharacter : MonoBehaviour
 
     void Start()
     {
+        string[] str = transform.parent.parent.transform.name.Split();
+        stageIndex = int.Parse(str[1])-1;
         // 변수들을 불러옴
-        column = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Width;
-        row = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Height;
-        current_x = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X;
-        current_y = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y;
+        column = DataManager.instance.stageList.stage[stageIndex].map_Width;
+        row = DataManager.instance.stageList.stage[stageIndex].map_Height;
+        current_x = DataManager.instance.stageList.stage[stageIndex].map_X;
+        current_y = DataManager.instance.stageList.stage[stageIndex].map_Y;
 
         // 맵의 크기 설정
         map = new char[column, row];
@@ -45,7 +48,7 @@ public class SubCharacter : MonoBehaviour
         for(int i=0; i<column*row; i++)
         {
             // 맵의 구성을 불러옴
-            map[i%column,i/column] = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Elements[i];
+            map[i%column,i/column] = DataManager.instance.stageList.stage[stageIndex].map_Elements[i];
 
             // 비활성화 길, 사다리 정보를 가져옴
             if(map[i%column,i/column] < 65)
@@ -99,7 +102,6 @@ public class SubCharacter : MonoBehaviour
             for(int j=0; j<column; j++)
             {
                 MapPlacement(j,i);
-                print(map[j,i]);
             }
         }
     }
@@ -278,24 +280,28 @@ public class SubCharacter : MonoBehaviour
                     case 'W':
                         break;
 
+                    // case 'S':
+                    //     if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
+                    //         tilemap[x,y] = Instantiate(maps[0]);
+
+                    //     else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
+                    //         tilemap[x,y] = Instantiate(maps[1]);
+
+                    //     else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
+                    //         tilemap[x,y] = Instantiate(maps[2]);
+                            
+                    //     else
+                    //         tilemap[x,y] = Instantiate(maps[3]);
+
+                    //     tilemap[x,y].transform.parent = transform.parent;
+                    //     tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - sum_Y, -0.1f);
+                    //     break;
+
                     case 'S':
-                        if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[0]);
-
-                        else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[1]);
-
-                        else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            tilemap[x,y] = Instantiate(maps[2]);
-                            
-                        else
-                            tilemap[x,y] = Instantiate(maps[3]);
-
-                        tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - sum_Y, -0.1f);
-                        break;
-
                     case 'E':
+                    
+                    case 'G':
+                    case 'B':
                         if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
                             tilemap[x,y] = Instantiate(maps[0]);
 
@@ -309,110 +315,53 @@ public class SubCharacter : MonoBehaviour
                             tilemap[x,y] = Instantiate(maps[3]);
 
                         tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f);
+                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y - 1) * sum_Y), -0.1f);
                         break;
 
                     case 'L':
                         if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            Instantiate(maps[0], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[0]);
 
                         else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            Instantiate(maps[1], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[1]);
 
                         else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            Instantiate(maps[2], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[2]);
                             
                         else
-                            Instantiate(maps[3], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[3]);
 
-                        tilemap[x,y] = Instantiate(maps[4]);
                         tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y) * sum_Y), -0.2f);
+                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y) * sum_Y), -0.1f);
                         break;
 
-                    case 'G':
-                        if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            Instantiate(maps[0], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-
-                        else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            Instantiate(maps[1], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-
-                        else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            Instantiate(maps[2], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-                            
-                        else
-                            Instantiate(maps[3], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-
-                        tilemap[x,y] = Instantiate(maps[5]);
-                        tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y) * sum_Y), -0.2f);
-                        
-                        break;
-
-                    case 'B':
-                        if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            Instantiate(maps[0], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-
-                        else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            Instantiate(maps[1], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-
-                        else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            Instantiate(maps[2], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-                            
-                        else
-                            Instantiate(maps[3], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
-
-                        tilemap[x,y] = Instantiate(maps[5]);
-                        tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y) * sum_Y), -0.2f);
-                        break;
-                        
                     default:
                     if(map[x,y] % 2 == 0)
                     {
-                        tilemap[x,y] = Instantiate(maps[6]);
+                        tilemap[x,y] = Instantiate(maps[4]);
                         tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y) * sum_Y), -0.2f);
+                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y) * sum_Y), -0.1f);
                     }
                     else
                     {
                         if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            Instantiate(maps[0], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[0]);
 
                         else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            Instantiate(maps[1], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[1]);
 
                         else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            Instantiate(maps[2], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[2]);
                             
                         else
-                            Instantiate(maps[3], new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y - 1) * sum_Y), -0.1f), Quaternion.identity, transform.parent);
+                            tilemap[x,y] = Instantiate(maps[3]);
 
-                        tilemap[x,y] = Instantiate(maps[7]);
                         tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].map_Y) * sum_Y), -0.2f);
+                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y - 1) * sum_Y), -0.1f);
                     }
                     break;
                 }

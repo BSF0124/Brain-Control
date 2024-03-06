@@ -15,11 +15,16 @@ public class MainBoard : MonoBehaviour
     private float initial_X, initial_Y; // 초기 좌표
     private float sum_X = 1, sum_Y = 1; // 보드 사이 간격
     private float current_X, current_Y; // 현재 좌표
+    private int stageIndex;
 
     void Start()
     {
-        column = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Width;
-        row = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Height;
+        string[] str = transform.parent.parent.transform.name.Split();
+        stageIndex = int.Parse(str[1])-1;
+        print(stageIndex);
+
+        column = DataManager.instance.stageList.stage[stageIndex].board_Width;
+        row = DataManager.instance.stageList.stage[stageIndex].board_Height;
         
         //보드 크기 설정
         Transform parent = transform.parent;
@@ -38,13 +43,13 @@ public class MainBoard : MonoBehaviour
         }
         
         // 캐릭터 시작 좌표 true 설정
-        VisitBoard(DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_X,
-        DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Y);
+        VisitBoard(DataManager.instance.stageList.stage[stageIndex].board_X,
+        DataManager.instance.stageList.stage[stageIndex].board_Y);
 
         board = new char[column, row];
         for(int i=0; i<column*row; i++)
         {
-            board[i%column,i/column] = DataManager.instance.stageList.stage[DataManager.instance.currentPlayer.stageIndex].board_Elements[i];
+            board[i%column,i/column] = DataManager.instance.stageList.stage[stageIndex].board_Elements[i];
             if(board[i%column,i/column] == 'W')
             {
                 VisitBoard(i%column,i/column);

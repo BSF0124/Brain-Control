@@ -104,10 +104,7 @@ MonoBehaviour:
   - {fileID: 8136996857077400762, guid: 1332bdcfed7c9534f94281a28b8db2c7, type: 3}
   - {fileID: 5176346261388185310, guid: be73bb2a4f8864e44a71c3f6060ccfac, type: 3}
   - {fileID: 8187796468169098194, guid: d902e6fb0dc0f984fbd2bf032fc35d57, type: 3}
-  - {fileID: 2389136738087172439, guid: fc340896ef1864345b76754532a49aa4, type: 3}
-  - {fileID: 372359753114340381, guid: 49c61f0e1a10da547afba5e737071afa, type: 3}
   - {fileID: 397690229263499472, guid: d4b8ecf111d31f941bc536fc3dafa177, type: 3}
-  - {fileID: 3005612682677770327, guid: 13db12ebe15b73c4688eb43921917729, type: 3}
   distance_x: 0
   distance_y: 0
   sum_X: 1
