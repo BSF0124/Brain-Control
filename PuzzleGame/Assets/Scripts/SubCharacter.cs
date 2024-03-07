@@ -275,95 +275,84 @@ public class SubCharacter : MonoBehaviour
 
         }
 
-        switch(map[x,y])
-                {
-                    case 'W':
-                        break;
+        if(map[x,y] != 'W')
+        {
+            if(map[x,y] < 65)
+            {
+                tilemap[x,y] = Instantiate(maps[4]);
+                tilemap[x,y].transform.parent = transform.parent;
+                tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+                transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
+                tilemap[x,y].transform.localScale = new Vector3(sum_X,sum_X,sum_X);
+            }
+            else
+            {
+                TypeCheck(x,y);
+                tilemap[x,y].transform.parent = transform.parent;
+                tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+                transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
+            }
+        }
 
-                    // case 'S':
-                    //     if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                    //         tilemap[x,y] = Instantiate(maps[0]);
+        // switch(map[x,y])
+        //         {
+        //             case 'W':
+        //                 break;
 
-                    //     else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                    //         tilemap[x,y] = Instantiate(maps[1]);
+        //             // case 'S':
+        //             //     if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
+        //             //         tilemap[x,y] = Instantiate(maps[0]);
 
-                    //     else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                    //         tilemap[x,y] = Instantiate(maps[2]);
-                            
-                    //     else
-                    //         tilemap[x,y] = Instantiate(maps[3]);
+        //             //     else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
+        //             //         tilemap[x,y] = Instantiate(maps[1]);
 
-                    //     tilemap[x,y].transform.parent = transform.parent;
-                    //     tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - sum_Y, -0.1f);
-                    //     break;
+        //             //     else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
+        //             //         tilemap[x,y] = Instantiate(maps[2]);
+        //             //     else
+        //             //         tilemap[x,y] = Instantiate(maps[3]);
 
-                    case 'S':
-                    case 'E':
-                    
-                    case 'G':
-                    case 'B':
-                        if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[0]);
+        //             //     tilemap[x,y].transform.parent = transform.parent;
+        //             //     tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - sum_Y, -0.1f);
+        //             //     break;
 
-                        else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[1]);
+        //             case 'S':
+        //             case 'E':
+        //             case 'G':
+        //             case 'B':
+        //             case 'L':
+        //                 TypeCheck(x,y);
+        //                 tilemap[x,y].transform.parent = transform.parent;
+        //                 tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+        //                 transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
+        //                 break;
 
-                        else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            tilemap[x,y] = Instantiate(maps[2]);
-                            
-                        else
-                            tilemap[x,y] = Instantiate(maps[3]);
-
-                        tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y - 1) * sum_Y), -0.1f);
-                        break;
-
-                    case 'L':
-                        if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[0]);
-
-                        else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[1]);
-
-                        else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            tilemap[x,y] = Instantiate(maps[2]);
-                            
-                        else
-                            tilemap[x,y] = Instantiate(maps[3]);
-
-                        tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y) * sum_Y), -0.1f);
-                        break;
-
-                    default:
-                    if(map[x,y] % 2 == 0)
-                    {
-                        tilemap[x,y] = Instantiate(maps[4]);
-                        tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y) * sum_Y), -0.1f);
-                    }
-                    else
-                    {
-                        if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[0]);
-
-                        else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-                            tilemap[x,y] = Instantiate(maps[1]);
-
-                        else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-                            tilemap[x,y] = Instantiate(maps[2]);
-                            
-                        else
-                            tilemap[x,y] = Instantiate(maps[3]);
-
-                        tilemap[x,y].transform.parent = transform.parent;
-                        tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
-                        transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y - 1) * sum_Y), -0.1f);
-                    }
-                    break;
-                }
+        //             default:
+        //             if(map[x,y] % 2 == 0)
+        //             {
+        //                 tilemap[x,y] = Instantiate(maps[4]);
+        //                 tilemap[x,y].transform.parent = transform.parent;
+        //                 tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+        //                 transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
+        //             }
+        //             // else
+        //             // {
+        //             //     TypeCheck(x,y);
+        //             //     tilemap[x,y].transform.parent = transform.parent;
+        //             //     tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
+        //             //     transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y - 1) * sum_Y), -0.05f);
+        //             // }
+        //             break;
+        //         }
+    }
+    void TypeCheck(int x, int y)
+    {
+        if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
+            tilemap[x,y] = Instantiate(maps[0]);
+        else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
+            tilemap[x,y] = Instantiate(maps[1]);
+        else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
+            tilemap[x,y] = Instantiate(maps[2]);
+        else
+            tilemap[x,y] = Instantiate(maps[3]);
     }
 }

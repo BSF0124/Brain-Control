@@ -21,7 +21,6 @@ public class MainBoard : MonoBehaviour
     {
         string[] str = transform.parent.parent.transform.name.Split();
         stageIndex = int.Parse(str[1])-1;
-        print(stageIndex);
 
         column = DataManager.instance.stageList.stage[stageIndex].board_Width;
         row = DataManager.instance.stageList.stage[stageIndex].board_Height;
