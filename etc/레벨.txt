@@ -211,3 +211,54 @@ S,R,R,T,R,
 R,T,T,L,L,
 R,L,R,R,G,
 T,L,R,T,L}
+
+3-2
+6,1 / 1,0
+{E,S,0,2,G,4}
+
+4,4 / 0,0
+{S,T,T,L,
+T,L,R,T,
+R,R,T,R,
+R,R,R,G}
+
+3-3
+5,3 / 2,1
+{E,E,1,E,G,
+W,W,L,W,W,
+G,E,3,E,E}
+
+5,5 / 0,2
+{D,R,U,R,G,
+L,D,T,L,L,
+S,U,L,R,U,
+U,R,T,U,L,
+R,D,L,R,G}
+
+3-4
+7,3 / 2,1
+{0,2,4,6,8,10,12,
+W,W,L,13,G,W,W,
+W,W,5,11,15,W,W}
+
+5,4 / 0,0
+{S,T,T,T,R,
+U,T,T,T,T,
+R,T,T,D,T,
+G,U,D,R,T}
+
+3-5
+4,5 / 0,2
+{W,G,L,L,
+W,1,L,5,
+L,L,L,3,
+L,L,L,W,
+L,L,L,W}
+
+6,6 / 3,5
+{L,R,W,W,U,U,
+G,L,R,L,L,T,
+L,R,D,U,T,R,
+W,D,W,T,W,W,
+W,U,T,R,D,L,
+W,W,R,S,R,L}
