@@ -17,10 +17,5 @@ public class StageClearCheck : MonoBehaviour
         {
             animator.SetBool("Clear", true);
         }
-
-        // else
-        // {
-        //     animator.SetBool("Clear", false);
-        // }
     }
 }

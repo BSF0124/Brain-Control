@@ -92,6 +92,7 @@ public class SelectMenu : MonoBehaviour
         Refresh();
     }
 
+    // 종료
     public void Quit()
     {
         Application.Quit();

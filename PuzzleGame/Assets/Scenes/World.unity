@@ -26768,8 +26768,8 @@ MonoBehaviour:
   fadeImage: {fileID: 644885641}
   clearText: {fileID: 0}
   enterText: {fileID: 0}
-  imageDuration: 1
-  textDuration: 1
+  imageDuration: 0.5
+  textDuration: 0.5
 --- !u!1001 &1678267091
 PrefabInstance:
   m_ObjectHideFlags: 0

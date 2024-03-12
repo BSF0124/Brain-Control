@@ -15,6 +15,7 @@ public class StartBoard : MonoBehaviour
         mainCharacter.transform.parent = transform.parent;
 
         // 메인 캐릭터의 좌표 설정
-        mainCharacter.transform.localPosition = transform.localPosition;
+        mainCharacter.transform.localPosition = transform.localPosition + new Vector3(
+            0, 0, -0.5f);
     }
 }
