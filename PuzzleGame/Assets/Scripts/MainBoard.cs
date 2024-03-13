@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,31 +7,32 @@ public class MainBoard : MonoBehaviour
     public SubCharacter subCharacter;
     public GameObject[] boards; // 보드 종류
     //0:Start, 1:Up 2:Dowm 3:Left 4:Right 5:Goal 6:Wall 7:Tool
+    private GameObject[,] setBoards;
     private int column, row; // 보드의 크기
-    private char[,] board; // 보드 구성
+    private char[,] board; // 보드 구성1
     private bool[,] boardVisited; // 보드 밟음 여부
-
     private float initial_X, initial_Y; // 초기 좌표
     private float sum_X = 1, sum_Y = 1; // 보드 사이 간격
-    private float current_X, current_Y; // 현재 좌표
     private int stageIndex;
 
-    void Start()
+    // private float current_X, current_Y; // 현재 좌표
+
+    void Start() 
     {
+        // 해당 스테이지 인덱스 설정
         string[] str = transform.parent.parent.transform.name.Split();
         stageIndex = int.Parse(str[1])-1;
 
+        // 보드의 행과 열 설정
         column = DataManager.instance.stageList.stage[stageIndex].board_Width;
         row = DataManager.instance.stageList.stage[stageIndex].board_Height;
         
-        //보드 크기 설정
-        Transform parent = transform.parent;
-        // transform.parent = null;
-        // transform.localScale = new Vector3(column+1, row+1, 1);
-        // transform.parent = parent;
-
-        // 보드 상태 배열 초기화
+        // 보드 배열 크기 설정
+        setBoards = new GameObject[column, row];
         boardVisited = new bool[column, row];
+        board = new char[column, row];
+
+        // 보드 배열 초기화
         for (int i=0; i<column; i++)
         {
             for (int j=0; j<row; j++)
@@ -40,12 +40,6 @@ public class MainBoard : MonoBehaviour
                 boardVisited[i, j] = false;
             }
         }
-        
-        // 캐릭터 시작 좌표 true 설정
-        VisitBoard(DataManager.instance.stageList.stage[stageIndex].board_X,
-        DataManager.instance.stageList.stage[stageIndex].board_Y);
-
-        board = new char[column, row];
         for(int i=0; i<column*row; i++)
         {
             board[i%column,i/column] = DataManager.instance.stageList.stage[stageIndex].board_Elements[i];
@@ -54,6 +48,10 @@ public class MainBoard : MonoBehaviour
                 VisitBoard(i%column,i/column);
             }
         }
+
+        // 캐릭터 시작 좌표 true 설정
+        VisitBoard(DataManager.instance.stageList.stage[stageIndex].board_X,
+        DataManager.instance.stageList.stage[stageIndex].board_Y);
 
         // 보드 배치를 위한 초기 좌표 설정
         if (column % 2 == 0)
@@ -75,69 +73,21 @@ public class MainBoard : MonoBehaviour
         {
             initial_Y = row / 2 - 2.5f;
         }
-        current_X = initial_X;
-        current_Y = initial_Y;
+        // current_X = initial_X;
+        // current_Y = initial_Y;
 
         // 보드 배치
-        for(int i=0; i<row; i++)
-        {
-            current_X = initial_X;
-            for(int j=0; j<column; j++)
-            {
-                GameObject newBoard;
-                Vector3 position = new Vector3(current_X, current_Y, -1);
-                if(board[j,i] == 'S')
-                {
-                    newBoard = Instantiate(boards[0]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                else if(board[j,i] == 'U')
-                {
-                    newBoard = Instantiate(boards[1]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                else if(board[j,i] == 'D')
-                {
-                    newBoard = Instantiate(boards[2]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                else if(board[j,i] == 'L')
-                {
-                    newBoard = Instantiate(boards[3]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                else if(board[j,i] == 'R')
-                {
-                    newBoard = Instantiate(boards[4]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                else if(board[j,i] == 'G')
-                {
-                    newBoard = Instantiate(boards[5]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                else if(board[j,i] == 'W')
-                {
-                    newBoard = Instantiate(boards[6]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                else if(board[j,i] == 'T')
-                {
-                    newBoard = Instantiate(boards[7]);
-                    newBoard.transform.parent = parent;
-                    newBoard.transform.localPosition = position;
-                }
-                current_X += sum_X;
-            }
-            current_Y -= sum_Y;
-        }
+        Invoke("CreateBoard", 3f);
+        // for(int i=0; i<row; i++)
+        // {
+        //     current_X = initial_X;
+        //     for(int j=0; j<column; j++)
+        //     {
+                
+        //         current_X += sum_X;
+        //     }
+        //     current_Y -= sum_Y;
+        // }
     }
 
     // 보드를 밟음
@@ -176,26 +126,61 @@ public class MainBoard : MonoBehaviour
                 GameManager.instance.isMainClear = true;
                 break;
         }
+    }
 
-        // if(board[x,y] == 'L')
-        // {
-        //     subCharacter.Move_Left();
-        // }
-        // if(board[x,y] == 'R')
-        // {
-        //     subCharacter.Move_Right();
-        // }
-        // if(board[x,y] == 'U')
-        // {
-        //     subCharacter.Move_Up();
-        // }
-        // if(board[x,y] == 'D')
-        // {
-        //     subCharacter.Move_Down();
-        // }
-        // if(board[x,y] == 'G')
-        // {
-        //     GameManager.instance.isMainClear = true;
-        // }
+    // 보드 생성
+    void CreateBoard()
+    {
+        for(int i=0; i<column; i++)
+        {
+            for(int j=0; j<row; j++)
+            {
+                float rand = Random.Range(4, 8);
+                Vector3 targetPosition = new Vector3(initial_X+(i*sum_X), initial_Y-(j*sum_Y), -1);
+                switch(board[i,j])
+                {
+                    case 'S':
+                        setBoards[i,j] = Instantiate(boards[0]);
+                        break;
+                    case 'U':
+                        setBoards[i,j] = Instantiate(boards[1]);
+                        break;
+                    case 'D':
+                        setBoards[i,j] = Instantiate(boards[2]);
+                        break;
+                    case 'L':
+                        setBoards[i,j] = Instantiate(boards[3]);
+                        break;
+                    case 'R':
+                        setBoards[i,j] = Instantiate(boards[4]);
+                        break;
+                    case 'G':
+                        setBoards[i,j] = Instantiate(boards[5]);
+                        break;
+                    case 'W':
+                        setBoards[i,j] = Instantiate(boards[6]);
+                        break;
+                    case 'T':
+                        setBoards[i,j] = Instantiate(boards[7]);
+                        break;
+                }
+                setBoards[i,j].transform.parent = transform.parent;
+                setBoards[i,j].transform.localPosition = new Vector3(targetPosition.x,targetPosition.y + rand, -1);
+                StartCoroutine(BoardMovement(i,j,targetPosition));
+            }
+        }
+    }
+
+    IEnumerator BoardMovement(int x, int y, Vector3 target)
+    {
+        while(setBoards[x,y].transform.position.y >= target.y)
+        {
+            // float rand = Random.Range(0.05f, 0.1f);
+            setBoards[x,y].transform.position -= new Vector3(0, 0.1f, 0);
+            yield return null;
+        }
+        // SpriteRenderer sprite = setBoards[x,y].GetComponent<SpriteRenderer>();
+        // sprite.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
     }
 }
