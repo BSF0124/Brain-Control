@@ -58,6 +58,7 @@ public class PauseMenu : MonoBehaviour
 
     public void World()
     {
+        Skeleton.animationSkipped = false;
         SceneManager.LoadScene("World");
         Time.timeScale = 1;
         isGamePaused = false;
@@ -65,6 +66,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
+        Skeleton.animationSkipped = false;
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
         isGamePaused = false;

@@ -15,8 +15,6 @@ public class MainBoard : MonoBehaviour
     private float sum_X = 1, sum_Y = 1; // 보드 사이 간격
     private int stageIndex;
 
-    // private float current_X, current_Y; // 현재 좌표
-
     void Start() 
     {
         // 해당 스테이지 인덱스 설정
@@ -73,21 +71,9 @@ public class MainBoard : MonoBehaviour
         {
             initial_Y = row / 2 - 2.5f;
         }
-        // current_X = initial_X;
-        // current_Y = initial_Y;
 
         // 보드 배치
-        Invoke("CreateBoard", 3f);
-        // for(int i=0; i<row; i++)
-        // {
-        //     current_X = initial_X;
-        //     for(int j=0; j<column; j++)
-        //     {
-                
-        //         current_X += sum_X;
-        //     }
-        //     current_Y -= sum_Y;
-        // }
+        StartCoroutine(CreateBoard());
     }
 
     // 보드를 밟음
@@ -129,8 +115,22 @@ public class MainBoard : MonoBehaviour
     }
 
     // 보드 생성
-    void CreateBoard()
+    IEnumerator CreateBoard()
     {
+        
+        float remaingingWaitTime = 3f;
+        while(remaingingWaitTime > 0f)
+        {
+            if(Skeleton.animationSkipped)
+            {
+                remaingingWaitTime = 0f;
+            }
+            else
+            {
+                remaingingWaitTime -= Time.deltaTime;
+                yield return null;
+            }
+        }
         for(int i=0; i<column; i++)
         {
             for(int j=0; j<row; j++)
@@ -164,9 +164,20 @@ public class MainBoard : MonoBehaviour
                         setBoards[i,j] = Instantiate(boards[7]);
                         break;
                 }
+
                 setBoards[i,j].transform.parent = transform.parent;
-                setBoards[i,j].transform.localPosition = new Vector3(targetPosition.x,targetPosition.y + rand, -1);
-                StartCoroutine(BoardMovement(i,j,targetPosition));
+
+                if(Skeleton.animationSkipped)
+                {
+                    setBoards[i,j].transform.localPosition = new Vector3(targetPosition.x,targetPosition.y, -1);
+                }
+
+                else
+                {
+                    setBoards[i,j].transform.localPosition = new Vector3(targetPosition.x,targetPosition.y + rand, -1);
+                    StartCoroutine(BoardMovement(i,j,targetPosition));
+                }
+                yield return null;
             }
         }
     }

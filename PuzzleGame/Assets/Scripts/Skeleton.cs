@@ -11,10 +11,32 @@ public class Skeleton : MonoBehaviour
     public float targetScale = 2;
     public float targetPostiion = 1.6f;
     public float animationDuration = 0.25f; // 애니메이션의 총 시간
+    static public bool animationSkipped = false;
 
     void Start()
     {
-        StartCoroutine(ObjectMovement());
+        if (animationSkipped)
+        {
+            skel1.transform.position -= new Vector3(targetPostiion * targetScale, 0, 0);
+            skel2.transform.localScale = new Vector3(targetScale, 0, 0);
+            skel3.transform.localScale = new Vector3(targetScale, 0, 0);
+            skel4.transform.position += new Vector3(targetPostiion * targetScale, 0, 0);
+            Destroy(skel3);
+        }
+        
+        else
+        {
+            StartCoroutine(ObjectMovement());
+        }
+    }
+
+    void Update()
+    {
+        
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            animationSkipped = true;
+        }
     }
 
     IEnumerator ObjectMovement()
@@ -25,21 +47,38 @@ public class Skeleton : MonoBehaviour
 
         while (skel2.transform.localScale.x < targetScale)
         {
+            // 엔터를 눌렀을 때 애니메이션 스킵
+            if (animationSkipped)
+            {
+                skel1.transform.position -= new Vector3(targetPostiion * targetScale, 0, 0);
+                skel2.transform.localScale = new Vector3(targetScale, 0, 0);
+                skel3.transform.localScale = new Vector3(targetScale, 0, 0);
+                skel4.transform.position += new Vector3(targetPostiion * targetScale, 0, 0);
+                Destroy(skel3);
+                yield return null;
+                break;
+            }
+
+            else
+            {
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / animationDuration); // 현재 진행된 시간의 비율 (0~1)
             float curvedStep = Mathf.Lerp(0, targetScale, Mathf.Pow(t, 2)); // 곡선 운동을 위해 진행률을 제곱하여 사용
-
             float step = curvedStep * Time.deltaTime;
 
             skel1.transform.position -= new Vector3(targetPostiion * step, 0, 0);
             skel2.transform.localScale += new Vector3(step, 0, 0);
             skel3.transform.localScale += new Vector3(step, 0, 0);
             skel4.transform.position += new Vector3(targetPostiion * step, 0, 0);
-
             yield return null;
+            }
+
         }
 
-        yield return StartCoroutine(ObjectSeparate());
+        if(!animationSkipped)
+        {
+            yield return StartCoroutine(ObjectSeparate());
+        }
     }
 
 
@@ -60,7 +99,5 @@ public class Skeleton : MonoBehaviour
             yield return null;
         }
         Destroy(skel3);
-
-        GameManager.instance.isSceneMove = false;
     }
 }

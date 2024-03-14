@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         if(!isGameClear && Input.GetKeyDown(KeyCode.R))
         {
             ResetBool();
+            Skeleton.animationSkipped = true;
             FadeManager.instance.FadeImage(1, 0, true);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -63,5 +64,6 @@ public class GameManager : MonoBehaviour
         isSubClear = false;
         isGameClear = false;
         isSceneMove = false;
+        // Skeleton.animationSkipped = false;
     }
 }

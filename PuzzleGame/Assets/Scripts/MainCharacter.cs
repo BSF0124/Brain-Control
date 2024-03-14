@@ -110,6 +110,7 @@ public class MainCharacter : MonoBehaviour
     // 월드 씬 이동
     private IEnumerator GoWorld()
     {
+        Skeleton.animationSkipped = false;
         GameManager.instance.isSceneMove = true;
         FadeManager.instance.FadeLoopStop();
         FadeManager.instance.FadeText(1, 0, true);
