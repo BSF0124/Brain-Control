@@ -12,6 +12,7 @@ public class Skeleton : MonoBehaviour
     public float targetPostiion = 1.6f;
     public float animationDuration = 0.25f; // 애니메이션의 총 시간
     static public bool animationSkipped = false;
+    static public bool animationEnd = false;
 
     void Start()
     {
@@ -36,6 +37,7 @@ public class Skeleton : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return))
         {
             animationSkipped = true;
+            animationEnd = true;
         }
     }
 
@@ -43,7 +45,7 @@ public class Skeleton : MonoBehaviour
     {
         GameManager.instance.isSceneMove = true;
         float elapsedTime = 0;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         while (skel2.transform.localScale.x < targetScale)
         {
@@ -51,10 +53,10 @@ public class Skeleton : MonoBehaviour
             if (animationSkipped)
             {
                 skel1.transform.position -= new Vector3(targetPostiion * targetScale, 0, 0);
-                skel2.transform.localScale = new Vector3(targetScale, 0, 0);
-                skel3.transform.localScale = new Vector3(targetScale, 0, 0);
+                skel2.transform.localScale = new Vector3(targetScale, 1, 0);
                 skel4.transform.position += new Vector3(targetPostiion * targetScale, 0, 0);
                 Destroy(skel3);
+                MainBoard.AnimationEnd();
                 yield return null;
                 break;
             }
@@ -99,5 +101,6 @@ public class Skeleton : MonoBehaviour
             yield return null;
         }
         Destroy(skel3);
+        MainBoard.AnimationEnd();
     }
 }

@@ -227,8 +227,10 @@ public class SubCharacter : MonoBehaviour
         while(true)
         {
             if(deactivatedCount == deactivatedTotal)
+            {    
                 return;
-            
+            }
+
             if(deactivatedBoard[i,0] == i)
             {
                 if(i % 2 == 0)
@@ -244,6 +246,7 @@ public class SubCharacter : MonoBehaviour
             i++;
             deactivatedCount++;
         }
+        MapPlacement(current_x, current_y);
     }
 
     void Shake()
@@ -272,7 +275,7 @@ public class SubCharacter : MonoBehaviour
     {
         if(tilemap[x,y] != null)
         {
-
+            Destroy(tilemap[x,y]);
         }
 
         if(map[x,y] != 'W')
@@ -293,56 +296,6 @@ public class SubCharacter : MonoBehaviour
                 transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
             }
         }
-
-        // switch(map[x,y])
-        //         {
-        //             case 'W':
-        //                 break;
-
-        //             // case 'S':
-        //             //     if(x != column-1 && (x == 0 || map[x-1,y] == 'W') && map[x+1,y] != 'W')
-        //             //         tilemap[x,y] = Instantiate(maps[0]);
-
-        //             //     else if(x != 0 && (x == column-1 || map[x+1,y] == 'W') && map[x-1,y] != 'W')
-        //             //         tilemap[x,y] = Instantiate(maps[1]);
-
-        //             //     else if((x == 0 && map[x+1,y] == 'W') || (x == column-1 && map[x-1,y] == 'W') || (map[x-1,y] == 'W' && map[x+1,y] == 'W'))
-        //             //         tilemap[x,y] = Instantiate(maps[2]);
-        //             //     else
-        //             //         tilemap[x,y] = Instantiate(maps[3]);
-
-        //             //     tilemap[x,y].transform.parent = transform.parent;
-        //             //     tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - sum_Y, -0.1f);
-        //             //     break;
-
-        //             case 'S':
-        //             case 'E':
-        //             case 'G':
-        //             case 'B':
-        //             case 'L':
-        //                 TypeCheck(x,y);
-        //                 tilemap[x,y].transform.parent = transform.parent;
-        //                 tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
-        //                 transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
-        //                 break;
-
-        //             default:
-        //             if(map[x,y] % 2 == 0)
-        //             {
-        //                 tilemap[x,y] = Instantiate(maps[4]);
-        //                 tilemap[x,y].transform.parent = transform.parent;
-        //                 tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
-        //                 transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
-        //             }
-        //             // else
-        //             // {
-        //             //     TypeCheck(x,y);
-        //             //     tilemap[x,y].transform.parent = transform.parent;
-        //             //     tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
-        //             //     transform.localPosition.y +((y - DataManager.instance.stageList.stage[stageIndex].map_Y - 1) * sum_Y), -0.05f);
-        //             // }
-        //             break;
-        //         }
     }
     void TypeCheck(int x, int y)
     {

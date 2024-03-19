@@ -14,6 +14,7 @@ public class MainBoard : MonoBehaviour
     private float initial_X, initial_Y; // 초기 좌표
     private float sum_X = 1, sum_Y = 1; // 보드 사이 간격
     private int stageIndex;
+    static public bool animationEnd = false;
 
     void Start() 
     {
@@ -71,9 +72,15 @@ public class MainBoard : MonoBehaviour
         {
             initial_Y = row / 2 - 2.5f;
         }
+    }
 
-        // 보드 배치
-        StartCoroutine(CreateBoard());
+    void Update()
+    {
+        if(animationEnd)
+        {
+            StartCoroutine(CreateBoard());
+            animationEnd = false;
+        }
     }
 
     // 보드를 밟음
@@ -114,23 +121,14 @@ public class MainBoard : MonoBehaviour
         }
     }
 
+    static public void AnimationEnd()
+    {
+        animationEnd = true;
+    }
+
     // 보드 생성
     IEnumerator CreateBoard()
     {
-        
-        float remaingingWaitTime = 3f;
-        while(remaingingWaitTime > 0f)
-        {
-            if(Skeleton.animationSkipped)
-            {
-                remaingingWaitTime = 0f;
-            }
-            else
-            {
-                remaingingWaitTime -= Time.deltaTime;
-                yield return null;
-            }
-        }
         for(int i=0; i<column; i++)
         {
             for(int j=0; j<row; j++)
@@ -180,18 +178,18 @@ public class MainBoard : MonoBehaviour
                 yield return null;
             }
         }
+        StartBoard.BoardSetEnd();
     }
 
     IEnumerator BoardMovement(int x, int y, Vector3 target)
     {
         while(setBoards[x,y].transform.position.y >= target.y)
         {
-            // float rand = Random.Range(0.05f, 0.1f);
-            setBoards[x,y].transform.position -= new Vector3(0, 0.1f, 0);
+            float rand = Random.Range(0.05f, 0.1f);
+            setBoards[x,y].transform.position -= new Vector3(0, rand, 0);
             yield return null;
         }
-        // SpriteRenderer sprite = setBoards[x,y].GetComponent<SpriteRenderer>();
-        // sprite.color = Color.white;
         yield return new WaitForSeconds(0.5f);
+        
     }
 }
