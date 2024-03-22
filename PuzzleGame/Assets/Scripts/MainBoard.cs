@@ -14,7 +14,6 @@ public class MainBoard : MonoBehaviour
     private float initial_X, initial_Y; // 초기 좌표
     private float sum_X = 1, sum_Y = 1; // 보드 사이 간격
     private int stageIndex;
-    static public bool animationEnd = false;
 
     void Start() 
     {
@@ -74,15 +73,6 @@ public class MainBoard : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if(animationEnd)
-        {
-            StartCoroutine(CreateBoard());
-            animationEnd = false;
-        }
-    }
-
     // 보드를 밟음
     public void VisitBoard(int x, int y)
     {
@@ -121,13 +111,9 @@ public class MainBoard : MonoBehaviour
         }
     }
 
-    static public void AnimationEnd()
-    {
-        animationEnd = true;
-    }
 
     // 보드 생성
-    IEnumerator CreateBoard()
+    public IEnumerator CreateBoard()
     {
         for(int i=0; i<column; i++)
         {
@@ -168,6 +154,11 @@ public class MainBoard : MonoBehaviour
                 if(Skeleton.animationSkipped)
                 {
                     setBoards[i,j].transform.localPosition = new Vector3(targetPosition.x,targetPosition.y, -1);
+                    if(board[i,j] == 'S')
+                    {
+                        StartBoard startBoard = FindObjectOfType<StartBoard>();
+                        startBoard.CreateCharacter();
+                    }
                 }
 
                 else
@@ -178,7 +169,6 @@ public class MainBoard : MonoBehaviour
                 yield return null;
             }
         }
-        StartBoard.BoardSetEnd();
     }
 
     IEnumerator BoardMovement(int x, int y, Vector3 target)
@@ -189,7 +179,14 @@ public class MainBoard : MonoBehaviour
             setBoards[x,y].transform.position -= new Vector3(0, rand, 0);
             yield return null;
         }
+        setBoards[x,y].transform.localPosition = target;
         yield return new WaitForSeconds(0.5f);
+
+        if(board[x,y] == 'S')
+        {
+            StartBoard startBoard = FindObjectOfType<StartBoard>();
+            startBoard.CreateCharacter();
+        }
         
     }
 }

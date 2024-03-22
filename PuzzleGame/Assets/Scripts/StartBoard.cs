@@ -7,22 +7,8 @@ public class StartBoard : MonoBehaviour
     // 생성할 메인 캐릭터
     public GameObject character;
     private GameObject mainCharacter;
-    static public bool boardSetEnd = false;
-    void Update()
-    {
-        if(boardSetEnd)
-        {
-            CreateCharacter();
-            boardSetEnd = false;
-        }
-    }
 
-    static public void BoardSetEnd()
-    {
-        boardSetEnd = true;
-    }
-
-    void CreateCharacter()
+    public void CreateCharacter()
     {
         // 메인 캐릭터 생성
         mainCharacter = Instantiate(character);
