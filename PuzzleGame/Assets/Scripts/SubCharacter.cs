@@ -25,9 +25,10 @@ public class SubCharacter : MonoBehaviour
     private int goalCount = 0;
     private int stageIndex;
     private int[,] deactivatedBoard; // 비활성화 맵 정보
-    private int deactivatedCount = 0;
+    // private int deactivatedCount = 0;
     private int deactivatedTotal = 0; // 총 비활성화 개수
     private float duration = 0.1f;
+    private int checkNum = 0;
 
     void Start()
     {
@@ -50,12 +51,9 @@ public class SubCharacter : MonoBehaviour
             // 맵의 구성을 불러옴
             map[i%column,i/column] = DataManager.instance.stageList.stage[stageIndex].map_Elements[i];
 
-            // 비활성화 길, 사다리 정보를 가져옴
+            // 비활성화 길, 사다리 갯수 확인
             if(map[i%column,i/column] < 65)
             {
-                deactivatedBoard[i,0] = map[i%column,i/column];
-                deactivatedBoard[i,1] = i%column;
-                deactivatedBoard[i,2] = i/column;
                 deactivatedTotal++;
             }
 
@@ -71,6 +69,20 @@ public class SubCharacter : MonoBehaviour
             else if(map[i%column, i/column] == 'G' || map[i%column, i/column] == 'B')
             {
                 goalCount++;
+            }
+        }
+
+        deactivatedBoard = new int[deactivatedTotal,3];
+        int n = 0;
+        for(int i=0; i<column*row; i++)
+        {
+            // 비활성화 길, 사다리 정보를 저장
+            if(map[i%column,i/column] < 65)
+            {
+                deactivatedBoard[n,0] = int.Parse(map[i%column,i/column].ToString());
+                deactivatedBoard[n,1] = i%column;
+                deactivatedBoard[n,2] = i/column;
+                n++;
             }
         }
 
@@ -97,11 +109,11 @@ public class SubCharacter : MonoBehaviour
 
         // 맵 생성
         tilemap = new GameObject[column,row];
-        for(int i=0; i<row; i++)
+        for(int i=0; i<column; i++)
         {
-            for(int j=0; j<column; j++)
+            for(int j=0; j<row; j++)
             {
-                MapPlacement(j,i);
+                MapPlacement(i,j);
             }
         }
     }
@@ -223,30 +235,31 @@ public class SubCharacter : MonoBehaviour
 
     public void BoardActivated()
     {
-        int i = 0;
         while(true)
         {
-            if(deactivatedCount == deactivatedTotal)
-            {    
-                return;
-            }
+            // if(deactivatedCount == deactivatedTotal)
+            // {    
+            //     return;
+            // }
 
-            if(deactivatedBoard[i,0] == i)
+            for(int i=0; i<deactivatedTotal; i++)
             {
-                if(i % 2 == 0)
+                if(deactivatedBoard[i,0] == checkNum)
                 {
-                    map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'E';
-                    MapPlacement(current_x, current_y);
-                }
-
-                else
-                {
-                    map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'L';
+                    if(deactivatedBoard[i,0] % 2 == 0)
+                    {
+                        map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'E';
+                    }
+                    else
+                    {
+                        map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'L';
+                    }
+                    deactivatedBoard[i,0] = -1;
                     MapPlacement(current_x, current_y);
                 }
             }
-            i++;
-            deactivatedCount++;
+            checkNum++;
+            // deactivatedCount++;
         }
         
     }

@@ -262,3 +262,19 @@ L,R,D,U,T,R,
 W,D,W,T,W,W,
 W,U,T,R,D,L,
 W,W,R,S,R,L}
+
+3-6
+7,5 / 3,4
+{W,16,L,E,G,14,W,
+W,7,11,E,13,9,W,
+W,5,L,6,E,3,W,
+E,L,E,1,E,L,E,
+W,W,W,S,W,W,W}
+
+8,5 / 7,2
+{W,U,T,R,T,R,T,W,
+W,R,T,L,T,R,T,W,
+G,R,T,U,T,U,T,S,
+W,R,T,L,T,L,T,W,
+W,U,T,L,T,L,T,W}
+----------------------------------
