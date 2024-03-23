@@ -631,6 +631,10 @@ PrefabInstance:
       value: SubCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
       value: 1
       objectReference: {fileID: 0}
@@ -3887,6 +3891,10 @@ PrefabInstance:
       value: SubCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
       value: 1
       objectReference: {fileID: 0}
@@ -5014,6 +5022,10 @@ PrefabInstance:
     - target: {fileID: 4676358058691837186, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: m_Name
       value: SubCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
@@ -8241,6 +8253,10 @@ PrefabInstance:
       value: SubCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
       value: 1
       objectReference: {fileID: 0}
@@ -11322,6 +11338,10 @@ PrefabInstance:
     - target: {fileID: 4676358058691837186, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: m_Name
       value: SubCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
@@ -16709,6 +16729,10 @@ PrefabInstance:
       value: SubCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
       value: 1
       objectReference: {fileID: 0}
@@ -18471,6 +18495,10 @@ PrefabInstance:
     - target: {fileID: 4676358058691837186, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: m_Name
       value: SubCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
@@ -24343,6 +24371,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4676358058691837186, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}

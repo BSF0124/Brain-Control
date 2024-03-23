@@ -14,7 +14,8 @@ public class SubCharacter : MonoBehaviour
 
     [HideInInspector]
     public int distance_x, distance_y; // 남은 거리
-    public float sum_X = 1, sum_Y = 1; // 캐릭터 이동 거리
+    public float sum_X, sum_Y; // 캐릭터 이동 거리
+    public float scale;
     private bool goalCheck = false;
     private char[,] map; // 맵의 구조
     // S:시작점, G:도착점, L:사다리, W:벽, E:길
@@ -284,14 +285,15 @@ public class SubCharacter : MonoBehaviour
             if(map[x,y] < 65)
             {
                 tilemap[x,y] = Instantiate(maps[4]);
+                tilemap[x,y].transform.localScale = new Vector3(scale,scale,scale);
                 tilemap[x,y].transform.parent = transform.parent;
                 tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
                 transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);
-                tilemap[x,y].transform.localScale = new Vector3(sum_X,sum_X,sum_X);
             }
             else
             {
                 TypeCheck(x,y);
+                tilemap[x,y].transform.localScale = new Vector3(scale,scale,scale);
                 tilemap[x,y].transform.parent = transform.parent;
                 tilemap[x,y].transform.localPosition = new Vector3(transform.localPosition.x + ((x - DataManager.instance.stageList.stage[stageIndex].map_X) * sum_X),
                 transform.localPosition.y -((y-DataManager.instance.stageList.stage[stageIndex].map_Y+1) * sum_Y), -0.01f);

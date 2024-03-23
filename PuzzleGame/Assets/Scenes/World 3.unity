@@ -1293,6 +1293,10 @@ PrefabInstance:
       value: SubCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
       value: 1
       objectReference: {fileID: 0}
@@ -5464,6 +5468,10 @@ PrefabInstance:
       value: SubCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
       value: 1
       objectReference: {fileID: 0}
@@ -5514,7 +5522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8264,7 +8272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11227,6 +11235,10 @@ PrefabInstance:
       value: SubCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
       value: 1
       objectReference: {fileID: 0}
@@ -11978,6 +11990,10 @@ PrefabInstance:
     - target: {fileID: 4676358058691837186, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: m_Name
       value: SubCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
@@ -14054,7 +14070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17697,7 +17713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17805,7 +17821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1063834653354340675, guid: fd3485df9b549af4e84cb2d0ea08f4fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21318,6 +21334,10 @@ PrefabInstance:
     - target: {fileID: 4676358058691837186, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: m_Name
       value: SubCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
+      propertyPath: scale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5070417863715779790, guid: c4e949917b267a14f8b45620af8b8d62, type: 3}
       propertyPath: sum_X
