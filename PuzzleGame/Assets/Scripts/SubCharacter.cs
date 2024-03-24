@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
@@ -25,10 +23,9 @@ public class SubCharacter : MonoBehaviour
     private int goalCount = 0;
     private int stageIndex;
     private int[,] deactivatedBoard; // 비활성화 맵 정보
-    // private int deactivatedCount = 0;
+    private int deactivatedCount = 0;
     private int deactivatedTotal = 0; // 총 비활성화 개수
     private float duration = 0.1f;
-    private int checkNum = 0;
 
     void Start()
     {
@@ -116,6 +113,7 @@ public class SubCharacter : MonoBehaviour
                 MapPlacement(i,j);
             }
         }
+        SortArray(deactivatedBoard);
     }
 
     void Update()
@@ -235,33 +233,29 @@ public class SubCharacter : MonoBehaviour
 
     public void BoardActivated()
     {
-        while(true)
-        {
-            // if(deactivatedCount == deactivatedTotal)
-            // {    
-            //     return;
-            // }
-
-            for(int i=0; i<deactivatedTotal; i++)
-            {
-                if(deactivatedBoard[i,0] == checkNum)
-                {
-                    if(deactivatedBoard[i,0] % 2 == 0)
-                    {
-                        map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'E';
-                    }
-                    else
-                    {
-                        map[deactivatedBoard[i,1],deactivatedBoard[i,2]] = 'L';
-                    }
-                    deactivatedBoard[i,0] = -1;
-                    MapPlacement(current_x, current_y);
-                }
-            }
-            checkNum++;
-            // deactivatedCount++;
+        if(deactivatedCount == deactivatedTotal)
+        {    
+            return;
         }
-        
+
+        int x = deactivatedBoard[deactivatedCount,1];
+        int y = deactivatedBoard[deactivatedCount,2];
+
+        if(deactivatedBoard[deactivatedCount,0] % 2 == 0)
+        {
+            map[x,y] = 'E';
+        }
+        else
+        {
+            map[x,y] = 'L';
+        }
+
+        Transform temp = tilemap[x,y].transform;
+        TypeCheck(x,y);
+        tilemap[x,y].transform.localScale = new Vector3(scale,scale,scale);
+        tilemap[x,y].transform.parent = transform.parent;
+        tilemap[x,y].transform.position = temp.position;
+        deactivatedCount++;
     }
 
     void Shake()
@@ -288,10 +282,10 @@ public class SubCharacter : MonoBehaviour
 
     void MapPlacement(int x, int y)
     {
-        if(tilemap[x,y] != null)
-        {
-            Destroy(tilemap[x,y]);
-        }
+        // if(tilemap[x,y] != null)
+        // {
+        //     Destroy(tilemap[x,y]);
+        // }
 
         if(map[x,y] != 'W')
         {
@@ -323,5 +317,26 @@ public class SubCharacter : MonoBehaviour
             tilemap[x,y] = Instantiate(maps[2]);
         else
             tilemap[x,y] = Instantiate(maps[3]);
+    }
+
+    void SortArray(int[,] array)
+    {
+        int n = array.GetLength(0);
+
+        for(int i=0; i<n-1; i++)
+        {
+            for(int j=0; j<n-i-1; j++)
+            {
+                if(array[j,0] > array[j+1,0])
+                {
+                    for(int k=0; k<3; k++)
+                    {
+                        int temp = array[i,k];
+                        array[i,k] = array[j,k];
+                        array[j,k] = temp;
+                    }
+                }
+            }
+        }
     }
 }
