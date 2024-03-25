@@ -76,7 +76,7 @@ public class SubCharacter : MonoBehaviour
             // 비활성화 길, 사다리 정보를 저장
             if(map[i%column,i/column] < 65)
             {
-                deactivatedBoard[n,0] = int.Parse(map[i%column,i/column].ToString());
+                deactivatedBoard[n,0] = map[i%column,i/column];
                 deactivatedBoard[n,1] = i%column;
                 deactivatedBoard[n,2] = i/column;
                 n++;
