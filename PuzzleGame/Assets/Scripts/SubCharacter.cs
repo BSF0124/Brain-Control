@@ -113,6 +113,7 @@ public class SubCharacter : MonoBehaviour
                 MapPlacement(i,j);
             }
         }
+
         SortArray(deactivatedBoard);
     }
 
@@ -181,13 +182,13 @@ public class SubCharacter : MonoBehaviour
 
     public void Move_Up()
     {
-
-        if((current_y == 0) || ((map[current_x,current_y] != 'L') && (map[current_x,current_y] != 'B')) || (map[current_x,current_y-1] == 'W') || (map[current_x,current_y-1] < 65))
+        if((current_y == 0) || ((map[current_x,current_y] != 'L') && (map[current_x,current_y] != 'B') && (map[current_x,current_y] != 'S')) || (map[current_x,current_y-1] == 'W') || (map[current_x,current_y-1] < 65))
         {
             Shake();
         }
         else
         {
+            
             current_y--;
             targetPosition += new Vector3(0, sum_Y, 0);
 
@@ -251,6 +252,7 @@ public class SubCharacter : MonoBehaviour
         }
 
         Transform temp = tilemap[x,y].transform;
+        Destroy(tilemap[x,y]);
         TypeCheck(x,y);
         tilemap[x,y].transform.localScale = new Vector3(scale,scale,scale);
         tilemap[x,y].transform.parent = transform.parent;
@@ -282,10 +284,6 @@ public class SubCharacter : MonoBehaviour
 
     void MapPlacement(int x, int y)
     {
-        // if(tilemap[x,y] != null)
-        // {
-        //     Destroy(tilemap[x,y]);
-        // }
 
         if(map[x,y] != 'W')
         {
@@ -323,7 +321,7 @@ public class SubCharacter : MonoBehaviour
     {
         int n = array.GetLength(0);
 
-        for(int i=0; i<n-1; i++)
+        for(int i=0; i<n; i++)
         {
             for(int j=0; j<n-i-1; j++)
             {
@@ -331,9 +329,9 @@ public class SubCharacter : MonoBehaviour
                 {
                     for(int k=0; k<3; k++)
                     {
-                        int temp = array[i,k];
-                        array[i,k] = array[j,k];
-                        array[j,k] = temp;
+                        int temp = array[j,k];
+                        array[j,k] = array[j+1,k];
+                        array[j+1,k] = temp;
                     }
                 }
             }
