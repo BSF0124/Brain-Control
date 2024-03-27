@@ -11,7 +11,7 @@ public class SelectMenu : MonoBehaviour
     public GameObject optionPanel;
     public TextMeshProUGUI[] slotText;
 
-    bool[] saveFile = new bool[3]; // true : 데이터 존재, false - 데이터 없음
+    bool[] saveFile = new bool[3]; // true : 데이터 존재, false : 데이터 없음
 
     void Start()
     {
@@ -104,5 +104,22 @@ public class SelectMenu : MonoBehaviour
         FadeManager.instance.FadeImage(0, 1, true);
         yield return new WaitForSeconds(FadeManager.instance.imageDuration);
         SceneManager.LoadScene("World");
+    }
+
+    // 클리어 데이터 변경
+    public void ClearSave()
+    {
+        for(int i=0; i<3; i++)
+        {
+            DataManager.instance.currentSlot = i;
+            DataManager.instance.DeleteData();
+            DataManager.instance.SaveData();
+            DataManager.instance.currentPlayer.isClear = new bool[]{true,true,true,true,true,true,true,true,
+            true,true,true,true,true,true,
+            true,true,true,true,true,true,
+            true,true,true,true,true,true,
+            true,true,true};
+        }
+        Refresh();
     }
 }

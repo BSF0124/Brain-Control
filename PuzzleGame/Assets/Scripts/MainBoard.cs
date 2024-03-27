@@ -108,6 +108,8 @@ public class MainBoard : MonoBehaviour
             case 'G':
                 GameManager.instance.isMainClear = true;
                 break;
+            case 'E':
+                break;
         }
     }
 
@@ -146,6 +148,9 @@ public class MainBoard : MonoBehaviour
                         break;
                     case 'T':
                         setBoards[i,j] = Instantiate(boards[7]);
+                        break;
+                    case 'E':
+                        setBoards[i,j] = Instantiate(boards[8]);
                         break;
                 }
 

@@ -266,8 +266,8 @@ W,W,R,S,R,L}
 3-6
 7,5 / 3,4
 {W,16,L,E,G,14,W,
-W,7,11,E,13,9,W,
-W,5,L,6,E,3,W,
+W,9,11,L,13,9,W,
+W,5,L,7,E,3,W,
 E,L,E,1,E,L,E,
 W,W,W,S,W,W,W}
 
@@ -278,3 +278,38 @@ G,R,T,U,T,U,T,S,
 W,R,T,L,T,L,T,W,
 W,U,T,L,T,L,T,W}
 ----------------------------------
+4-1
+7,2 / 6,0
+{L,L,L,L,L,L,S,
+L,L,G,L,L,L,L}
+
+7,4 / 6,0
+{L,L,W,W,L,E,S,
+E,E,E,D,E,G,W,
+L,E,R,W,L,D,L,
+W,L,E,E,E,R,R}
+
+4-2
+8,2 / 0,1
+{W,W,L,E,E,L,W,W,
+S,E,L,E,E,L,E,G}
+
+6,6 / 0,0
+{S,E,R,W,U,R,
+W,U,E,G,E,E,
+R,E,E,R,E,U,
+R,D,E,E,R,W,
+E,W,W,R,E,R,
+D,E,E,E,E,L}
+
+
+4-3
+6,1 / 5,0
+{E,G,E,E,S,E}
+
+8,5 / 1,2
+{W,R,E,R,G,W,L,E,
+L,E,E,E,E,E,E,L,
+E,S,E,E,E,E,E,W,
+E,W,E,E,R,E,E,R,
+R,E,E,R,W,L,E,E}

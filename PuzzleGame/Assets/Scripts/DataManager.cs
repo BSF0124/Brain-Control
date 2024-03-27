@@ -8,12 +8,13 @@ public class PlayerData
     public int stageIndex = 0;
 
     // true : 스테이지 클리어
-    public bool[] isClear = new bool[26]
+    public bool[] isClear = new bool[29]
     {
         false,false,false,false,false,false,false,false,
         false,false,false,false,false,false,
         false,false,false,false,false,false,
-        false,false,false,false,false,false
+        false,false,false,false,false,false,
+        false,false,false
     };
 }
 [System.Serializable]
