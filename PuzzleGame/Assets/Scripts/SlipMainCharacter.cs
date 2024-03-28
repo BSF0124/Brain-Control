@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System;
+using System.CodeDom.Compiler;
 
 public class SlipMainCharacter : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class SlipMainCharacter : MonoBehaviour
 
         mainBoard = GameObject.Find("MainBoard").GetComponent<SlipMainBoard>();
         targetPosition = transform.position;
-        print(mainBoard.board[x,y]);
 
     }
 
@@ -57,46 +57,75 @@ public class SlipMainCharacter : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow)) // 위쪽 방향키 입력
         {
-            StartCoroutine(Move(0, -1, Vector3.up));
+            Move(0, -1, Vector3.up);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow)) // 아래쪽 방향키 입력
         {
-            StartCoroutine(Move(0, 1, Vector3.down));
+            Move(0, 1, Vector3.down);
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow)) // 왼쪽 방향키 입력
         {
-            StartCoroutine(Move(-1, 0, Vector3.left));
+            Move(-1, 0, Vector3.left);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow)) // 오른쪽 방향키 입력
         {
-            StartCoroutine(Move(1, 0, Vector3.right));
+            Move(1, 0, Vector3.right);
         }
     }
-
-    IEnumerator Move(int column, int row, Vector3 direction)
+    void Move(int column, int row, Vector3 direction)
     {
+        isMoving = true;
+
         if (x + column < 0 || x + column >= DataManager.instance.stageList.stage[stageIndex].board_Width || y + row < 0 || 
         y + row >= DataManager.instance.stageList.stage[stageIndex].board_Height || mainBoard.board[x+column,y+row] == 'W')
         {
-            Shake();
-            transform.position = new Vector3((float)Math.Round(transform.position.x),(float)Math.Round(transform.position.y),transform.position.z);
-            yield return null;
-            isMoving = false;
+            StartCoroutine(DoMove());
         }
 
         else
         {
-            isMoving = true;
+            
             targetPosition += direction;
-            transform.DOMove(targetPosition, duration);
-            yield return new WaitForSeconds(0.05f);
             x += column;
             y += row;
             mainBoard.MoveSubCharacter(x,y);
             mainBoard.VisitBoard(x,y);
-            StartCoroutine(Move(column, row, direction));
+            Move(column, row, direction);
         }
     }
+
+    IEnumerator DoMove()
+    {
+        transform.DOMove(targetPosition, duration);
+        yield return new WaitForSeconds(duration);
+        // Shake();
+        isMoving = false;
+    }
+    // IEnumerator Move(int column, int row, Vector3 direction)
+    // {
+
+    //     if (x + column < 0 || x + column >= DataManager.instance.stageList.stage[stageIndex].board_Width || y + row < 0 || 
+    //     y + row >= DataManager.instance.stageList.stage[stageIndex].board_Height || mainBoard.board[x+column,y+row] == 'W')
+    //     {
+    //         transform.position = targetPosition;
+    //         Shake();
+    //         yield return null;
+    //         isMoving = false;
+    //     }
+
+    //     else
+    //     {
+    //         isMoving = true;
+    //         targetPosition += direction;
+    //         transform.DOMove(targetPosition, duration);
+    //         yield return new WaitForSeconds(0.05f);
+    //         x += column;
+    //         y += row;
+    //         mainBoard.MoveSubCharacter(x,y);
+    //         mainBoard.VisitBoard(x,y);
+    //         StartCoroutine(Move(column, row, direction));
+    //     }
+    // }
 
     // 캐릭터 흔들기(이동불가)
     void Shake()
