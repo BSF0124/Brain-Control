@@ -42,7 +42,7 @@ public class Skeleton : MonoBehaviour
                 skel2.transform.localScale = new Vector3(targetScale, 1, 0);
                 skel4.transform.position += new Vector3(targetPostiion * targetScale, 0, 0);
                 Destroy(skel3);
-                MainBoard mainBoard = FindObjectOfType<MainBoard>(); // MainBoard 인스턴스 찾기
+                SlipMainBoard mainBoard = FindObjectOfType<SlipMainBoard>(); // MainBoard 인스턴스 찾기
                 StartCoroutine(mainBoard.CreateBoard()); // 메서드 호출
                 yield return null;
                 break;
@@ -89,7 +89,7 @@ public class Skeleton : MonoBehaviour
         }
         Destroy(skel3);
 
-        MainBoard mainBoard = FindObjectOfType<MainBoard>(); // MainBoard 인스턴스 찾기
+        SlipMainBoard mainBoard = FindObjectOfType<SlipMainBoard>(); // MainBoard 인스턴스 찾기
         StartCoroutine(mainBoard.CreateBoard()); // 메서드 호출
     }
 }

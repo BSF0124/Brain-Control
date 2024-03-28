@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainBoard : MonoBehaviour
+public class SlipMainBoard : MonoBehaviour
 {
     public SubCharacter subCharacter;
     public GameObject[] boards; // 보드 종류
     //0:Start, 1:Up 2:Dowm 3:Left 4:Right 5:Goal 6:Wall 7:Tool
     private GameObject[,] setBoards;
     private int column, row; // 보드의 크기
-    private char[,] board; // 보드 구성
-    private bool[,] boardVisited; // 보드 밟음 여부
+    public char[,] board; // 보드 구성
     private float initial_X, initial_Y; // 초기 좌표
     private float sum_X = 1, sum_Y = 1; // 보드 사이 간격
     private int stageIndex;
@@ -27,29 +26,13 @@ public class MainBoard : MonoBehaviour
         
         // 보드 배열 크기 설정
         setBoards = new GameObject[column, row];
-        boardVisited = new bool[column, row];
         board = new char[column, row];
 
         // 보드 배열 초기화
-        for (int i=0; i<column; i++)
-        {
-            for (int j=0; j<row; j++)
-            {
-                boardVisited[i, j] = false;
-            }
-        }
         for(int i=0; i<column*row; i++)
         {
             board[i%column,i/column] = DataManager.instance.stageList.stage[stageIndex].board_Elements[i];
-            if(board[i%column,i/column] == 'W')
-            {
-                VisitBoard(i%column,i/column);
-            }
         }
-
-        // 캐릭터 시작 좌표 true 설정
-        VisitBoard(DataManager.instance.stageList.stage[stageIndex].board_X,
-        DataManager.instance.stageList.stage[stageIndex].board_Y);
 
         // 보드 배치를 위한 초기 좌표 설정
         if (column % 2 == 0)
@@ -76,13 +59,7 @@ public class MainBoard : MonoBehaviour
     // 보드를 밟음
     public void VisitBoard(int x, int y)
     {
-        boardVisited[x, y] = true;
-    }
-
-    // 보드를 밟았는지 여부를 반환
-    public bool IsBoardVisited(int x, int y)
-    {
-        return boardVisited[x, y];
+        board[x,y] = 'E';
     }
 
     // 밟은 보드에 따른 서브 캐릭터 이동
