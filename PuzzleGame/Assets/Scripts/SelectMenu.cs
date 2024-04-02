@@ -56,7 +56,7 @@ public class SelectMenu : MonoBehaviour
         else
         {
             DataManager.instance.SaveData();
-            StartCoroutine(GoGame());
+            StartCoroutine(GoCutScene());
         }
     }
 
@@ -104,6 +104,14 @@ public class SelectMenu : MonoBehaviour
         FadeManager.instance.FadeImage(0, 1, true);
         yield return new WaitForSeconds(FadeManager.instance.imageDuration);
         SceneManager.LoadScene("World");
+    }
+
+     // 씬 이동
+    private IEnumerator GoCutScene()
+    {
+        FadeManager.instance.FadeImage(0, 1, true);
+        yield return new WaitForSeconds(FadeManager.instance.imageDuration);
+        SceneManager.LoadScene("CutScene");
     }
 
     // 클리어 데이터 변경
