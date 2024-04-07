@@ -4290,7 +4290,7 @@ GameObject:
   - component: {fileID: 317721724}
   - component: {fileID: 317721725}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: BgmSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14925,6 +14925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c94739b480ebf498e6bc572e7bfce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
   resolutionDropdown: {fileID: 1347865532}
 --- !u!114 &1215255307
 MonoBehaviour:
@@ -14938,8 +14940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6cf40c2958d20441abf073db7d3b69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PauseMenuUI: {fileID: 883043635}
-  optionPanel: {fileID: 1776805419}
+  PauseMenuUI: {fileID: 317721723}
+  optionPanel: {fileID: 1508759828}
 --- !u!1 &1217703428
 GameObject:
   m_ObjectHideFlags: 0
@@ -16424,7 +16426,7 @@ GameObject:
   - component: {fileID: 1508759829}
   - component: {fileID: 1508759830}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: SfxSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19746,12 +19748,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 469491982}
-  - {fileID: 467243968}
   - {fileID: 1891505035}
-  - {fileID: 1347865533}
   - {fileID: 1771680721}
-  - {fileID: 317721724}
   - {fileID: 1152219509}
+  - {fileID: 467243968}
+  - {fileID: 1347865533}
+  - {fileID: 317721724}
   - {fileID: 1508759829}
   - {fileID: 1144690846}
   - {fileID: 1927327613}

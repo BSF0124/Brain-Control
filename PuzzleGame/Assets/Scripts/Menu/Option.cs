@@ -58,6 +58,9 @@ public class Option : MonoBehaviour
 
         // 드롭다운 메뉴 갱신
         resolutionDropdown.RefreshShownValue();
+
+        bgmSlider.value = AudioManager.instance.bgmVolume;
+        sfxSlider.value = AudioManager.instance.sfxVolume;
     }
 
     // 해상도 변경 메서드

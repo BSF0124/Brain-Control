@@ -32,9 +32,9 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(instance.gameObject);
         }
-        Init();
         DontDestroyOnLoad(gameObject);
 
+        Init();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -47,8 +47,6 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
         bgmPlayer.volume = bgmVolume;
-        bgmPlayer.clip = bgmClips[0];
-        bgmPlayer.Play();
 
         // 효과음 플레이어 초기화
         GameObject sfxObject = new GameObject("Sfx");
@@ -74,6 +72,8 @@ public class AudioManager : MonoBehaviour
                 PlayBgm(Bgm.World);
                 break;
             case "CutScene":
+            case "Manager":
+                bgmPlayer.clip = null;
                 StopBgm();
                 break;
             default:

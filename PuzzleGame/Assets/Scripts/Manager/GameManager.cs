@@ -35,24 +35,27 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if(PauseMenu.isGamePaused)
-        {
+        { 
             return;
         }
-        
-        // 메인과 서브 캐릭터 모두 클리어 확인
-        if(isMainClear && isSubClear && !isGameClear)
+
+        if(SceneManager.GetActiveScene().name != "MainMenu" && SceneManager.GetActiveScene().name != "CutScene" && SceneManager.GetActiveScene().name != "World")
         {
-            isGameClear = true;
-            AudioManager.instance.PlaySfx(AudioManager.Sfx.StageClear);
-            FadeManager.instance.FadeImage(0, 0.9f, true);
-            FadeManager.instance.FadeText(0, 1, true);
-            FadeManager.instance.FadeLoop();
-            DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.stageIndex] = true;
-            DataManager.instance.SaveData();
-        }
-        if(!isGameClear && Input.GetKeyDown(KeyCode.R))
-        {
-            StartCoroutine(Restart());
+            // 메인과 서브 캐릭터 모두 클리어 확인
+            if(isMainClear && isSubClear && !isGameClear)
+            {
+                isGameClear = true;
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.StageClear);
+                FadeManager.instance.FadeImage(0, 0.9f, true);
+                FadeManager.instance.FadeText(0, 1, true);
+                FadeManager.instance.FadeLoop();
+                DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.stageIndex] = true;
+                DataManager.instance.SaveData();
+            }
+            if(!isGameClear && Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Restart());
+            }
         }
     }
 

@@ -241,6 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c94739b480ebf498e6bc572e7bfce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmSlider: {fileID: 808054706}
+  sfxSlider: {fileID: 91143534}
   resolutionDropdown: {fileID: 449468543}
 --- !u!114 &16265209
 MonoBehaviour:
@@ -504,7 +506,7 @@ GameObject:
   - component: {fileID: 91143533}
   - component: {fileID: 91143534}
   m_Layer: 5
-  m_Name: Slider (1)
+  m_Name: SfxSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,7 +579,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 581343637}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 80
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -6121,12 +6123,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1235963970}
-  - {fileID: 1850608411}
   - {fileID: 375792775}
-  - {fileID: 449468544}
-  - {fileID: 1262233084}
-  - {fileID: 808054705}
   - {fileID: 903090407}
+  - {fileID: 1262233084}
+  - {fileID: 1850608411}
+  - {fileID: 449468544}
+  - {fileID: 808054705}
   - {fileID: 91143533}
   - {fileID: 1155896671}
   - {fileID: 1737468391}
@@ -15805,7 +15807,7 @@ GameObject:
   - component: {fileID: 808054705}
   - component: {fileID: 808054706}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: BgmSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15878,7 +15880,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1424768561}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 80
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
