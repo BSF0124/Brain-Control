@@ -16,6 +16,6 @@ public class StageManager : MonoBehaviour
         
         stage[PlayerMove.currentStage].gameObject.SetActive(true);
         mainCamera.transform.position = new Vector3(PlayerMove.currentStage*40, mainCamera.transform.position.y, mainCamera.transform.position.z);
-        FadeManager.instance.FadeImage(1, 0, false);
+        FadeManager.instance.FadeImage(1, 0);
     }
 }

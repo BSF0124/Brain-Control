@@ -30,55 +30,40 @@ public class FadeManager : MonoBehaviour
     }
 
     // 이미지 fade 효과
-    public void FadeImage(float start, float end, bool isActive)
+    public void FadeImage(float start, float end)
     {
-        if(isActive)
-        {
-            StartCoroutine(Fade_1(fadeImage, imageDuration, start, end));
-        }
-
-        else
-        {
-            StartCoroutine(Fade_0(fadeImage, imageDuration, start, end));
-        }
+        StartCoroutine(Fade(fadeImage, imageDuration, start, end));
     }
 
     // 텍스트 fade 효과
-    public void FadeText(float start, float end, bool isActive)
+    public void FadeText(float start, float end)
     {
-        if(isActive)
-        {
-            StartCoroutine(Fade_1(clearText, textDuration, start, end));
-        }
-
-        else
-        {
-            StartCoroutine(Fade_0(clearText, textDuration, start, end));
-        }
+        StartCoroutine(Fade(clearText, textDuration, start, end));
     }
 
     // fade후 오브젝트 비활성화
-    private IEnumerator Fade_0(Graphic graphic, float duration, float start, float end)
-    {
-        if(!graphic.gameObject.activeSelf)
-        {
-            graphic.gameObject.SetActive(true);
-        }
+    // private IEnumerator Fade_0(Graphic graphic, float duration, float start, float end)
+    // {
+    //     if(!graphic.gameObject.activeSelf)
+    //     {
+    //         graphic.gameObject.SetActive(true);
+    //     }
         
-        Color temp = graphic.color;
-        temp.a = start;
-        graphic.color = temp;
+    //     Color temp = graphic.color;
+    //     temp.a = start;
+    //     graphic.color = temp;
 
-        graphic.DOFade(end, duration);
+    //     graphic.DOFade(end, duration);
 
-        yield return new WaitForSeconds(duration);
+    //     yield return new WaitForSeconds(duration);
 
-        graphic.gameObject.SetActive(false);
-    }
+    //     graphic.gameObject.SetActive(false);
+    // }
 
     // fade후 오브젝트 활성화 유지
-    private IEnumerator Fade_1(Graphic graphic, float duration, float start, float end)
+    private IEnumerator Fade(Graphic graphic, float duration, float start, float end)
     {
+        GameManager.instance.isSceneMove = true;
         if(!graphic.gameObject.activeSelf)
         {
             graphic.gameObject.SetActive(true);
@@ -90,6 +75,7 @@ public class FadeManager : MonoBehaviour
 
         graphic.DOFade(end, duration);
         yield return new WaitForSeconds(duration);
+        GameManager.instance.isSceneMove = false;
     }
 
     // fade in, out 반복

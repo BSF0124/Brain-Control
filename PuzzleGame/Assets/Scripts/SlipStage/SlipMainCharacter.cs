@@ -102,31 +102,6 @@ public class SlipMainCharacter : MonoBehaviour
         // Shake();
         isMoving = false;
     }
-    // IEnumerator Move(int column, int row, Vector3 direction)
-    // {
-
-    //     if (x + column < 0 || x + column >= DataManager.instance.stageList.stage[stageIndex].board_Width || y + row < 0 || 
-    //     y + row >= DataManager.instance.stageList.stage[stageIndex].board_Height || mainBoard.board[x+column,y+row] == 'W')
-    //     {
-    //         transform.position = targetPosition;
-    //         Shake();
-    //         yield return null;
-    //         isMoving = false;
-    //     }
-
-    //     else
-    //     {
-    //         isMoving = true;
-    //         targetPosition += direction;
-    //         transform.DOMove(targetPosition, duration);
-    //         yield return new WaitForSeconds(0.05f);
-    //         x += column;
-    //         y += row;
-    //         mainBoard.MoveSubCharacter(x,y);
-    //         mainBoard.VisitBoard(x,y);
-    //         StartCoroutine(Move(column, row, direction));
-    //     }
-    // }
 
     // 캐릭터 흔들기(이동불가)
     void Shake()
@@ -144,8 +119,8 @@ public class SlipMainCharacter : MonoBehaviour
         Skeleton.animationSkipped = false;
         GameManager.instance.isSceneMove = true;
         FadeManager.instance.FadeLoopStop();
-        FadeManager.instance.FadeText(1, 0, true);
-        FadeManager.instance.FadeImage(0.9f, 1, true);
+        FadeManager.instance.FadeText(1, 0);
+        FadeManager.instance.FadeImage(0.9f, 1);
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("World");
         GameManager.instance.ResetBool();

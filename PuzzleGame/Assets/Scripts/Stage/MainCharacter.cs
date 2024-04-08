@@ -114,8 +114,8 @@ public class MainCharacter : MonoBehaviour
         Skeleton.animationSkipped = false;
         GameManager.instance.isSceneMove = true;
         FadeManager.instance.FadeLoopStop();
-        FadeManager.instance.FadeText(1, 0, true);
-        FadeManager.instance.FadeImage(0.9f, 1, true);
+        FadeManager.instance.FadeText(1, 0);
+        FadeManager.instance.FadeImage(0.9f, 1);
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("World");
         GameManager.instance.ResetBool();

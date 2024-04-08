@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour
         Vector3 temp = GameObject.Find("World " + (currentWorld+1)).GetComponent<WorldManager>().stage[currentStage].position;
         transform.position = temp;
 
-        FadeManager.instance.FadeImage(1, 0, false);
+        FadeManager.instance.FadeImage(1, 0);
     }
 
     void Update()
@@ -211,7 +211,7 @@ public class PlayerMove : MonoBehaviour
     private IEnumerator GoWorld()
     {
         AudioManager.instance.PlaySfx(AudioManager.Sfx.GotoStage);
-        FadeManager.instance.FadeImage(0, 1, true);
+        FadeManager.instance.FadeImage(0, 1);
         yield return new WaitForSeconds(FadeManager.instance.imageDuration);
         SceneManager.LoadScene("World " + (currentWorld+1));
     }

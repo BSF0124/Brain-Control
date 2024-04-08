@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
             {
                 isGameClear = true;
                 AudioManager.instance.PlaySfx(AudioManager.Sfx.StageClear);
-                FadeManager.instance.FadeImage(0, 0.9f, true);
-                FadeManager.instance.FadeText(0, 1, true);
+                FadeManager.instance.FadeImage(0, 0.9f);
+                FadeManager.instance.FadeText(0, 1);
                 FadeManager.instance.FadeLoop();
                 DataManager.instance.currentPlayer.isClear[DataManager.instance.currentPlayer.stageIndex] = true;
                 DataManager.instance.SaveData();
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         ResetBool();
         Skeleton.animationSkipped = false;
         AudioManager.instance.PlaySfx(AudioManager.Sfx.StageRestart);
-        FadeManager.instance.FadeImage(0, 1, true);
+        FadeManager.instance.FadeImage(0, 1);
         yield return null;
         // yield return new WaitForSeconds(FadeManager.instance.textDuration);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

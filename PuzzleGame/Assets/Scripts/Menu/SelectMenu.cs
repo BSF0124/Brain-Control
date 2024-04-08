@@ -11,11 +11,69 @@ public class SelectMenu : MonoBehaviour
     public GameObject optionPanel;
     public TextMeshProUGUI[] slotText;
 
+    public TextMeshProUGUI[] texts;
+    public int currentButton = 0;
+
     bool[] saveFile = new bool[3]; // true : 데이터 존재, false : 데이터 없음
 
     void Start()
     {
         Refresh();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if(currentButton != 0)
+            {
+                currentButton--;
+                ChangeColor();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if(currentButton != texts.Length-1)
+            {
+                currentButton++;
+                ChangeColor();
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            switch(currentButton)
+            {
+                case 0:
+                    ShowStartPanel();
+                    break;
+                case 1:
+                    ShowOptionPanel();
+                    break;
+                case 2:
+                    Quit();
+                    break;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(startPanel.activeSelf)
+            {
+                HideStartPanel();
+            }
+
+            else if(optionPanel.activeSelf)
+            {
+                HideOptionPanel();
+            }
+
+            else
+            {
+                Quit();
+            }
+        }
     }
     
     // 데이터 새로고침
@@ -101,7 +159,7 @@ public class SelectMenu : MonoBehaviour
     // 씬 이동
     private IEnumerator GoGame()
     {
-        FadeManager.instance.FadeImage(0, 1, true);
+        FadeManager.instance.FadeImage(0, 1);
         yield return new WaitForSeconds(FadeManager.instance.imageDuration);
         SceneManager.LoadScene("World");
     }
@@ -109,7 +167,7 @@ public class SelectMenu : MonoBehaviour
      // 씬 이동
     private IEnumerator GoCutScene()
     {
-        FadeManager.instance.FadeImage(0, 1, true);
+        FadeManager.instance.FadeImage(0, 1);
         yield return new WaitForSeconds(FadeManager.instance.imageDuration);
         SceneManager.LoadScene("CutScene");
     }
@@ -129,5 +187,33 @@ public class SelectMenu : MonoBehaviour
             true,true,true};
         }
         Refresh();
+    }
+
+    public void ChangeWhite(int index)
+    {
+        texts[index].color = Color.white;
+    }
+
+    public void ChangeGray(int index)
+    {
+        texts[index].color = new Color32(161,161,161,255);
+    }
+
+    public void ChangeColor()
+    {
+        for(int i=0; i<texts.Length; i++)
+        {
+            if(i == currentButton)
+                ChangeWhite(i);
+
+            else
+                ChangeGray(i);
+        }
+    }
+
+    public void MouseEnter(int index)
+    {
+        currentButton = index;
+        ChangeColor();
     }
 }
