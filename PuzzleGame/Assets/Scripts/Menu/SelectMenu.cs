@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.IO;
+using UnityEngine.UI;
+using System;
 
 public class SelectMenu : MonoBehaviour
 {
@@ -12,64 +14,141 @@ public class SelectMenu : MonoBehaviour
     public TextMeshProUGUI[] slotText;
 
     public TextMeshProUGUI[] texts;
+    public Button[] slotButton;
+
+    [HideInInspector]
     public int currentButton = 0;
+    [HideInInspector]
+    public int currentSlot = 0;
 
     bool[] saveFile = new bool[3]; // true : 데이터 존재, false : 데이터 없음
 
     void Start()
     {
+        ChangeTextColor();
         Refresh();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(startPanel.activeSelf)
         {
-            if(currentButton != 0)
-            {
-                currentButton--;
-                ChangeColor();
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if(currentButton != texts.Length-1)
-            {
-                currentButton++;
-                ChangeColor();
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            switch(currentButton)
-            {
-                case 0:
-                    ShowStartPanel();
-                    break;
-                case 1:
-                    ShowOptionPanel();
-                    break;
-                case 2:
-                    Quit();
-                    break;
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(startPanel.activeSelf)
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
                 HideStartPanel();
+                currentSlot = 0;
+                ChangeButtonColor();
             }
 
-            else if(optionPanel.activeSelf)
+            if(Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                if(currentSlot % 2 == 1)
+                {
+                    currentSlot--;
+                    ChangeButtonColor();
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if(currentSlot % 2 == 0)
+                {
+                    currentSlot++;
+                    ChangeButtonColor();
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if(currentSlot > 1)
+                {
+                    currentSlot -= 2;
+                    ChangeButtonColor();
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if(currentSlot < 4)
+                {
+                    currentSlot += 2;
+                    ChangeButtonColor();
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                switch(currentSlot)
+                {
+                    case 0:
+                        Slot(0);
+                        break;
+                    case 1:
+                        Delete(0);
+                        break;
+                    case 2:
+                        Slot(1);
+                        break;
+                    case 3:
+                        Delete(1);
+                        break;
+                    case 4:
+                        Slot(2);
+                        break;
+                    case 5:
+                        Delete(2);
+                        break;
+                }
+            }
+        }
+
+        else if(optionPanel.activeSelf)
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
                 HideOptionPanel();
             }
+        }
 
-            else
+        else
+        {
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                if(currentButton != 0)
+                {
+                    currentButton--;
+                    ChangeTextColor();
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if(currentButton != texts.Length-1)
+                {
+                    currentButton++;
+                    ChangeTextColor();
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                switch(currentButton)
+                {
+                    case 0:
+                        currentSlot = 0;
+                        ChangeButtonColor();
+                        ShowStartPanel();
+                        break;
+                    case 1:
+                        ShowOptionPanel();
+                        break;
+                    case 2:
+                        Quit();
+                        break;
+                }
+            }
+
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
                 Quit();
             }
@@ -189,31 +268,60 @@ public class SelectMenu : MonoBehaviour
         Refresh();
     }
 
-    public void ChangeWhite(int index)
+    public void ChangeWhiteText(int index)
     {
         texts[index].color = Color.white;
     }
 
-    public void ChangeGray(int index)
+    public void ChangeGrayText(int index)
     {
         texts[index].color = new Color32(161,161,161,255);
     }
 
-    public void ChangeColor()
+    public void ChangeTextColor()
     {
         for(int i=0; i<texts.Length; i++)
         {
             if(i == currentButton)
-                ChangeWhite(i);
+                ChangeWhiteText(i);
 
             else
-                ChangeGray(i);
+                ChangeGrayText(i);
         }
     }
 
     public void MouseEnter(int index)
     {
         currentButton = index;
-        ChangeColor();
+        ChangeTextColor();
+    }
+
+    public void MouseEnterSlot(int index)
+    {
+        currentSlot = index;
+        ChangeButtonColor();
+    }
+
+    public void ChangeButtonColor()
+    {
+        for(int i=0; i<slotButton.Length; i++)
+        {
+            if(i == currentSlot)
+                ChangeWhiteButton(i);
+
+            else
+                ChangeGrayButton(i);
+        }
+    }
+
+    private void ChangeWhiteButton(int index)
+    {
+        slotButton[index].image.color = Color.white;
+
+    }
+
+    private void ChangeGrayButton(int index)
+    {
+        slotButton[index].image.color = new Color32(161,161,161,255);
     }
 }
