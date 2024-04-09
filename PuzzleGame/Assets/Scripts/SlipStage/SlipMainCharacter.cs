@@ -1,10 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-using System;
-using System.CodeDom.Compiler;
 
 public class SlipMainCharacter : MonoBehaviour
 {

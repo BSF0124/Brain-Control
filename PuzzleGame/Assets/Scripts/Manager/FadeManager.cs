@@ -32,6 +32,7 @@ public class FadeManager : MonoBehaviour
     // 이미지 fade 효과
     public void FadeImage(float start, float end)
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MoveWorld);
         StartCoroutine(Fade(fadeImage, imageDuration, start, end));
     }
 

@@ -29,18 +29,25 @@ public class SlipSkeleton : MonoBehaviour
 
     IEnumerator ObjectMovement()
     {
+        Vector3 temp1 = skel1.transform.position;
+        temp1 -= new Vector3(targetPostiion * targetScale, 0, 0);
+
+        Vector3 temp2 = skel4.transform.position;
+        temp2 += new Vector3(targetPostiion * targetScale, 0, 0);
+
         GameManager.instance.isSceneMove = true;
         float elapsedTime = 0;
         yield return new WaitForSeconds(1f);
 
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Skeleton);
         while (skel2.transform.localScale.x < targetScale)
         {
             // 엔터를 눌렀을 때 애니메이션 스킵
             if (animationSkipped)
             {
-                skel1.transform.position -= new Vector3(targetPostiion * targetScale, 0, 0);
+                skel1.transform.position = temp1;
                 skel2.transform.localScale = new Vector3(targetScale, 1, 0);
-                skel4.transform.position += new Vector3(targetPostiion * targetScale, 0, 0);
+                skel4.transform.position = temp2;
                 Destroy(skel3);
                 SlipMainBoard mainBoard = FindObjectOfType<SlipMainBoard>(); // MainBoard 인스턴스 찾기
                 StartCoroutine(mainBoard.CreateBoard()); // 메서드 호출

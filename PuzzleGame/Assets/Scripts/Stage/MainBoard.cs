@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainBoard : MonoBehaviour
@@ -178,6 +177,7 @@ public class MainBoard : MonoBehaviour
 
     IEnumerator BoardMovement(int x, int y, Vector3 target)
     {
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.SetBoard);
         while(setBoards[x,y].transform.position.y >= target.y)
         {
             float rand = Random.Range(0.05f, 0.1f);

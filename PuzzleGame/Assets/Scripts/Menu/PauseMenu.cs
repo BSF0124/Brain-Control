@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
     public static bool isGamePaused = false;
 
     public TextMeshProUGUI[] texts;
+    [HideInInspector]
     public int currentButton = 0;
 
     void Start()
@@ -24,6 +25,7 @@ public class PauseMenu : MonoBehaviour
         if(GameManager.instance.isSceneMove)
             return;
 
+        
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(GameManager.instance.isGameClear)
@@ -47,63 +49,66 @@ public class PauseMenu : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if(isGamePaused)
         {
-            if(currentButton != 0)
+            if(Input.GetKeyDown(KeyCode.UpArrow))
             {
-                currentButton--;
-                ChangeColor();
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if(currentButton != texts.Length-1)
-            {
-                currentButton++;
-                ChangeColor();
-            }
-        }
-
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            if(texts.Length == 4)
-            {
-                switch(currentButton)
+                if(currentButton != 0)
                 {
-                    case 0:
-                        Resume();
-                        break;
-                    case 1:
-                        ShowOptionPanel();
-                        break;
-                    case 2:
-                        MainMenu();
-                        break;
-                    case 3:
-                        Quit();
-                        break;
+                    currentButton--;
+                    ChangeColor();
                 }
             }
-            else
+    
+            if(Input.GetKeyDown(KeyCode.DownArrow))
             {
-                switch(currentButton)
+                if(currentButton != texts.Length-1)
                 {
-                    case 0:
-                        Resume();
-                        break;
-                    case 1:
-                        ShowOptionPanel();
-                        break;
-                    case 2:
-                        World();
-                        break;
-                    case 3:
-                        MainMenu();
-                        break;
-                    case 4:
-                        Quit();
-                        break;
+                    currentButton++;
+                    ChangeColor();
+                }
+            }
+    
+            if(Input.GetKeyDown(KeyCode.Return))
+            {
+                if(texts.Length == 4)
+                {
+                    switch(currentButton)
+                    {
+                        case 0:
+                            Resume();
+                            break;
+                        case 1:
+                            ShowOptionPanel();
+                            break;
+                        case 2:
+                            MainMenu();
+                            break;
+                        case 3:
+                            Quit();
+                            break;
+                    }
+                }
+                else
+                {
+                    switch(currentButton)
+                    {
+                        case 0:
+                            Resume();
+                            break;
+                        case 1:
+                            ShowOptionPanel();
+                            break;
+                        case 2:
+                            World();
+                            break;
+                        case 3:
+                            MainMenu();
+                            break;
+                        case 4:
+                            Quit();
+                            break;
+                    }
                 }
             }
         }
@@ -111,13 +116,16 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        AudioManager.instance.StartBgm();
         PauseMenuUI.gameObject.SetActive(false);
         Time.timeScale = 1;
         Invoke("SetGamePause", 0.5f);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuSelect);
     }
 
     public void Pause()
     {
+        AudioManager.instance.StopBgm();
         PauseMenuUI.gameObject.SetActive(true);
         Time.timeScale = 0;
         isGamePaused = true;
@@ -126,6 +134,7 @@ public class PauseMenu : MonoBehaviour
     public void ShowOptionPanel()
     {
         optionPanel.gameObject.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuSelect);
     }
 
     public void HideOptionPanel()
@@ -147,6 +156,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
         isGamePaused = false;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuSelect);
     }
 
     public void Quit()
@@ -174,6 +184,7 @@ public class PauseMenu : MonoBehaviour
             else
                 ChangeGray(i);
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuChange);
     }
 
     public void MouseEnter(int index)

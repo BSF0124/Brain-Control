@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviour
     private Animator animator;
     private float duration = 0.2f; // 플레이어 이동 속도
     public int maxWorld = 4; // 최대 월드 수
-    private int[] maxStage = new int[4]{8,6,6,6}; // 현재 월드의 스테이지 수
+    private int[] maxStage = new int[4]{8,6,6,3}; // 현재 월드의 스테이지 수
     public static int currentWorld; // 현재 월드 인덱스
     public static int currentStage; // 현재 스테이지 인덱스
     private int stageIndex;

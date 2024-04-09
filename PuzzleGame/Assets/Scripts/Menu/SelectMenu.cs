@@ -183,7 +183,7 @@ public class SelectMenu : MonoBehaviour
     public void Slot(int num)
     {
         DataManager.instance.currentSlot = num;
-
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.GameStart);
         if(saveFile[num])
         {
             DataManager.instance.LoadData();
@@ -201,6 +201,7 @@ public class SelectMenu : MonoBehaviour
     public void ShowStartPanel()
     {
         startPanel.gameObject.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuSelect);
     }
 
     // 데이터 선택창 숨김
@@ -213,6 +214,7 @@ public class SelectMenu : MonoBehaviour
     public void ShowOptionPanel()
     {
         optionPanel.gameObject.SetActive(true);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuSelect);
     }
 
     // 옵션창 숨김
@@ -288,6 +290,8 @@ public class SelectMenu : MonoBehaviour
             else
                 ChangeGrayText(i);
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuChange);
+
     }
 
     public void MouseEnter(int index)
@@ -312,12 +316,12 @@ public class SelectMenu : MonoBehaviour
             else
                 ChangeGrayButton(i);
         }
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.MenuChange);
     }
 
     private void ChangeWhiteButton(int index)
     {
         slotButton[index].image.color = Color.white;
-
     }
 
     private void ChangeGrayButton(int index)

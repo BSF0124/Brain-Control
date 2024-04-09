@@ -29,18 +29,25 @@ public class Skeleton : MonoBehaviour
 
     IEnumerator ObjectMovement()
     {
+        Vector3 temp1 = skel1.transform.position;
+        temp1 -= new Vector3(targetPostiion * targetScale, 0, 0);
+
+        Vector3 temp2 = skel4.transform.position;
+        temp2 += new Vector3(targetPostiion * targetScale, 0, 0);
+
         GameManager.instance.isSceneMove = true;
         float elapsedTime = 0;
         yield return new WaitForSeconds(1f);
 
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Skeleton);
         while (skel2.transform.localScale.x < targetScale)
         {
             // 엔터를 눌렀을 때 애니메이션 스킵
             if (animationSkipped)
             {
-                skel1.transform.position -= new Vector3(targetPostiion * targetScale, 0, 0);
+                skel1.transform.position = temp1;;
                 skel2.transform.localScale = new Vector3(targetScale, 1, 0);
-                skel4.transform.position += new Vector3(targetPostiion * targetScale, 0, 0);
+                skel4.transform.position = temp2;
                 Destroy(skel3);
                 MainBoard mainBoard = FindObjectOfType<MainBoard>(); // MainBoard 인스턴스 찾기
                 StartCoroutine(mainBoard.CreateBoard()); // 메서드 호출
@@ -50,16 +57,16 @@ public class Skeleton : MonoBehaviour
 
             else
             {
-            elapsedTime += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsedTime / animationDuration); // 현재 진행된 시간의 비율 (0~1)
-            float curvedStep = Mathf.Lerp(0, targetScale, Mathf.Pow(t, 2)); // 곡선 운동을 위해 진행률을 제곱하여 사용
-            float step = curvedStep * Time.deltaTime;
+                elapsedTime += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsedTime / animationDuration); // 현재 진행된 시간의 비율 (0~1)
+                float curvedStep = Mathf.Lerp(0, targetScale, Mathf.Pow(t, 2)); // 곡선 운동을 위해 진행률을 제곱하여 사용
+                float step = curvedStep * Time.deltaTime;
 
-            skel1.transform.position -= new Vector3(targetPostiion * step, 0, 0);
-            skel2.transform.localScale += new Vector3(step, 0, 0);
-            skel3.transform.localScale += new Vector3(step, 0, 0);
-            skel4.transform.position += new Vector3(targetPostiion * step, 0, 0);
-            yield return null;
+                skel1.transform.position -= new Vector3(targetPostiion * step, 0, 0);
+                skel2.transform.localScale += new Vector3(step, 0, 0);
+                skel3.transform.localScale += new Vector3(step, 0, 0);
+                skel4.transform.position += new Vector3(targetPostiion * step, 0, 0);
+                yield return null;
             }
 
         }

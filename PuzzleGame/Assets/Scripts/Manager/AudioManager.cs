@@ -20,7 +20,8 @@ public class AudioManager : MonoBehaviour
     public enum Bgm {MainMenu, World, Stage}
 
     public enum Sfx {GotoStage, PlayerBlock=3, PlayerMove, PlayerSlip=6, PlayerTool,
-    StageClear, StageMove=10, StageRestart}
+    StageClear, StageMove=10, StageRestart, MoveWorld, MenuChange, MenuSelect, GameStart,
+    Skeleton, SetBoard}
 
     void Awake()
     {
@@ -96,6 +97,10 @@ public class AudioManager : MonoBehaviour
         bgmPlayer.Play();
     }
 
+    public void StartBgm()
+    {
+        bgmPlayer.Play();
+    }
     public void StopBgm()
     {
         bgmPlayer.Stop();
